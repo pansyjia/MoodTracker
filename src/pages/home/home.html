@@ -1,14 +1,38 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Mood Records
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-list>
+    <ion-item>
+      <button ion-button full (click)="addEntry()">Add Entry</button>
+    </ion-item>
+
+    <ion-item *ngFor="let entry of entries">
+      <img item-start width="48" height="48" [src]="entry.mode_image">
+      <h2>{{entry.mood_score}}</h2>
+      <p>{{entry.location}}</p>
+      <p>{{entry.timestamp | date: "short"}}</p> 
+     
+      <button ion-button clear icon-only item-end
+              (click)="editEntry(entry.id)">
+        <ion-icon name="create"></ion-icon>
+      </button>
+      <button ion-button clear icon-only item-end
+              (click)="deleteEntry(entry.id)">
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+
+  <ion-tabs selectedIndex="1">
+      <ion-tab tabIcon="analytics" [root]="ChartView"></ion-tab>
+      <ion-tab tabIcon="create" [root]="AddEntry"></ion-tab>
+      <ion-tab tabIcon="compass" [root]="ListView"></ion-tab>
+  </ion-tabs>
+
 </ion-content>
