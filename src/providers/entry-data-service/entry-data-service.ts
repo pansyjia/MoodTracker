@@ -5,14 +5,14 @@ import { Observable } from 'rxjs/Observable';
 // import { Storage } from '@ionic/storage';
 // import firebase from 'firebase';
 
-const config = {
-  apiKey: "AIzaSyCK2UwSNrgj-9tH1D4mBJquBJ6n-wQ4uAw",
-  authDomain: "project2-75a8d.firebaseapp.com",
-  databaseURL: "https://project2-75a8d.firebaseio.com",
-  projectId: "project2-75a8d",
-  storageBucket: "project2-75a8d.appspot.com",
-  messagingSenderId: "349612439619"
-};
+// const config = {
+//   apiKey: "AIzaSyCK2UwSNrgj-9tH1D4mBJquBJ6n-wQ4uAw",
+//   authDomain: "project2-75a8d.firebaseapp.com",
+//   databaseURL: "https://project2-75a8d.firebaseio.com",
+//   projectId: "project2-75a8d",
+//   storageBucket: "project2-75a8d.appspot.com",
+//   messagingSenderId: "349612439619"
+// };
 
 @Injectable()
 export class EntryDataServiceProvider {

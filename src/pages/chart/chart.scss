@@ -1,3 +1,22 @@
 page-chart {
 
+    .chart-wrapper {
+        width: 25%;
+        display: inline-block;
+        margin: 1em 2em;
+     }
+  
+  
+     canvas  {
+        height: 500px;
+     }
+
+    // .scroll-content {
+    //     background-color: map-get($colors, light);
+    // }
+
+    // ion-card-header {
+    //     font-weight: bold;
+    // }
+
 }
