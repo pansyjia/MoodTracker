@@ -20,9 +20,7 @@ const OKAY_IMAGE: string = "/assets/imgs/Okay-b.png";
 export class HomePage {
 
 
-  private entries: any[] = [];
-  // private image = PLACEHOLDER_IMAGE;
-  
+  private entries: any[] = [];  
 
   constructor(public navCtrl: NavController) {
 

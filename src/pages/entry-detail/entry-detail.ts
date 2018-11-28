@@ -11,8 +11,6 @@ import { ChartPage } from '../chart/chart';
 
 export class EntryDetailPage {
 
- 
-
   private currentTime = new Date();
   alertCtrl: any;
 

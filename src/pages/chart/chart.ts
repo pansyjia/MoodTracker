@@ -93,10 +93,8 @@ export class ChartPage {
   }
 
 /**
-    *
     * Parse the JSON data, push specific keys into selected arrays for use with
     * each chart
-    *
     */
    defineChartData() : void
    {
@@ -115,9 +113,7 @@ export class ChartPage {
 
 
    /**
-    *
     * Configure the Bar chart, define configuration options
-    *
     */
    createBarChart() : void
    {

@@ -1,5 +1,5 @@
 export class Entry {
-  id: string;
+  id: string; ////use string not number for firebase purpose
   timestamp: Date;
   location: string;
   mood_image: string;
