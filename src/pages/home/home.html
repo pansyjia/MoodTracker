@@ -6,28 +6,18 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-list>
-    <ion-item>
-      <button ion-button full (click)="addEntry()">Add Entry</button>
-    </ion-item>
+<ion-content padding class="card-list">
 
-    <ion-item *ngFor="let entry of entries">
-      <img item-start width="48" height="48" [src]="image"/>
-      <h2>{{entry.mood_score}}</h2>
-      <p>{{entry.location}}</p>
-      <p>{{entry.timestamp | date: "short"}}</p> 
-     
-      <button ion-button clear icon-only item-end
-              (click)="editEntry(entry.id)">
-        <ion-icon name="create"></ion-icon>
-      </button>
-      <button ion-button clear icon-only item-end
+    <ion-card *ngFor="let entry of entries">
+        <img class="card-img" item-start width="48" height="48" [src]="entry.mood_image"/>
+        <div class="card-title">{{entry.location}}</div>
+        <div class="card-subtitle">{{entry.timestamp | date: "mm/dd/yyyy"}}</div>
+
+      <!-- <button ion-button clear icon-only item-end
               (click)="deleteEntry(entry.id)">
         <ion-icon name="close-circle"></ion-icon>
       </button>
-    </ion-item>
-  </ion-list>
-
+       -->
+    </ion-card>
 
 </ion-content>

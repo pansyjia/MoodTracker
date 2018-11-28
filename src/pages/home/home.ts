@@ -6,10 +6,10 @@ import { ChartPage } from '../chart/chart';
 
 
 const PLACEHOLDER_IMAGE: string = "/assets/imgs/holder.png";
-const HAPPY_IMAGE: string = "/assets/imgs/Happy.png";
-const ANGRY_IMAGE: string = "/assets/imgs/Angry.png";
-const SAD_IMAGE: string = "/assets/imgs/Sad.png";
-const OKAY_IMAGE: string = "/assets/imgs/Okay.png";
+const HAPPY_IMAGE: string = "/assets/imgs/Happy-b.png";
+const ANGRY_IMAGE: string = "/assets/imgs/Angry-b.png";
+const SAD_IMAGE: string = "/assets/imgs/Sad-b.png";
+const OKAY_IMAGE: string = "/assets/imgs/Okay-b.png";
 
 
 @Component({
@@ -21,7 +21,7 @@ export class HomePage {
 
 
   private entries: any[] = [];
-  private image = PLACEHOLDER_IMAGE;
+  // private image = PLACEHOLDER_IMAGE;
   
 
   constructor(public navCtrl: NavController) {
@@ -70,13 +70,6 @@ export class HomePage {
   }
 
  
-  private addEntry() {
-    this.navCtrl.push(EntryDetailPage);
-  }
-
-  private seeChart() {
-    this.navCtrl.push(ChartPage);
-  }
 
 }
 

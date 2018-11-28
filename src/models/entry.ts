@@ -1,5 +1,5 @@
 export class Entry {
-  id: number;
+  id: string;
   timestamp: Date;
   location: string;
   mood_image: string;

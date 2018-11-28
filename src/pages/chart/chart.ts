@@ -124,7 +124,7 @@ export class ChartPage {
       console.log("start...")
     this.barChartEl= new Chart(this.barChart.nativeElement,
       {
-         type: 'bar',
+         type: 'horizontalBar',
          data: {
             labels: this.chartLabels,
             datasets: [{
@@ -138,12 +138,12 @@ export class ChartPage {
          },
          options : {
             maintainAspectRatio: false,
-            // legend         : {
-            //    display     : true,
-            //    boxWidth    : 80,
-            //    fontSize    : 15,
-            //    padding     : 0
-            // },
+            legend         : {
+               display     : true,
+               boxWidth    : 80,
+               fontSize    : 15,
+               padding     : 0
+            },
             scales: {
                yAxes: [{
                   ticks: {
