@@ -163,3 +163,7 @@ export class ChartPage {
 
 
 }
+
+
+
+// Question: 1. need to calculate avg mood score at the same place next step
