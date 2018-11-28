@@ -19,7 +19,6 @@ export class EntryDataServiceProvider {
   private entries: Entry[] = [];
   private serviceObserver: any;
   private clientObservable: any;
-  // private nextID: number = 0;
   private db: any;
 
   constructor() {
@@ -81,7 +80,7 @@ export class EntryDataServiceProvider {
       let listEntry = this.db.ref('/entries');
       let entryRef = listEntry.push();
       let dataRecord = {
-        id: entry.id,
+        // id: entry.id,
         mood_score: entry.mood_score,
         text: entry.text,
         timestamp: new Date().toLocaleString()
@@ -94,7 +93,7 @@ export class EntryDataServiceProvider {
       let parentRef = this.db.ref('/entries');
       let childRef = parentRef.child(key);
       let updateRecord = {
-        id: newEntry.id,
+        // id: newEntry.id,
         mood_score: newEntry.mood_score,
         text: newEntry.text,
         timestamp: new Date(newEntry.timestamp).toLocaleString()

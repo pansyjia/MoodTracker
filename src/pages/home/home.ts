@@ -20,13 +20,14 @@ const OKAY_IMAGE: string = "/assets/imgs/Okay-b.png";
 export class HomePage {
 
 
-  private entries: any[] = [];  
+  private entries: Entry[];  
 
   constructor(public navCtrl: NavController) {
 
 
-    let fakeEntries = [
+    let fakeEntries: Entry[] = [
       {
+        id:"1",
         timestamp: new Date(),
         location: "Cafe",
         mood_image: HAPPY_IMAGE,
@@ -36,6 +37,7 @@ export class HomePage {
         text: "I can't wait for Halloween! I'm going to eat so much candy!!!"
       },
       {
+        id:"2",
         timestamp: new Date(),
         location: "Home",
         mood_image: ANGRY_IMAGE,
@@ -45,6 +47,7 @@ export class HomePage {
         text: "OMG Project 1 was the absolute suck!"
       },
       {
+        id:"3",
         timestamp: new Date(),
         location: "Library",
         mood_image: SAD_IMAGE,
@@ -54,6 +57,7 @@ export class HomePage {
         text: "OMG Project 1 was the absolute suck!"
       },
       {
+        id:"4",
         timestamp: new Date(),
         location: "North Quad",
         mood_image: OKAY_IMAGE,
@@ -63,11 +67,17 @@ export class HomePage {
         text: "Today I went to my favorite class, SI 669. It was super great."
       }
     ];
+    
     this.entries = fakeEntries;
+    
      
   }
 
  
+  private editEntry(entryID: number) {
+    // console.log("editing entry ", entryID);
+    this.navCtrl.push(EntryDetailPage, {"entryID": entryID});
+  }
 
 }
 

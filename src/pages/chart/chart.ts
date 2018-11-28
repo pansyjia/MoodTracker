@@ -124,7 +124,7 @@ export class ChartPage {
          data: {
             labels: this.chartLabels,
             datasets: [{
-               label: 'Mood vs. Location',
+               label: 'Mood Score',
                data: this.chartValues,
                duration: 2000,
                easing: 'easeInQuart',
