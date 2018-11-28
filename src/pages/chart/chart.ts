@@ -21,12 +21,8 @@ const OKAY_IMAGE: string = "/assets/imgs/Okay.png";
 
 export class ChartPage {
 
-  // ChartView = ChartPage;
-  // AddEntry = EntryDetailPage;
-  // ListView = HomePage;
  
   @ViewChild('barChart') barChart;
-
 
 
   public entries: any={
@@ -45,18 +41,18 @@ export class ChartPage {
       timestamp: new Date(),
       location: "Home",
       mood_image: ANGRY_IMAGE,
-      mood_score: 10,
+      mood_score: -10,
       color: "#DB4437",
-      hover: "ff7762",
+      hover: "#ff7762",
       text: "OMG Project 1 was the absolute suck!"
     },
     {
       timestamp: new Date(),
       location: "Library",
       mood_image: SAD_IMAGE,
-      mood_score: 0,
-      color: "039BE5",
-      hover: "63ccff",
+      mood_score: -20,
+      color: "#039BE5",
+      hover: "#63ccff",
       text: "OMG Project 1 was the absolute suck!"
     },
     {
@@ -68,11 +64,12 @@ export class ChartPage {
       hover: "#7ee17c",
       text: "Today I went to my favorite class, SI 669. It was super great."
     }
+    
   ]
 };
 
   
-public barChartEl: any;
+ public barChartEl: any;
  public chartLabels: any = [];
  public chartValues: any = [];
  public chartColours: any = [];
@@ -89,6 +86,10 @@ public barChartEl: any;
   {
      this.defineChartData();
      this.createBarChart();
+   //   setTimeout(() => {
+   //      console.log("")
+   //      this.createBarChart();
+   //   }, 0)
   }
 
 /**
@@ -103,7 +104,7 @@ public barChartEl: any;
 
       for(k in this.entries.entries)
       {
-         var entry  =      this.entries.entries[k];
+         var entry = this.entries.entries[k];
 
          this.chartLabels.push(entry.location);
          this.chartValues.push(entry.mood_score);
@@ -120,13 +121,14 @@ public barChartEl: any;
     */
    createBarChart() : void
    {
-    this.barChartEl 	          = new Chart(this.barChart.nativeElement,
+      console.log("start...")
+    this.barChartEl= new Chart(this.barChart.nativeElement,
       {
          type: 'bar',
          data: {
             labels: this.chartLabels,
             datasets: [{
-               label: 'Mood & Location',
+               label: 'Mood vs. Location',
                data: this.chartValues,
                duration: 2000,
                easing: 'easeInQuart',
@@ -136,28 +138,29 @@ public barChartEl: any;
          },
          options : {
             maintainAspectRatio: false,
-            legend         : {
-               display     : true,
-               boxWidth    : 80,
-               fontSize    : 15,
-               padding     : 0
-            },
+            // legend         : {
+            //    display     : true,
+            //    boxWidth    : 80,
+            //    fontSize    : 15,
+            //    padding     : 0
+            // },
             scales: {
                yAxes: [{
                   ticks: {
                      beginAtZero:true,
-                     stepSize: 5,
+                     stepSize: 20,
                      max : 100
                   }
                }],
                xAxes: [{
                   ticks: {
-                     autoSkip: false
+                     autoSkip: true
                   }
                }]
             }
          }
       });
+      console.log("safe!")
     
    }
 

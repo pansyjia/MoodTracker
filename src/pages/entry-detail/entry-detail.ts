@@ -11,9 +11,7 @@ import { ChartPage } from '../chart/chart';
 
 export class EntryDetailPage {
 
-  // ChartView = ChartPage;
-  // AddEntry = EntryDetailPage;
-  // ListView =  HomePage;
+ 
 
   private currentTime = new Date();
   alertCtrl: any;

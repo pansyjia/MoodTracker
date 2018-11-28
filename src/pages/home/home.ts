@@ -19,9 +19,6 @@ const OKAY_IMAGE: string = "/assets/imgs/Okay.png";
 
 export class HomePage {
 
-  ChartView = ChartPage;
-  AddEntry = EntryDetailPage;
-  ListView = HomePage;
 
   private entries: any[] = [];
   private image = PLACEHOLDER_IMAGE;

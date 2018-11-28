@@ -67,15 +67,15 @@ export class EntryDataServiceProvider {
       });
     }
 
-    public getEntryByID(id: number): Entry {
-      for (let e of this.entries) {
-        if (e.id === id) {
-          let clone = JSON.parse(JSON.stringify(e));
-          return clone;
-        }
-      }
-      return undefined;
-    }
+    // public getEntryByID(id: number): Entry {
+    //   for (let e of this.entries) {
+    //     if (e.id === id) {
+    //       let clone = JSON.parse(JSON.stringify(e));
+    //       return clone;
+    //     }
+    //   }
+    //   return undefined;
+    // }
 
     public addEntry(entry:Entry) {
       let listEntry = this.db.ref('/entries');

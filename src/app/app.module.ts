@@ -8,13 +8,15 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { EntryDetailPage } from '../pages/entry-detail/entry-detail';
 import { ChartPage } from '../pages/chart/chart';
+import {TabsPage} from '../pages/tabs/tabs';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     EntryDetailPage,
-    ChartPage
+    ChartPage,
+    TabsPage
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,8 @@ import { ChartPage } from '../pages/chart/chart';
     MyApp,
     HomePage,
     EntryDetailPage,
-    ChartPage
+    ChartPage,
+    TabsPage
   ],
   providers: [
     StatusBar,
