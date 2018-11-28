@@ -2,16 +2,16 @@ import { Injectable } from '@angular/core';
 import { Entry } from '../../models/entry';
 import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
-// import { Storage } from '@ionic/storage';
-// import firebase from 'firebase';
+import { Storage } from '@ionic/storage';
+import firebase from 'firebase';
 
 // const config = {
-//   apiKey: "AIzaSyCK2UwSNrgj-9tH1D4mBJquBJ6n-wQ4uAw",
-//   authDomain: "project2-75a8d.firebaseapp.com",
-//   databaseURL: "https://project2-75a8d.firebaseio.com",
-//   projectId: "project2-75a8d",
-//   storageBucket: "project2-75a8d.appspot.com",
-//   messagingSenderId: "349612439619"
+//   apiKey: "AIzaSyC9ICYAY0GONi1mgiGgRjAAuaev2qqosvM",
+//   authDomain: "mood-tracker-8f5b8.firebaseapp.com",
+//   databaseURL: "https://mood-tracker-8f5b8.firebaseio.com",
+//   projectId: "mood-tracker-8f5b8",
+//   storageBucket: "mood-tracker-8f5b8.appspot.com",
+//   messagingSenderId: "1047636349755"
 // };
 
 @Injectable()
@@ -22,27 +22,27 @@ export class EntryDataServiceProvider {
   private db: any;
 
   constructor() {
-  //   firebase.initializeApp(config);
-  //   this.db = firebase.database();
-  //   this.clientObservable = Observable.create(observer => {
-  //     this.serviceObserver = observer;
-  //   });
+    firebase.initializeApp(config);
+    this.db = firebase.database();
+    this.clientObservable = Observable.create(observer => {
+      this.serviceObserver = observer;
+    });
 
-  //   let dataRef = this.db.ref('/entries');
-  //   dataRef.on('value', snapshot => {
-  //       this.entries = [];
-  //       snapshot.forEach(childSnapshot => {
-  //         let entry = {
-  //           id: childSnapshot.key,
-  //           title: childSnapshot.val().title,
-  //           text: childSnapshot.val().text,
-  //           timestamp: childSnapshot.val().timestamp,
-  //           image: childSnapshot.val().image,
-  //   };
-  //     this.entries.push(entry);
-  //   });
-  //     this.notifySubscribers();
-  // });
+    let dataRef = this.db.ref('/entries');
+    dataRef.on('value', snapshot => {
+        this.entries = [];
+        snapshot.forEach(childSnapshot => {
+          let entry = {
+            id: childSnapshot.key,
+            location: childSnapshot.val().location,
+            text: childSnapshot.val().text,
+            timestamp: childSnapshot.val().timestamp,
+            mood: childSnapshot.val().mood,
+    };
+      this.entries.push(entry);
+    });
+      this.notifySubscribers();
+  });
   }
 
     public getObservable(): Observable<Entry[]> {
@@ -66,22 +66,23 @@ export class EntryDataServiceProvider {
       });
     }
 
-    // public getEntryByID(id: number): Entry {
-    //   for (let e of this.entries) {
-    //     if (e.id === id) {
-    //       let clone = JSON.parse(JSON.stringify(e));
-    //       return clone;
-    //     }
-    //   }
-    //   return undefined;
-    // }
+    public getEntryByID(id: number): Entry {
+      for (let e of this.entries) {
+        if (e.id === id) {
+          let clone = JSON.parse(JSON.stringify(e));
+          return clone;
+        }
+      }
+      return undefined;
+    }
 
     public addEntry(entry:Entry) {
       let listEntry = this.db.ref('/entries');
       let entryRef = listEntry.push();
       let dataRecord = {
         // id: entry.id,
-        mood_score: entry.mood_score,
+        location: entry.location,
+        mood: entry.mood,
         text: entry.text,
         timestamp: new Date().toLocaleString()
       }
@@ -94,7 +95,8 @@ export class EntryDataServiceProvider {
       let childRef = parentRef.child(key);
       let updateRecord = {
         // id: newEntry.id,
-        mood_score: newEntry.mood_score,
+        location: newEntry.location,
+        mood: newEntry.mood,
         text: newEntry.text,
         timestamp: new Date(newEntry.timestamp).toLocaleString()
       }
@@ -108,6 +110,6 @@ export class EntryDataServiceProvider {
       childRef.remove();
       this.notifySubscribers();
     }
-    
+
 
 }
