@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Entry } from '../../models/entry';
+import { Mood } from '../../models/mood';
 import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
 import { Storage } from '@ionic/storage';
 import firebase from 'firebase';
 
-// const config = {
-//   apiKey: "AIzaSyC9ICYAY0GONi1mgiGgRjAAuaev2qqosvM",
-//   authDomain: "mood-tracker-8f5b8.firebaseapp.com",
-//   databaseURL: "https://mood-tracker-8f5b8.firebaseio.com",
-//   projectId: "mood-tracker-8f5b8",
-//   storageBucket: "mood-tracker-8f5b8.appspot.com",
-//   messagingSenderId: "1047636349755"
-// };
+const config = {
+  apiKey: "AIzaSyC9ICYAY0GONi1mgiGgRjAAuaev2qqosvM",
+  authDomain: "mood-tracker-8f5b8.firebaseapp.com",
+  databaseURL: "https://mood-tracker-8f5b8.firebaseio.com",
+  projectId: "mood-tracker-8f5b8",
+  storageBucket: "mood-tracker-8f5b8.appspot.com",
+  messagingSenderId: "1047636349755"
+};
 
 @Injectable()
 export class EntryDataServiceProvider {

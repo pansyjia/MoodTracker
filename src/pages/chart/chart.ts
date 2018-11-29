@@ -4,6 +4,7 @@ import { Chart } from 'chart.js';
 
 import { EntryDetailPage } from '../entry-detail/entry-detail';
 import { Entry } from '../../models/entry';
+import { Mood } from '../../models/mood';
 import { HomePage } from '../home/home';
 
 
@@ -21,7 +22,7 @@ const OKAY_IMAGE: string = "/assets/imgs/Okay.png";
 
 export class ChartPage {
 
- 
+
   @ViewChild('barChart') barChart;
 
 
@@ -64,11 +65,11 @@ export class ChartPage {
       hover: "#7ee17c",
       text: "Today I went to my favorite class, SI 669. It was super great."
     }
-    
+
   ]
 };
 
-  
+
  public barChartEl: any;
  public chartLabels: any = [];
  public chartValues: any = [];
@@ -76,7 +77,7 @@ export class ChartPage {
  public chartHoverColours: any = [];
  public chartLoadingEl: any;
 
-  
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
@@ -105,9 +106,9 @@ export class ChartPage {
          var entry = this.entries.entries[k];
 
          this.chartLabels.push(entry.location);
-         this.chartValues.push(entry.mood_score);
-         this.chartColours.push(entry.color);
-         this.chartHoverColours.push(entry.hover);
+         this.chartValues.push(entry.mood.score);
+         this.chartColours.push(entry.mood.color);
+         this.chartHoverColours.push(entry.mood.hover);
       }
    }
 
@@ -157,7 +158,7 @@ export class ChartPage {
          }
       });
       console.log("safe!")
-    
+
    }
 
 
