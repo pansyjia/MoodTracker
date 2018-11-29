@@ -4,6 +4,8 @@ import { EntryDetailPage } from '../entry-detail/entry-detail';
 import { Entry } from '../../models/entry';
 import { Mood } from '../../models/mood';
 import { ChartPage } from '../chart/chart';
+import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service'
+
 
 
 @Component({

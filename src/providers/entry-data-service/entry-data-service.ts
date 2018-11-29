@@ -42,7 +42,7 @@ export class EntryDataServiceProvider {
     };
       this.entries.push(entry);
     });
-      this.notifySubscribers();
+      //this.notifySubscribers();
   });
   }
 
@@ -50,10 +50,10 @@ export class EntryDataServiceProvider {
       return this.clientObservable;
     }
 
-    private notifySubscribers(): void {
-      // console.log('arrive here');
-      this.serviceObserver.next(true);
-    }
+    // private notifySubscribers(): void {
+    //   // console.log('arrive here');
+    //   this.serviceObserver.next(true);
+    // }
 
 
     public getEntries():Entry[] {
@@ -88,7 +88,7 @@ export class EntryDataServiceProvider {
         timestamp: new Date().toLocaleString()
       }
       entryRef.set(dataRecord);
-      this.notifySubscribers();
+      //this.notifySubscribers();
     }
 
     public updateEntry(key, newEntry: Entry): void {
@@ -102,14 +102,14 @@ export class EntryDataServiceProvider {
         timestamp: new Date(newEntry.timestamp).toLocaleString()
       }
       childRef.set(updateRecord);
-      this.notifySubscribers();
+      //this.notifySubscribers();
     }
 
     public removeEntry(key): void {
       let parentRef = this.db.ref('/entries');
       let childRef = parentRef.child(key);
       childRef.remove();
-      this.notifySubscribers();
+      //this.notifySubscribers();
     }
 
 

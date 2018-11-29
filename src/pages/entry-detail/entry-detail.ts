@@ -35,7 +35,7 @@ export class EntryDetailPage {
     }else {
         this.entry = this.entryDataService.getEntryByID(entryID);
     }
-    console.log("retrieved entry:", this.entry);
+    console.log("retrieved entry:", this.entry.mood.type);
   }
 
 
@@ -54,8 +54,8 @@ export class EntryDetailPage {
     if (event.srcElement.id == "angry") newEntry.mood = this.angry;
     if (event.srcElement.id == "sad") newEntry.mood = this.sad;
     if (event.srcElement.id == "okay") newEntry.mood = this.okay;
-    newEntry.location = this.entryLocation;
-    newEntry.text = this.entryText;
+    newEntry.location = this.entry.location;
+    newEntry.text = this.entry.text;
     console.log("Now I would save the mood: ", newEntry.mood);
     this.entryDataService.addEntry(this.entry);
     this.navCtrl.pop();
