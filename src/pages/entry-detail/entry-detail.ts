@@ -35,14 +35,14 @@ export class EntryDetailPage {
 
   private savemood(){
     let newEntry = new Entry();
-    newEntry.mood = event.srcElement.id;
+
     // if (event.srcElement.id == "happy") newEntry.mood = this.happy;
     // if (event.srcElement.id == "angry") newEntry.mood = this.angry;
     // if (event.srcElement.id == "sad") newEntry.mood = this.sad;
     // if (event.srcElement.id == "okay") newEntry.mood = this.okay;
     newEntry.location = this.entryLocation;
     newEntry.text = this.entryText;
-    console.log("Now I would save the mood: ", newEntry.mood);
+    console.log("Now I would save the mood: ", event.srcElement.id);
     // this.entryDataService.addEntry(this.entry);
     // this.navCtrl.pop();
   }
