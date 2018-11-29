@@ -7,14 +7,12 @@ import { ChartPage } from '../chart/chart';
 import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service'
 
 
-
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 
 export class HomePage {
-
 
   private entries: Entry[];
 
@@ -29,9 +27,7 @@ export class HomePage {
         console.log('this.entryService.getObservable().subscribe :', err);
       });
     this.entries = this.entryService.getEntries();
-
   }
-
 
   private editEntry(entryID: number) {
     // console.log("editing entry ", entryID);

@@ -18,8 +18,8 @@ const config = {
 @Injectable()
 export class EntryDataServiceProvider {
   private entries: Entry[] = [];
-  private serviceObserver: any;
-  private clientObservable: any;
+  private serviceObserver: Observer<Entry[]>;
+  private clientObservable: Observable<Entry[]>;
   private db: any;
 
   constructor() {
@@ -36,13 +36,14 @@ export class EntryDataServiceProvider {
           let entry = {
             id: childSnapshot.key,
             location: childSnapshot.val().location,
-            text: childSnapshot.val().text,
             timestamp: childSnapshot.val().timestamp,
+            text: childSnapshot.val().text,
             mood: childSnapshot.val().mood,
     };
       this.entries.push(entry);
+
     });
-      //this.notifySubscribers();
+    this.notifySubscribers();
   });
   }
 
@@ -50,11 +51,9 @@ export class EntryDataServiceProvider {
       return this.clientObservable;
     }
 
-    // private notifySubscribers(): void {
-    //   // console.log('arrive here');
-    //   this.serviceObserver.next(true);
-    // }
-
+    private notifySubscribers(): void {
+      this.serviceObserver.next(undefined);
+    }
 
     public getEntries():Entry[] {
       let entriesClone = JSON.parse(JSON.stringify(this.entries));
@@ -67,7 +66,7 @@ export class EntryDataServiceProvider {
       });
     }
 
-    public getEntryByID(id: number): Entry {
+    public getEntryByID(id: any): Entry {
       for (let e of this.entries) {
         if (e.id === id) {
           let clone = JSON.parse(JSON.stringify(e));
@@ -77,18 +76,17 @@ export class EntryDataServiceProvider {
       return undefined;
     }
 
-    public addEntry(entry:Entry) {
+    public addEntry(entry: Entry): void {
       let listEntry = this.db.ref('/entries');
       let entryRef = listEntry.push();
       let dataRecord = {
-        // id: entry.id,
         location: entry.location,
         mood: entry.mood,
         text: entry.text,
         timestamp: new Date().toLocaleString()
       }
       entryRef.set(dataRecord);
-      //this.notifySubscribers();
+      this.notifySubscribers();
     }
 
     public updateEntry(key, newEntry: Entry): void {
@@ -102,14 +100,14 @@ export class EntryDataServiceProvider {
         timestamp: new Date(newEntry.timestamp).toLocaleString()
       }
       childRef.set(updateRecord);
-      //this.notifySubscribers();
+      this.notifySubscribers();
     }
 
     public removeEntry(key): void {
       let parentRef = this.db.ref('/entries');
       let childRef = parentRef.child(key);
       childRef.remove();
-      //this.notifySubscribers();
+      this.notifySubscribers();
     }
 
 

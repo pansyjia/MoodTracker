@@ -1,18 +1,13 @@
 import { Component, ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Chart } from 'chart.js';
-
-import { EntryDetailPage } from '../entry-detail/entry-detail';
 import { Entry } from '../../models/entry';
 import { Mood } from '../../models/mood';
+import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service'
+
+import { EntryDetailPage } from '../entry-detail/entry-detail';
 import { HomePage } from '../home/home';
 
-
-const PLACEHOLDER_IMAGE: string = "/assets/imgs/holder.png";
-const HAPPY_IMAGE: string = "/assets/imgs/Happy.png";
-const ANGRY_IMAGE: string = "/assets/imgs/Angry.png";
-const SAD_IMAGE: string = "/assets/imgs/Sad.png";
-const OKAY_IMAGE: string = "/assets/imgs/Okay.png";
 
 @IonicPage()
 @Component({
@@ -23,53 +18,16 @@ const OKAY_IMAGE: string = "/assets/imgs/Okay.png";
 export class ChartPage {
 
 
-  @ViewChild('barChart') barChart;
+  private happy = new Mood("happy", 100, "/assets/imgs/Happy-b.png", "#FFCC00", "#fff176");
+  private angry = new Mood("angry", -10, "/assets/imgs/Angry-b.png", "#DB4437", "#ff7762");
+  private sad = new Mood("sad", -20, "/assets/imgs/Sad-b.png", "#039BE5", "#63ccff");
+  private okay = new Mood("okay", 50, "/assets/imgs/Okay-b.png", "#4AAE4E", "#7ee17c");
 
 
-  public entries: any={
-    "entries":
-   [
-    {
-      timestamp: new Date(),
-      location: "Cafe",
-      mood_image: HAPPY_IMAGE,
-      mood_score: 100,
-      color: "#FFCC00",
-      hover: "#fff176",
-      text: "I can't wait for Halloween! I'm going to eat so much candy!!!"
-    },
-    {
-      timestamp: new Date(),
-      location: "Home",
-      mood_image: ANGRY_IMAGE,
-      mood_score: -10,
-      color: "#DB4437",
-      hover: "#ff7762",
-      text: "OMG Project 1 was the absolute suck!"
-    },
-    {
-      timestamp: new Date(),
-      location: "Library",
-      mood_image: SAD_IMAGE,
-      mood_score: -20,
-      color: "#039BE5",
-      hover: "#63ccff",
-      text: "OMG Project 1 was the absolute suck!"
-    },
-    {
-      timestamp: new Date(),
-      location: "North Quad",
-      mood_image: OKAY_IMAGE,
-      mood_score: 50,
-      color: "#4AAE4E",
-      hover: "#7ee17c",
-      text: "Today I went to my favorite class, SI 669. It was super great."
-    }
-
-  ]
-};
+ @ViewChild('barChart') barChart;
 
 
+ private entries: Entry[];
  public barChartEl: any;
  public chartLabels: any = [];
  public chartValues: any = [];
@@ -79,7 +37,17 @@ export class ChartPage {
 
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private entryService: EntryDataServiceProvider) {
+    this.entryService.getObservable().subscribe(
+      (update) => {
+          this.entries = this.entryService.getEntries();
+          console.log(this.entries);
+      },
+      (err) => {
+        console.log('this.entryService.getObservable().subscribe :', err);
+      });
+    this.entries = this.entryService.getEntries();
+
 
   }
 
@@ -100,11 +68,9 @@ export class ChartPage {
    defineChartData() : void
    {
       let k : any;
-
-      for(k in this.entries.entries)
+      for(k in this.entries)
       {
-         var entry = this.entries.entries[k];
-
+         var entry = k;
          this.chartLabels.push(entry.location);
          this.chartValues.push(entry.mood.score);
          this.chartColours.push(entry.mood.color);
