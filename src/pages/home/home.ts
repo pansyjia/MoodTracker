@@ -34,4 +34,10 @@ export class HomePage {
     this.navCtrl.push(EntryDetailPage, {"entryID": entryID});
   }
 
+  private getMood(name: string) {
+    let thisMood = this.entryService.getMood(name)
+    // console.log('thisMood', thisMood);
+    return thisMood;
+  }
+
 }

@@ -37,11 +37,14 @@ export class ChartPage {
 
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private entryService: EntryDataServiceProvider) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private entryService: EntryDataServiceProvider) {
     this.entryService.getObservable().subscribe(
       (update) => {
           this.entries = this.entryService.getEntries();
           console.log(this.entries);
+        console.log('this.entryService.getObservable().subscribe ');
       },
       (err) => {
         console.log('this.entryService.getObservable().subscribe :', err);
@@ -71,10 +74,11 @@ export class ChartPage {
       for(k in this.entries)
       {
          var entry = k;
+         let thisMood = this.entryService.getMood(entry.mood)
          this.chartLabels.push(entry.location);
-         this.chartValues.push(entry.mood.score);
-         this.chartColours.push(entry.mood.color);
-         this.chartHoverColours.push(entry.mood.hover);
+         this.chartValues.push(thisMood.score);
+         this.chartColours.push(thisMood.color);
+         this.chartHoverColours.push(thisMood.hover);
       }
    }
 
