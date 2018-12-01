@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { ChartPage } from '../chart/chart';
 import { Entry } from '../../models/entry';
+import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service'
 
 @IonicPage()
 @Component({
@@ -12,34 +13,49 @@ import { Entry } from '../../models/entry';
 
 export class EntryDetailPage {
 
-  private entryLocation: string;
-  private entryText: string;
+  private entry: Entry;
 
-  private currentTime = new Date();
-  alertCtrl: any;
+  constructor(public navCtrl: NavController,
+              public navParams:NavParams,
+              private entryDataService: EntryDataServiceProvider) {
+    let entryID = this.navParams.get("entryID");
 
-  constructor(public navCtrl: NavController, public navParams:
-    NavParams) {
-
+    if (entryID === undefined) {
+      this.entry = new Entry();
+      this.entry.id = -1; // placeholder for 'temporary' entry
+      this.entry.text = "";
+      this.entry.mood = "happy";
+      this.entry.location = "";
+      this.entry.timestamp = new Date();/////change type
+    }else {
+        this.entry = this.entryDataService.getEntryByID(entryID);
+    }
+    console.log("retrieved entry:", this.entry.mood.type);
+    console.log("happy is", this.happy);
   }
 
 
-  private saveAlert() {
-    const alert = this.alertCtrl.create({
-      title: 'Mood Record Created!',
-      subTitle: 'You just successfully created a mood record!',
-      buttons: ['OK']
-    });
-    alert.present();
+  // private saveAlert() {
+  //   const alert = this.alertCtrl.create({
+  //     title: 'Mood Record Created!',
+  //     subTitle: 'You just successfully created a mood record!',
+  //     buttons: ['OK']
+  //   });
+  //   alert.present();
+  // }
+  private changeMood(name: string){
+    this.entry.mood = name;
   }
 
   private saveEntry() {
     let newEntry = new Entry();
-    newEntry.location = this.entryLocation;
-    newEntry.text = this.entryText;
-    
+    newEntry.mood = this.entry.mood;
+    newEntry.location = this.entry.location;
+    newEntry.text = this.entry.text;
     console.log("Now I would save the entry: ", newEntry);
-    }
-
+    this.entryDataService.addEntry(this.entry);
+    // this.navCtrl.pop();
+    this.navCtrl.parent.select(2);
+  }
 
 }
