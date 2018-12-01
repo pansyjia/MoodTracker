@@ -36,6 +36,8 @@ export class ChartPage {
  public chartLoadingEl: any;
 
 
+<<<<<<< HEAD
+=======
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -51,17 +53,30 @@ export class ChartPage {
       });
     this.entries = this.entryService.getEntries();
 
+>>>>>>> 0c599a7ceacddb310839e8bb8f3196d11c7e572d
 
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private entryService: EntryDataServiceProvider) {
+
+    this.entryService.getObservable().subscribe(
+      (update) => {
+          this.entries = this.entryService.getEntries();
+         //  console.log(this.entries);
+      //   console.log('this.entryService.getObservable().subscribe ');
+      },
+      (err) => {
+      //   console.log('this.entryService.getObservable().subscribe :', err);
+      });
+    this.entries = this.entryService.getEntries();
+
+    
   }
 
   ionViewDidLoad()
   {
      this.defineChartData();
      this.createBarChart();
-   //   setTimeout(() => {
-   //      console.log("")
-   //      this.createBarChart();
-   //   }, 0)
   }
 
 /**
@@ -73,8 +88,14 @@ export class ChartPage {
       let k : any;
       for(k in this.entries)
       {
+<<<<<<< HEAD
+         var entry = this.entries[k];
+         let thisMood = this.entryService.getMood(entry.mood);
+         console.log("retrieved mood:", thisMood);
+=======
          var entry = k;
          let thisMood = this.entryService.getMood(entry.mood)
+>>>>>>> 0c599a7ceacddb310839e8bb8f3196d11c7e572d
          this.chartLabels.push(entry.location);
          this.chartValues.push(thisMood.score);
          this.chartColours.push(thisMood.color);

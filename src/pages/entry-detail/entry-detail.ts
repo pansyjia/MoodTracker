@@ -4,6 +4,11 @@ import { HomePage } from '../home/home';
 import { ChartPage } from '../chart/chart';
 import { Entry } from '../../models/entry';
 import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service'
+<<<<<<< HEAD
+import { ToastController } from 'ionic-angular';
+import { Mood } from '../../models/mood';
+=======
+>>>>>>> 0c599a7ceacddb310839e8bb8f3196d11c7e572d
 
 @IonicPage()
 @Component({
@@ -14,10 +19,19 @@ import { EntryDataServiceProvider } from '../../providers/entry-data-service/ent
 export class EntryDetailPage {
 
   private entry: Entry;
+<<<<<<< HEAD
+  private buttonColor: string = '#fff';
+
+  constructor(public navCtrl: NavController,
+              public navParams:NavParams,
+              private entryDataService: EntryDataServiceProvider,
+              private toastCtrl: ToastController) {
+=======
 
   constructor(public navCtrl: NavController,
               public navParams:NavParams,
               private entryDataService: EntryDataServiceProvider) {
+>>>>>>> 0c599a7ceacddb310839e8bb8f3196d11c7e572d
     let entryID = this.navParams.get("entryID");
 
     if (entryID === undefined) {
@@ -30,6 +44,15 @@ export class EntryDetailPage {
     }else {
         this.entry = this.entryDataService.getEntryByID(entryID);
     }
+<<<<<<< HEAD
+    // console.log("retrieved entry:", this.entry.mood.type);
+    // console.log("happy is", this.happy);
+  }
+
+
+  private changeMood(name: string){
+    this.buttonColor = "blue"; 
+=======
     console.log("retrieved entry:", this.entry.mood.type);
     console.log("happy is", this.happy);
   }
@@ -44,10 +67,24 @@ export class EntryDetailPage {
   //   alert.present();
   // }
   private changeMood(name: string){
+>>>>>>> 0c599a7ceacddb310839e8bb8f3196d11c7e572d
     this.entry.mood = name;
   }
 
   private saveEntry() {
+    ///present toast
+    let toast = this.toastCtrl.create({
+      message: 'A mood record was added successfully',
+      duration: 3000,
+      position: 'bottom'
+    });
+  
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+    toast.present();
+
+    ///save
     let newEntry = new Entry();
     newEntry.mood = this.entry.mood;
     newEntry.location = this.entry.location;
