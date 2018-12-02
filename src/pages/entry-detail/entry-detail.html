@@ -17,7 +17,7 @@
     <h5 style="text-align:center;">How is your mood?</h5>
     <ion-row>
       <ion-col col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3>
-        <button id="happy" class="select-mood" [ngStyle]="{'background-color': buttonColor}"(click)="changeMood('happy')" >
+        <button id="happy" (click)="changeMood('happy')" >
         <img id="happy" style="width: 132px; height: 132px; background: white;" src="./assets/imgs/Happy.png">
         </button>
         <button id="angry" (click)="changeMood('angry')">

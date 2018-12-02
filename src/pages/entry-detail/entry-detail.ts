@@ -16,7 +16,6 @@ import { ToastController } from 'ionic-angular';
 export class EntryDetailPage {
 
   private entry: Entry;
-  private buttonColor: string = '#fff';
 
   constructor(public navCtrl: NavController,
               public navParams:NavParams,
@@ -40,7 +39,6 @@ export class EntryDetailPage {
 
 
   private changeMood(name: string){
-    this.buttonColor = "blue"; 
     this.entry.mood = name;
   }
 
