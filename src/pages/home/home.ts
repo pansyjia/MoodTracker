@@ -29,11 +29,7 @@ export class HomePage {
     this.entries = this.entryService.getEntries();
   }
 
-<<<<<<< HEAD
   private editEntry(entryID: any) {
-=======
-  private editEntry(entryID: number) {
->>>>>>> 0c599a7ceacddb310839e8bb8f3196d11c7e572d
     // console.log("editing entry ", entryID);
     this.navCtrl.push(EntryDetailPage, {"entryID": entryID});
   }
@@ -43,14 +39,11 @@ export class HomePage {
     // console.log('thisMood', thisMood);
     return thisMood;
   }
-<<<<<<< HEAD
 
   private deleteEntry(entryID: any) {
     let thisMood = this.entryService.removeEntry(entryID);
     // console.log('thisMood', thisMood);
     return thisMood;
   }
-=======
->>>>>>> 0c599a7ceacddb310839e8bb8f3196d11c7e572d
 
 }
