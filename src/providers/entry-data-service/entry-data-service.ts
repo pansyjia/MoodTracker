@@ -125,4 +125,16 @@ export class EntryDataServiceProvider {
   }
 
 
+  public moodCount(moodtype:string) {
+    let k : any;
+    for(k in this.entries)
+    {
+       var entry = this.entries[k];
+       var mood = moodtype;
+       var count = this.entries.filter((obj) => obj.mood === mood).length;
+    }
+    return count;     
+ }
+
+
 }
