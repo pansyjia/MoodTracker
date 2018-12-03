@@ -1,11 +1,14 @@
 import { Component, AnimationStyles } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { EntryDetailPage } from '../entry-detail/entry-detail';
+import { CurrentPage } from '../current/current';
+import { ChartPage } from '../chart/chart';
+import { NewMoodPage } from '../new-mood/new-mood';
+
 import { Entry } from '../../models/entry';
 import { Mood } from '../../models/mood';
-import { ChartPage } from '../chart/chart';
 import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service';
-import { NewMoodPage } from '../new-mood/new-mood';
+
 
 
 @Component({
@@ -35,11 +38,11 @@ export class HomePage {
     this.navCtrl.push(EntryDetailPage, {"entryID": entryID});
   }
 
-  private getMood(name: string) {
-    let thisMood = this.entryService.getMood(name)
-    // console.log('thisMood', thisMood);
-    return thisMood;
-  }
+  // private getMood(name: string) {
+  //   let thisMood = this.entryService.getMood(name)
+  //   // console.log('thisMood', thisMood);
+  //   return thisMood;
+  // }
 
   private deleteEntry(entryID: any) {
     let thisMood = this.entryService.removeEntry(entryID);
@@ -52,12 +55,12 @@ export class HomePage {
         return true;
       }
       return false;
-    }
+  }
 
   // add the first or new record
   private addNew (){
-    this.navCtrl.push(NewMoodPage);
+    this.navCtrl.push(EntryDetailPage);
   }
- 
+
 
 }

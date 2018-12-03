@@ -11,15 +11,15 @@ import { EntryDataServiceProvider } from '../../providers/entry-data-service/ent
   templateUrl: 'new-location.html',
 })
 export class NewLocationPage {
- 
+
   private entry: Entry;
 
-  constructor(public navCtrl: NavController, 
-    public navParams: NavParams, 
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
     private toastCtrl: ToastController,
     private entryDataService: EntryDataServiceProvider) {
       this.entry = new Entry();
-      this.entry.id = -1; 
+      this.entry.id = -1;
       this.entry.text = "";
       this.entry.mood = "happy";
       this.entry.location = "";
@@ -36,9 +36,9 @@ export class NewLocationPage {
     let toast = this.toastCtrl.create({
       message: 'A mood record was added successfully',
       duration: 3000,
-      position: 'bottom'
+      position: 'top'
     });
-  
+
     toast.onDidDismiss(() => {
       console.log('Dismissed toast');
     });
@@ -52,7 +52,7 @@ export class NewLocationPage {
     console.log("Now I would save the entry: ", newEntry);
     this.entryDataService.addEntry(this.entry);
     this.navCtrl.popToRoot();
-    this.navCtrl.parent.select(2);
+    this.navCtrl.parent.select(1);
   }
 
 }

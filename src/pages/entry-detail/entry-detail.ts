@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { ChartPage } from '../chart/chart';
+import { CurrentPage } from '../current/current';
 import { Entry } from '../../models/entry';
+import { Mood } from '../../models/mood';
 import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service'
 import { ToastController } from 'ionic-angular';
 
@@ -16,6 +18,10 @@ import { ToastController } from 'ionic-angular';
 export class EntryDetailPage {
 
   private entry: Entry;
+  private happy = new Mood("happy", 100, "/assets/imgs/Happy.png", "#FFCC00", "#fff176");
+  private angry = new Mood("angry", -10, "/assets/imgs/Angry.png", "#DB4437", "#ff7762");
+  private sad = new Mood("sad", -20, "/assets/imgs/Sad.png", "#039BE5", "#63ccff");
+  private okay = new Mood("okay", 50, "/assets/imgs/Okay.png", "#4AAE4E", "#7ee17c");
 
   constructor(public navCtrl: NavController,
               public navParams:NavParams,
@@ -25,7 +31,7 @@ export class EntryDetailPage {
 
     if (entryID === undefined) {
       this.entry = new Entry();
-      this.entry.id = -1; 
+      this.entry.id = -1;
       this.entry.text = "";
       this.entry.mood = "happy";
       this.entry.location = "";
@@ -37,7 +43,6 @@ export class EntryDetailPage {
     // console.log("happy is", this.happy);
   }
 
-
   private changeMood(name: string){
     this.entry.mood = name;
   }
@@ -47,9 +52,9 @@ export class EntryDetailPage {
     let toast = this.toastCtrl.create({
       message: 'A mood record was added successfully',
       duration: 3000,
-      position: 'bottom'
+      position: 'top'
     });
-  
+
     toast.onDidDismiss(() => {
       console.log('Dismissed toast');
     });
@@ -57,13 +62,19 @@ export class EntryDetailPage {
 
     ///save
     let newEntry = new Entry();
-    newEntry.mood = this.entry.mood;
+    let newMood = new Mood();
+    if (this.entry.mood == "happy") newMood = this.happy;
+    if (this.entry.mood == "angry") newMood = this.angry;
+    if (this.entry.mood == "sad") newMood = this.sad;
+    if (this.entry.mood == "okay") newMood = this.okay;
+    newEntry.mood = newMood;
     newEntry.location = this.entry.location;
     newEntry.text = this.entry.text;
     console.log("Now I would save the entry: ", newEntry);
-    this.entryDataService.addEntry(this.entry);
+    this.entryDataService.addEntry(newEntry);
     // this.navCtrl.pop();
-    this.navCtrl.parent.select(2);
+    // this.navCtrl.parent.select(1);
+    this.navCtrl.push(CurrentPage);
   }
 
 }
