@@ -17,18 +17,19 @@
               </div>
             
     <div *ngIf="!checkStatus()">
-      <ion-card>
-          <ion-list>
-          <img class="card-img" item-start [src]="getMood(entry.mood).image" />
-          <!-- <div class="card-title">{{entry.location}}</div>
-          <div class="card-subtitle">{{entry.timestamp | date: "mm/dd/yyyy"}}</div> -->
+
+         <!-- <h5>{{entry.location}}</h5> -->
+          <!-- <p>{{entry.timestamp | date: "short"}}</p> -->
+      
+          <img style="width: 200px; height: 200px; " class="mood-img" item-start [src]="getMood(entry.mood).image" />  
+
+           <h2 class="mood-text"> I'm {{entry.mood}}....</h2>
   
           <ion-fab right bottom>
             <button ion-fab color="primary" icon-only (click)="addNew()"><ion-icon name="add"></ion-icon></button>
         </ion-fab>
   
-      </ion-list>
-    </ion-card>
+   
 </div>
 
   </ion-content>

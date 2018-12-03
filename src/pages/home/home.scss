@@ -1,5 +1,10 @@
 page-home {
 
+  ion-content{
+    background-image: url("../assets/imgs/back-d.png");
+}
+
+
     ion-card {
         position: relative;
         text-align: left;
@@ -11,7 +16,7 @@ page-home {
         font-size: 1.0em;
         width: 100%;
         font-weight: bold;
-        color:#fff;
+        color:#000;
         margin-left: 0.3em;
       }
     
@@ -20,14 +25,15 @@ page-home {
         position: absolute;
         top: 26%;
         width: 100%;
-        color: #fff;
+        color: #000;
         margin-left: 0.3em;
       }
 
       .card-img{
           height: 100%;
           width: 100%;
-
+          display: block;
+          margin-left: 50%;
       }
 
       // .delete-icon{

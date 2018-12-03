@@ -30,6 +30,7 @@ export class ChartPage {
  private entries: Entry[];
  public barChartEl: any;
  public chartLabels: any = [];
+ public chartTips: any = [];
  public chartValues: any = [];
  public chartColours: any = [];
  public chartHoverColours: any = [];
@@ -72,6 +73,7 @@ constructor(public navCtrl: NavController,
          var entry = this.entries[k];
          let thisMood = this.entryService.getMood(entry.mood);
          console.log("retrieved mood:", thisMood);
+         this.chartTips.push(thisMood.type);
          this.chartLabels.push(entry.location);
          this.chartValues.push(thisMood.score);
          this.chartColours.push(thisMood.color);

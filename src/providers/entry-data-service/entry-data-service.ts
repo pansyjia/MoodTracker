@@ -78,11 +78,11 @@ export class EntryDataServiceProvider {
   }
 
   public getMood(name: string):Mood {
-    if (name == "happy") { return new Mood("happy", 100, "/assets/imgs/Happy-b.png", "#FFCC00", "#fff176"); }
-    if (name == "angry") { return new Mood("angry", 30, "/assets/imgs/Angry-b.png", "#DB4437", "#ff7762"); }
-    if (name == "sad") { return new Mood("sad", 50, "/assets/imgs/Sad-b.png", "#039BE5", "#63ccff"); }
-    if (name == "okay") { return new Mood("okay", 80, "/assets/imgs/Okay-b.png", "#4AAE4E", "#7ee17c"); }
-    return new Mood("happy", 100, "/assets/imgs/Happy-b.png", "#FFCC00", "#fff176"); // if not applied
+    if (name == "happy") { return new Mood("happy", 100, "/assets/imgs/happy.png", "#f9c849", "#fcde8d"); }
+    if (name == "angry") { return new Mood("angry", 30, "/assets/imgs/angry.png", "#fa4b4f", "#fc8285"); }
+    if (name == "sad") { return new Mood("sad", 50, "/assets/imgs/sad.png", "#77c4fb", "#a3d5f9"); }
+    if (name == "okay") { return new Mood("okay", 80, "/assets/imgs/okay.png", "#f8b563", "#f9c98f"); }
+    return new Mood("happy", 100, "/assets/imgs/Happy-b.png", "#f9c849", "#fcde8d"); // if not applied
   }
 
   public addEntry(entry: Entry): void {
