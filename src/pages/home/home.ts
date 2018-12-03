@@ -47,6 +47,8 @@ export class HomePage {
   private deleteEntry(entryID: any) {
     let thisMood = this.entryService.removeEntry(entryID);
     // console.log('thisMood', thisMood);
+    this.navCtrl.push(CurrentPage);
+    this.navCtrl.parent.select(2);
     return thisMood;
   }
 

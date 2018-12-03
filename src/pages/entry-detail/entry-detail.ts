@@ -75,6 +75,7 @@ export class EntryDetailPage {
     // this.navCtrl.pop();
     // this.navCtrl.parent.select(1);
     this.navCtrl.push(CurrentPage);
+    //this.navCtrl.parent.select(1);
   }
 
 }

@@ -110,5 +110,9 @@ export class EntryDataServiceProvider {
       this.notifySubscribers();
     }
 
+    public moodCount(type: string): number{
+      return 1;
+    }
+
 
 }
