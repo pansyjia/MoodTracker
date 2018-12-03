@@ -4,7 +4,8 @@ import { EntryDetailPage } from '../entry-detail/entry-detail';
 import { Entry } from '../../models/entry';
 import { Mood } from '../../models/mood';
 import { ChartPage } from '../chart/chart';
-import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service'
+import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service';
+import { NewMoodPage } from '../new-mood/new-mood';
 
 
 @Component({
@@ -53,5 +54,10 @@ export class HomePage {
       return false;
     }
 
+// add the first or new record
+private addNew (){
+  this.navCtrl.push(NewMoodPage);
+}
+ 
 
 }

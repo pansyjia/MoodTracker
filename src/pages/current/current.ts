@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the CurrentPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service';
+import { NewMoodPage } from '../new-mood/new-mood';
+import { Entry } from '../../models/entry';
 
 @IonicPage()
 @Component({
@@ -14,12 +10,38 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'current.html',
 })
 export class CurrentPage {
+  
+  private entry: Entry;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              private entryService: EntryDataServiceProvider) {
+
+                this.entryService.getObservable().subscribe(
+                  (update) => {
+                      this.entry = this.entryService.getEntries()[0];
+                      console.log(this.entry);
+                  },
+                  (err) => {
+                    console.log('this.entryService.getObservable()[0].subscribe :', err);
+                  });
+                this.entry = this.entryService.getEntries()[0];
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CurrentPage');
   }
 
+
+  private addNew (){
+    this.navCtrl.push(NewMoodPage);
+  }
+
+  private getMood(name: string) {
+    let thisMood = this.entryService.getMood(name)
+    // console.log('thisMood', thisMood);
+    return thisMood;
+  }
+
+  
 }

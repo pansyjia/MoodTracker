@@ -99,6 +99,9 @@ export class EntryDataServiceProvider {
     this.notifySubscribers();
   }
 
+
+  
+
   public updateEntry(key, newEntry: Entry): void {
     let parentRef = this.db.ref('/entries');
     let childRef = parentRef.child(key);

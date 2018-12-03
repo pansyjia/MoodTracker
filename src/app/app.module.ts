@@ -11,6 +11,8 @@ import { ChartPage } from '../pages/chart/chart';
 import { TabsPage } from '../pages/tabs/tabs';
 import { EntryDataServiceProvider } from '../providers/entry-data-service/entry-data-service';
 import { CurrentPage } from '../pages/current/current';
+import { NewLocationPage } from '../pages/new-location/new-location';
+import { NewMoodPage } from '../pages/new-mood/new-mood';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { CurrentPage } from '../pages/current/current';
     EntryDetailPage,
     ChartPage,
     TabsPage,
-    CurrentPage
+    CurrentPage,
+    NewMoodPage,
+    NewLocationPage
   ],
   imports: [
     BrowserModule,
@@ -32,7 +36,9 @@ import { CurrentPage } from '../pages/current/current';
     EntryDetailPage,
     ChartPage,
     TabsPage,
-    CurrentPage
+    CurrentPage,
+    NewMoodPage,
+    NewLocationPage
   ],
   providers: [
     StatusBar,
