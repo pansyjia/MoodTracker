@@ -43,5 +43,11 @@ export class CurrentPage {
     return thisMood;
   }
 
-  
+  private checkStatus(){
+    if(this.entryService.getEntries().length == 0){
+        return true;
+      }
+      return false;
+    }
+    
 }

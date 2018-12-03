@@ -89,6 +89,7 @@ export class EntryDataServiceProvider {
     let listEntry = this.db.ref('/entries');
     let entryRef = listEntry.push();
     let dataRecord = {
+      id: entry.id,
       location: entry.location,
       mood: entry.mood,
       text: entry.text,
@@ -100,7 +101,7 @@ export class EntryDataServiceProvider {
   }
 
 
-  
+
 
   public updateEntry(key, newEntry: Entry): void {
     let parentRef = this.db.ref('/entries');

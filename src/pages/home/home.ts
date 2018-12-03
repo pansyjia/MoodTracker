@@ -54,10 +54,10 @@ export class HomePage {
       return false;
     }
 
-// add the first or new record
-private addNew (){
-  this.navCtrl.push(NewMoodPage);
-}
+  // add the first or new record
+  private addNew (){
+    this.navCtrl.push(NewMoodPage);
+  }
  
 
 }
