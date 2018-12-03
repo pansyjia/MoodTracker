@@ -6,12 +6,12 @@ import { Observable } from 'rxjs/Observable';
 import firebase from 'firebase';
 
 const config = {
-  apiKey: "AIzaSyC9ICYAY0GONi1mgiGgRjAAuaev2qqosvM",
-  authDomain: "mood-tracker-8f5b8.firebaseapp.com",
-  databaseURL: "https://mood-tracker-8f5b8.firebaseio.com",
-  projectId: "mood-tracker-8f5b8",
-  storageBucket: "mood-tracker-8f5b8.appspot.com",
-  messagingSenderId: "1047636349755"
+  apiKey: "AIzaSyBU4FhZ_0XJF9-GpUxvRCfXFP14PnANb6o",
+  authDomain: "moodtracker-b75bd.firebaseapp.com",
+  databaseURL: "https://moodtracker-b75bd.firebaseio.com",
+  projectId: "moodtracker-b75bd",
+  storageBucket: "moodtracker-b75bd.appspot.com",
+  messagingSenderId: "587504295484"
 };
 
 @Injectable()
