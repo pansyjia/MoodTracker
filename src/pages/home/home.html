@@ -8,6 +8,17 @@
 
 <ion-content padding class="card-list">
 
+    <div *ngIf="checkStatus()">
+     
+        <h4>Welcome to Mood Tracker!</h4>
+        <p>Wherer mood matters!</p>
+
+          <button ion-button clear icon-only (click)="addEntry()">
+              <ion-icon name="create-circle"></ion-icon>
+          </button>      
+  </div>
+
+  <div *ngIf="!checkStatus()">
     <ion-card *ngFor="let entry of entries">
 
         <ion-list>
@@ -25,6 +36,7 @@
 
     </ion-list>
   </ion-card>
+</div>
 
 </ion-content>
 

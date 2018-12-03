@@ -10,6 +10,7 @@ import { EntryDetailPage } from '../pages/entry-detail/entry-detail';
 import { ChartPage } from '../pages/chart/chart';
 import { TabsPage } from '../pages/tabs/tabs';
 import { EntryDataServiceProvider } from '../providers/entry-data-service/entry-data-service';
+import { CurrentPage } from '../pages/current/current';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { EntryDataServiceProvider } from '../providers/entry-data-service/entry-
     HomePage,
     EntryDetailPage,
     ChartPage,
-    TabsPage
+    TabsPage,
+    CurrentPage
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import { EntryDataServiceProvider } from '../providers/entry-data-service/entry-
     HomePage,
     EntryDetailPage,
     ChartPage,
-    TabsPage
+    TabsPage,
+    CurrentPage
   ],
   providers: [
     StatusBar,
