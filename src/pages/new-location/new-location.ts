@@ -51,7 +51,7 @@ export class NewLocationPage {
     newEntry.text = this.entry.text;
     console.log("Now I would save the entry: ", newEntry);
     this.entryDataService.addEntry(this.entry);
-    // this.navCtrl.pop();
+    this.navCtrl.popToRoot();
     this.navCtrl.parent.select(2);
   }
 
