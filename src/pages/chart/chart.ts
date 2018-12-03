@@ -22,7 +22,7 @@ export class ChartPage {
   private angry = new Mood("angry", -10, "/assets/imgs/Angry-b.png", "#DB4437", "#ff7762");
   private sad = new Mood("sad", -20, "/assets/imgs/Sad-b.png", "#039BE5", "#63ccff");
   private okay = new Mood("okay", 50, "/assets/imgs/Okay-b.png", "#4AAE4E", "#7ee17c");
- 
+
 
  @ViewChild('barChart') barChart;
 
@@ -79,7 +79,7 @@ this.okayCount = this.entryService.moodCount("okay");
       for(k in this.entries)
       {
          var entry = this.entries[k];
-         let thisMood = this.entryService.getMood(entry.mood);
+         let thisMood = entry.mood;
          console.log("retrieved mood:", thisMood);
          this.chartTips.push(thisMood.type);
          this.chartLabels.push(entry.location);
@@ -146,13 +146,13 @@ this.okayCount = this.entryService.moodCount("okay");
    //       var mood = moodtype;
    //       var count = this.entries.filter((obj) => obj.mood === mood).length;
    //    }
-   //    return count;   
-   
+   //    return count;
+
    // }
 
 
 
-   
+
 }
 
 

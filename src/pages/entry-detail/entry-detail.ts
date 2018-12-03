@@ -73,9 +73,9 @@ export class EntryDetailPage {
     console.log("Now I would save the entry: ", newEntry);
     this.entryDataService.addEntry(newEntry);
     // this.navCtrl.pop();
-    // this.navCtrl.parent.select(1);
+
     this.navCtrl.push(CurrentPage);
-    //this.navCtrl.parent.select(1);
+    this.navCtrl.parent.select(1);
   }
 
 }
