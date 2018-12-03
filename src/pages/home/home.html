@@ -13,7 +13,7 @@
     <p>Wherer mood matters!</p>
       <button ion-button clear icon-only (click)="addNew()">
       <ion-icon name="create"></ion-icon>
-    </button>      
+    </button>
   </div>
 
   <div *ngIf="!checkStatus()">
@@ -22,14 +22,14 @@
           <button ion-fab color="primary" icon-only (click)="addNew()"><ion-icon name="add"></ion-icon></button>
       </ion-fab>
 
- 
+
     <ion-list no-lines *ngFor="let entry of entries">
 
       <ion-item-sliding #item>
           <ion-item>
               <img class="card-img" style="width: 125px; height: 125px;" [src]="getMood(entry.mood).image" />
               <div class="card-title">{{entry.location}}</div>
-              <div class="card-subtitle">{{entry.timestamp | date: "mm/dd/yyyy"}}</div>
+              <div class="card-subtitle">{{entry.timestamp}}</div>
           </ion-item>
 
           <ion-item-options side="left">
@@ -39,13 +39,10 @@
             <button ion-button expandable color="danger" (click)="deleteEntry(entry.id)">Delete</button>
           </ion-item-options>
     </ion-item-sliding>
-      
+
     </ion-list>
-  
+
 
 </div>
 
 </ion-content>
-
-
-
