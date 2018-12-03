@@ -50,19 +50,19 @@ export class EntryDetailPage {
 
   private savemood(){
     console.log("Now I would save the mood: ", event.srcElement.id);
-    if (event.srcElement.id == "happy") return this.happy;
-    if (event.srcElement.id == "angry") return this.angry;
-    if (event.srcElement.id == "sad") return this.sad;
-    if (event.srcElement.id == "okay") return this.okay;
   }
 
-  private saveEntry() {
+  private saveEntry(newMood: Mood) {
     let newEntry = new Entry();
-    newEntry.mood = this.savemood();
+    if (event.srcElement.id == "happy") newMood = this.happy;
+    if (event.srcElement.id == "angry") newMood = this.angry;
+    if (event.srcElement.id == "sad") newMood = this.sad;
+    if (event.srcElement.id == "okay") newMood = this.okay;
+    newEntry.mood = newMood;
     newEntry.location = this.entry.location;
     newEntry.text = this.entry.text;
-    console.log("Now I would save the entry: ", newEntry);
-    this.entryDataService.addEntry(this.entry);
+    console.log("Now I would save the entry: ", newEntry.mood);
+    this.entryDataService.addEntry(newEntry);
     this.navCtrl.pop();
   }
 

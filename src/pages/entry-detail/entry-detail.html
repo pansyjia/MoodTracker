@@ -14,42 +14,35 @@
       <ion-input type="text" placeholder="Your Location" [(ngModel)]="entry.location"></ion-input>
     </ion-item>
 
-    <h5 style="text-align:center;">How is your mood?</h5>
-    <ion-row>
-      <ion-col col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3>
-        <button id="happy" (click)="savemood()">
-          <img id="happy" style="width: 132px; height: 132px; background: white;" src="./assets/imgs/Happy.png">
-        </button>
-        <button id="angry" (click)="savemood()">
-          <img id="angry" style="width: 132px; height: 132px;background: white; " src="./assets/imgs/Angry.png" >
-        </button>
-        <button id="sad" (click)="savemood()">
-          <img id="sad" style="width: 132px; height: 132px; background: white;" src="./assets/imgs/Sad.png">
-        </button>
-        <button id="okay" (click)="savemood()">
-          <img id="okay" style="width: 132px; height: 132px;background: white; " src="./assets/imgs/Okay.png">
-        </button>
-      </ion-col>
-    </ion-row>
-      <!-- <ion-item>
-        <ion-img style="width: 132px; height: 132px; background: white;" src="./assets/imgs/Happy.png" ng-click="savemood()"></ion-img>
-        <ion-img style="width: 132px; height: 132px;background: white; " src="./assets/imgs/Angry.png" ></ion-img>
-      </ion-item>
-      <ion-item>
-        <ion-img style="width: 132px; height: 132px; background: white;" src="./assets/imgs/Sad.png"></ion-img>
-        <ion-img style="width: 132px; height: 132px;background: white; " src="./assets/imgs/Okay.png"></ion-img>
-      </ion-item> -->
 
     <h5 style="text-align:center;">Add some notes?</h5>
     <ion-item>
       <ion-input type="text" placeholder="A beautiful day" [(ngModel)]="entry.text"></ion-input>
     </ion-item>
+    
+    <h5 style="text-align:center;">How is your mood?</h5>
+    <ion-row>
+      <ion-col col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3>
+        <button id="happy" (click)="saveEntry()">
+          <img id="happy" style="width: 132px; height: 132px; background: white;" src="./assets/imgs/Happy.png">
+        </button>
+        <button id="angry" (click)="saveEntry()">
+          <img id="angry" style="width: 132px; height: 132px;background: white; " src="./assets/imgs/Angry.png" >
+        </button>
+        <button id="sad" (click)="saveEntry()">
+          <img id="sad" style="width: 132px; height: 132px; background: white;" src="./assets/imgs/Sad.png">
+        </button>
+        <button id="okay" (click)="saveEntry()">
+          <img id="okay" style="width: 132px; height: 132px;background: white; " src="./assets/imgs/Okay.png">
+        </button>
+      </ion-col>
+    </ion-row>
   </ion-list>
 
   <ion-list no-lines>
     <ion-item>
       <button ion-button outline item-end>Cancel </button>
-      <button ion-button item-end click="saveEntry()">Save</button>
+      <button ion-button item-end (click)="saveEntry()">Save</button>
     </ion-item>
   </ion-list>
 

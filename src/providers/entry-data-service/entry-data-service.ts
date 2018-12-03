@@ -52,7 +52,7 @@ export class EntryDataServiceProvider {
     }
 
     private notifySubscribers(): void {
-      this.serviceObserver.next(undefined);
+      this.serviceObserver.next(true);
     }
 
     public getEntries():Entry[] {

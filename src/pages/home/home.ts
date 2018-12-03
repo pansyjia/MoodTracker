@@ -29,9 +29,13 @@ export class HomePage {
     this.entries = this.entryService.getEntries();
   }
 
-  private editEntry(entryID: number) {
+  // private editEntry(entryID: number) {
+  //   // console.log("editing entry ", entryID);
+  //   this.navCtrl.push(EntryDetailPage, {"entryID": entryID});
+  // }
+  private deleteEntry (entryID: any) {
     // console.log("editing entry ", entryID);
-    this.navCtrl.push(EntryDetailPage, {"entryID": entryID});
+    this.entryService.removeEntry(entryID);
+    //this.navCtrl.pop();
   }
-
 }

@@ -9,23 +9,23 @@
 <ion-content padding class="card-list">
 
     <ion-card *ngFor="let entry of entries">
-
-        <ion-list>
-        <img class="card-img" item-start width="48" height="48"/>  //[src]="entry.mood.image"
-        <div class="card-title">{{entry.location}}</div>
-        <!-- <div class="card-subtitle">{{entry.timestamp | date: "mm/dd/yyyy"}}</div> -->
-
-        <!-- <button ion-button clear icon-only item-end class="edit-icon" (click)="editEntry(entry.id)">
-            <ion-icon name="create"></ion-icon>
-        </button>
-
-        <button ion-button clear icon-only  item-end class="delete-icon" (click)="deleteEntry(entry.id)">
-            <ion-icon name="close-circle"></ion-icon>
-        </button> -->
-
-    </ion-list>
+      <img src="{{ entry.mood.image }}"/>
+      <!-- [src]="entry.mood.image" -->
+      <ion-card-content>
+          <ion-list>
+            <p>
+              {{ entry.text}}
+              {{ entry.mood.type }}
+            </p>
+            <!-- <div class="card-title">{{entry.location}}</div> -->
+          <!-- <div class="card-subtitle">{{entry.timestamp | date: "mm/dd/yyyy"}}</div> -->
+          <button ion-item (click)="deleteEntry(entry.id)">
+            <ion-icon name="close-circle" item-start></ion-icon>
+            delete
+          </button>
+        </ion-list>
+      </ion-card-content>
   </ion-card>
-
 </ion-content>
 
 
