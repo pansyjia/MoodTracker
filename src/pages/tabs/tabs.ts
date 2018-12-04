@@ -25,4 +25,9 @@ export class TabsPage {
     console.log('ionViewDidLoad TabsPage');
   }
 
+  // private refresh(){
+  //   console.log('ionViewDidLoad CurrentPage');
+  //   this.navCtrl.push(CurrentPage);
+  // }
+
 }

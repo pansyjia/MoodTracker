@@ -18,10 +18,10 @@ import { ToastController } from 'ionic-angular';
 export class EntryDetailPage {
 
   private entry: Entry;
-  private happy = new Mood("happy", 100, "/assets/imgs/Happy.png", "#FFCC00", "#fff176");
-  private angry = new Mood("angry", -10, "/assets/imgs/Angry.png", "#DB4437", "#ff7762");
-  private sad = new Mood("sad", -20, "/assets/imgs/Sad.png", "#039BE5", "#63ccff");
-  private okay = new Mood("okay", 50, "/assets/imgs/Okay.png", "#4AAE4E", "#7ee17c");
+  private happy = new Mood("happy", 100, "/assets/imgs/happy.png", "#FFCC00", "#fff176");
+  private angry = new Mood("angry", 10, "/assets/imgs/angry.png", "#DB4437", "#ff7762");
+  private sad = new Mood("sad", 20, "/assets/imgs/sad.png", "#039BE5", "#63ccff");
+  private okay = new Mood("okay",50, "/assets/imgs/okay.png", "#4AAE4E", "#7ee17c");
 
   constructor(public navCtrl: NavController,
               public navParams:NavParams,
@@ -75,7 +75,7 @@ export class EntryDetailPage {
     // this.navCtrl.pop();
 
     this.navCtrl.push(CurrentPage);
-    this.navCtrl.parent.select(1);
+    //this.navCtrl.parent.select(1);
   }
 
 }

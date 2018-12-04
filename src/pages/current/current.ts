@@ -23,12 +23,12 @@ export class CurrentPage {
           (update) => {
               this.entries = this.entryService.getEntries();
               this.entry = this.entries[0];
-
           },
           (err) => {
             console.log('this.entryService.getObservable()[0].subscribe :', err);
           });
-        this.entry = this.entryService.getEntries()[0];
+        this.entries = this.entryService.getEntries();
+        this.entry = this.entries[0];
   }
 
   ionViewDidLoad() {
