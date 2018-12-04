@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Entry, Mood, Location } from '../../models/models';
 import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
-import { Storage } from '@ionic/storage';
+import { Subject } from 'rxjs';
 import firebase from 'firebase';
 
 const config = {
@@ -17,16 +17,21 @@ const config = {
 @Injectable()
 export class EntryDataServiceProvider {
   private entries: Entry[] = [];
-  private serviceObserver: Observer<Entry[]>;
-  private clientObservable: Observable<Entry[]>;
+  ////replace Observer with Subject 
+  private serviceObserver: Subject<any>;
+  private clientObservable: Subject<any>;
   private db: any;
 
   constructor() {
     firebase.initializeApp(config);
     this.db = firebase.database();
-    this.clientObservable = Observable.create(observer => {
-      this.serviceObserver = observer;
-    });
+
+  //   this.clientObservable = Observable.create(observer => {
+  //   this.serviceObserver = observer;
+  // });
+
+    this.clientObservable = new Subject();
+    this.serviceObserver = this.clientObservable;
 
     let dataRef = this.db.ref('/entries');
     dataRef.on('value', snapshot => {
@@ -51,7 +56,9 @@ export class EntryDataServiceProvider {
     }
 
     private notifySubscribers(): void {
-      this.serviceObserver.next(true);
+      // this.serviceObserver.next(true);
+      this.serviceObserver.next(undefined);
+      ///Siyu can only run the file using undefined
     }
 
     public getEntries(): Entry[]{
