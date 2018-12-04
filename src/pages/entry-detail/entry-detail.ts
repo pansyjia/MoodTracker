@@ -4,6 +4,8 @@ import { HomePage } from '../home/home';
 import { ChartPage } from '../chart/chart';
 import { Entry } from '../../models/models';
 import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service'
+import { ToastController } from 'ionic-angular';
+
 
 @IonicPage()
 @Component({
@@ -17,36 +19,41 @@ export class EntryDetailPage {
 
   constructor(public navCtrl: NavController,
               public navParams:NavParams,
-              private entryDataService: EntryDataServiceProvider) {
+              private entryDataService: EntryDataServiceProvider,
+              private toastCtrl: ToastController) {
     let entryID = this.navParams.get("entryID");
 
     if (entryID === undefined) {
       this.entry = new Entry();
-      this.entry.id = -1; // placeholder for 'temporary' entry
+      this.entry.id = -1;
       this.entry.text = "";
       this.entry.mood = "happy";
       this.entry.location = "";
-      this.entry.timestamp = new Date();/////change type
+      this.entry.timestamp = new Date();
     }else {
         this.entry = this.entryDataService.getEntryByID(entryID);
     }
-
   }
 
 
-  // private saveAlert() {
-  //   const alert = this.alertCtrl.create({
-  //     title: 'Mood Record Created!',
-  //     subTitle: 'You just successfully created a mood record!',
-  //     buttons: ['OK']
-  //   });
-  //   alert.present();
-  // }
   private changeMood(name: string){
     this.entry.mood = name;
   }
 
   private saveEntry() {
+    ///present toast
+    let toast = this.toastCtrl.create({
+      message: 'A mood record was added successfully',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+    toast.present();
+
+    ///save
     let newEntry = new Entry();
     newEntry.mood = this.entry.mood;
     newEntry.location = this.entry.location;

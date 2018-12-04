@@ -35,32 +35,28 @@ export class ChartPage {
  public chartLoadingEl: any;
 
 
-
-  constructor(public navCtrl: NavController,
+constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private entryService: EntryDataServiceProvider) {
+
     this.entryService.getObservable().subscribe(
       (update) => {
           this.entries = this.entryService.getEntries();
-          console.log(this.entries);
-        console.log('this.entryService.getObservable().subscribe ');
+         //  console.log(this.entries);
+      //   console.log('this.entryService.getObservable().subscribe ');
       },
       (err) => {
-        console.log('this.entryService.getObservable().subscribe :', err);
+      //   console.log('this.entryService.getObservable().subscribe :', err);
       });
     this.entries = this.entryService.getEntries();
 
-
+    
   }
 
   ionViewDidLoad()
   {
      this.defineChartData();
      this.createBarChart();
-   //   setTimeout(() => {
-   //      console.log("")
-   //      this.createBarChart();
-   //   }, 0)
   }
 
 /**
@@ -72,8 +68,9 @@ export class ChartPage {
       let k : any;
       for(k in this.entries)
       {
-         var entry = k;
-         let thisMood = this.entryService.getMood(entry.mood)
+         var entry = this.entries[k];
+         let thisMood = this.entryService.getMood(entry.mood);
+         console.log("retrieved mood:", thisMood);
          this.chartLabels.push(entry.location);
          this.chartValues.push(thisMood.score);
          this.chartColours.push(thisMood.color);

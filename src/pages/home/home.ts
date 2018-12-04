@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AnimationStyles } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { EntryDetailPage } from '../entry-detail/entry-detail';
 import { Entry, Mood, Location } from '../../models/models';
@@ -28,13 +28,19 @@ export class HomePage {
     this.entries = this.entryService.getEntries();
   }
 
-  private editEntry(entryID: number) {
+  private editEntry(entryID: any) {
     // console.log("editing entry ", entryID);
     this.navCtrl.push(EntryDetailPage, {"entryID": entryID});
   }
 
   private getMood(name: string) {
     let thisMood = this.entryService.getMood(name)
+    // console.log('thisMood', thisMood);
+    return thisMood;
+  }
+
+  private deleteEntry(entryID: any) {
+    let thisMood = this.entryService.removeEntry(entryID);
     // console.log('thisMood', thisMood);
     return thisMood;
   }

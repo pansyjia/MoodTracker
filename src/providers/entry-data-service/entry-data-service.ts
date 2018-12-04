@@ -78,9 +78,9 @@ export class EntryDataServiceProvider {
 
   public getMood(name: string):Mood {
     if (name == "happy") { return new Mood("happy", 100, "/assets/imgs/Happy-b.png", "#FFCC00", "#fff176"); }
-    if (name == "angry") { return new Mood("angry", -10, "/assets/imgs/Angry-b.png", "#DB4437", "#ff7762"); }
-    if (name == "sad") { return new Mood("sad", -20, "/assets/imgs/Sad-b.png", "#039BE5", "#63ccff"); }
-    if (name == "okay") { return new Mood("okay", 50, "/assets/imgs/Okay-b.png", "#4AAE4E", "#7ee17c"); }
+    if (name == "angry") { return new Mood("angry", 30, "/assets/imgs/Angry-b.png", "#DB4437", "#ff7762"); }
+    if (name == "sad") { return new Mood("sad", 50, "/assets/imgs/Sad-b.png", "#039BE5", "#63ccff"); }
+    if (name == "okay") { return new Mood("okay", 80, "/assets/imgs/Okay-b.png", "#4AAE4E", "#7ee17c"); }
     return new Mood("happy", 100, "/assets/imgs/Happy-b.png", "#FFCC00", "#fff176"); // if not applied
   }
 
