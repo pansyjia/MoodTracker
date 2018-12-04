@@ -111,8 +111,12 @@ export class EntryDataServiceProvider {
     }
 
     public moodCount(type: string): number{
-      return 1;
+      let moodcount = 0;
+      for (let e of this.entries) {
+        if (e.mood.type === type) {
+          moodcount +=1;
+        }
+      }
+      return moodcount;
     }
-
-
 }
