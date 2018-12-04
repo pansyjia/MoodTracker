@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { ChartPage } from '../chart/chart';
-import { Entry } from '../../models/entry';
+import { Entry } from '../../models/models';
 import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service'
 
 @IonicPage()
@@ -30,8 +30,7 @@ export class EntryDetailPage {
     }else {
         this.entry = this.entryDataService.getEntryByID(entryID);
     }
-    console.log("retrieved entry:", this.entry.mood.type);
-    console.log("happy is", this.happy);
+
   }
 
 

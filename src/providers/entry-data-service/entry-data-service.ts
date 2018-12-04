@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Entry } from '../../models/entry';
-import { Mood } from '../../models/mood';
+import { Entry, Mood, Location } from '../../models/models';
 import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
 import firebase from 'firebase';
