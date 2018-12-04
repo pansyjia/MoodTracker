@@ -3,8 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { ChartPage } from '../chart/chart';
 import { CurrentPage } from '../current/current';
-import { Entry } from '../../models/entry';
-import { Mood } from '../../models/mood';
+import { Entry, Mood } from '../../models/models';
 
 import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service'
 import { ToastController } from 'ionic-angular';

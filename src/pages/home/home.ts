@@ -5,8 +5,7 @@ import { CurrentPage } from '../current/current';
 import { ChartPage } from '../chart/chart';
 import { NewMoodPage } from '../new-mood/new-mood';
 
-import { Entry } from '../../models/entry';
-import { Mood } from '../../models/mood';
+import { Entry, Mood } from '../../models/models';
 import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service';
 
 

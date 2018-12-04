@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { NewLocationPage } from '../new-location/new-location';
-import { Entry } from '../../models/entry';
+import { Entry } from '../../models/models';
 import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service';
 
 @IonicPage()
@@ -14,11 +14,11 @@ export class NewMoodPage {
   private currentTime = new Date();
 
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private entryDataService: EntryDataServiceProvider) {
       this.entry = new Entry();
-      this.entry.id = -1; 
+      this.entry.id = -1;
       this.entry.text = "";
       this.entry.mood = "happy";
       this.entry.location = "";
@@ -30,7 +30,7 @@ export class NewMoodPage {
   }
 
   private changeMood(name: string){
-    // this.buttonColor = "blue"; 
+    // this.buttonColor = "blue";
     this.entry.mood = name;
   }
 

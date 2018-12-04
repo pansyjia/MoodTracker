@@ -3,8 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service';
 import { NewMoodPage } from '../new-mood/new-mood';
 import { EntryDetailPage } from '../entry-detail/entry-detail';
-import { Entry } from '../../models/entry';
-import { Mood } from '../../models/mood';
+import { Entry, Mood } from '../../models/models';
 
 @IonicPage()
 @Component({

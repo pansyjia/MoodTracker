@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Entry } from '../../models/entry';
+import { Entry, Location } from '../../models/models';
 import { ToastController } from 'ionic-angular';
 import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service';
 
