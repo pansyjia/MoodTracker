@@ -1,0 +1,19 @@
+page-current {
+    ion-content{
+        background-image: url("../assets/imgs/back-d.png");
+    }
+
+    .mood-img{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 30%;
+        width: 70%;
+    }
+
+    .mood-text{
+        text-align: center;
+    }
+    
+
+}

@@ -1,4 +1,8 @@
 page-chart {
+    ion-content{
+        background-image: url("../assets/imgs/back-d.png");
+    }
+    
 
     .chart-wrapper {
         width: 99%;
@@ -10,6 +14,19 @@ page-chart {
      canvas  {
         height: 500px;
 
+     }
+
+     .mood-count {
+         font-size: 1.2em;
+         font-weight: 500;
+         color: grey;
+     }
+
+    
+     .mood-item, .mood-img {
+        border-color: rgba(0, 0, 0, 0);        
+        background-color: rgba(0, 0, 0, 0);
+        color: white; 
      }
 
     // .scroll-content {

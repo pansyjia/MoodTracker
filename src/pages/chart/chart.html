@@ -7,4 +7,30 @@
     <section class="chart-wrapper">
       <canvas #barChart></canvas>
     </section>
+
+<br>
+<br>
+    <ion-list no-lines class="mood-count">
+      <ion-item class="mood-item">
+       <img id="happy" item-start style="width: 125px; height: 125px; " src="./assets/imgs/Happy.png">
+       <p class="mood-count">Happy: {{happyCount}}</p>
+      </ion-item>
+      
+       <ion-item class="mood-item">
+      <img id="angry" item-start style="width: 125px; height: 125px;" src="./assets/imgs/Angry.png" >
+      <p class="mood-count">Angry: {{angryCount}}</p>
+    </ion-item>
+      
+    <ion-item class="mood-item">
+      <img id="sad" item-start style="width: 125px; height: 125px; " src="./assets/imgs/Sad.png">
+      <p class="mood-count">Sad: {{sadCount}}</p>
+    </ion-item>
+      
+    <ion-item class="mood-item">      
+      <img id="okay" item-start style="width: 125px; height: 125px; " src="./assets/imgs/Okay.png">
+      <p class="mood-count">Okay: {{okayCount}}</p>
+    </ion-item>
+      
+  
+    </ion-list>
 </ion-content>

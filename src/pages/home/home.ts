@@ -1,9 +1,13 @@
 import { Component, AnimationStyles } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { EntryDetailPage } from '../entry-detail/entry-detail';
-import { Entry, Mood, Location } from '../../models/models';
+import { CurrentPage } from '../current/current';
 import { ChartPage } from '../chart/chart';
-import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service'
+import { NewMoodPage } from '../new-mood/new-mood';
+
+import { Entry } from '../../models/entry';
+import { Mood } from '../../models/mood';
+import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service';
 
 
 @Component({
@@ -33,16 +37,31 @@ export class HomePage {
     this.navCtrl.push(EntryDetailPage, {"entryID": entryID});
   }
 
-  private getMood(name: string) {
-    let thisMood = this.entryService.getMood(name)
-    // console.log('thisMood', thisMood);
-    return thisMood;
-  }
+  // private getMood(name: string) {
+  //   let thisMood = this.entryService.getMood(name)
+  //   // console.log('thisMood', thisMood);
+  //   return thisMood;
+  // }
 
   private deleteEntry(entryID: any) {
     let thisMood = this.entryService.removeEntry(entryID);
     // console.log('thisMood', thisMood);
+    //this.navCtrl.parent.select(2);
+    this.navCtrl.push(HomePage);
     return thisMood;
   }
+
+  private checkStatus(){
+    if(this.entryService.getEntries().length == 0){
+        return true;
+      }
+      return false;
+  }
+
+  // add the first or new record
+  private addNew (){
+    this.navCtrl.push(EntryDetailPage);
+  }
+
 
 }

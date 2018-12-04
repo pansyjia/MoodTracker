@@ -15,19 +15,23 @@
     </ion-item>
 
     <h5 style="text-align:center;">How is your mood?</h5>
-    <ion-row>
-      <ion-col col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3>
-        <button id="happy" (click)="changeMood('happy')" >
-        <img id="happy" style="width: 132px; height: 132px; background: white;" src="./assets/imgs/Happy.png">
+    <ion-row class="select">
+      <ion-col class="select" col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3>
+        <button class="select-mood" id="happy" (click)="changeMood('happy')">
+          <img *ngIf="!happyselected" id="happy" style="width: 125px; height: 125px; " src="./assets/imgs/Happy.png">
+          <img *ngIf="happyselected" id="happy" style="width: 125px; height: 125px; " src="./assets/imgs/happy_selected.png">
         </button>
-        <button id="angry" (click)="changeMood('angry')">
-          <img id="angry" style="width: 132px; height: 132px;background: white; " src="./assets/imgs/Angry.png" >
+        <button class="select-mood" id="angry" (click)="changeMood('angry')">
+          <img *ngIf="!angryselected" id="angry" style="width: 125px; height: 125px; " src="./assets/imgs/Angry.png" >
+          <img *ngIf="angryselected" id="angry" style="width: 125px; height: 125px; " src="./assets/imgs/angry_selected.png" >
         </button>
-        <button id="sad"  (click)="changeMood('sad')">
-          <img id="sad" style="width: 132px; height: 132px; background: white;" src="./assets/imgs/Sad.png">
+        <button class="select-mood" id="sad"  (click)="changeMood('sad')">
+          <img *ngIf="!sadselected" id="sad" style="width: 125px; height: 125px;  " src="./assets/imgs/Sad.png">
+          <img *ngIf="sadselected" id="sad" style="width: 125px; height: 125px;  " src="./assets/imgs/sad_selected.png">
         </button>
-        <button id="okay"  (click)="changeMood('okay')">
-          <img id="okay" style="width: 132px; height: 132px;background: white; " src="./assets/imgs/Okay.png">
+        <button class="select-mood" id="okay"  (click)="changeMood('okay')">
+          <img *ngIf="!okayselected" id="okay" style="width: 125px; height: 125px; " src="./assets/imgs/Okay.png">
+          <img *ngIf="okayselected" id="okay" style="width: 125px; height: 125px; " src="./assets/imgs/okay_selected.png">
         </button>
       </ion-col>
     </ion-row>
@@ -46,16 +50,13 @@
     </ion-item>
   </ion-list>
 
-  <ion-list no-lines>
-    <ion-item>
+  <!-- <ion-list no-lines>
+    <ion-item> -->
       <button ion-button outline item-end>Cancel </button>
       <button ion-button item-end (click)="saveEntry()">Save</button>
-    </ion-item>
-  </ion-list>
+    <!-- </ion-item>
+  </ion-list> -->
 
 
 
 </ion-content>
-
-
-

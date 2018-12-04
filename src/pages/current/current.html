@@ -1,0 +1,35 @@
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>Current Mood</ion-title>
+    </ion-navbar>
+
+  </ion-header>
+
+
+  <ion-content padding>
+        <div *ngIf="checkStatus()">
+                <h4>No Record</h4>
+                <p>Click the button to record your current mood</p>
+                  <button ion-button clear icon-only (click)="addNew()">
+                  <ion-icon name="create"></ion-icon>
+                </button>
+              </div>
+
+    <div *ngIf="!checkStatus()">
+
+         <!-- <h5>{{entry.location}}</h5> -->
+          <!-- <p>{{entry.timestamp | date: "short"}}</p> -->
+
+          <img style="width: 200px; height: 200px; " class="mood-img" item-start [src]="entry.mood.image" />
+
+           <h2 class="mood-text"> I'm {{entry.mood.type}}....</h2>
+
+          <ion-fab right bottom>
+            <button ion-fab color="primary" icon-only (click)="addNew()"><ion-icon name="add"></ion-icon></button>
+        </ion-fab>
+
+
+</div>
+
+  </ion-content>
