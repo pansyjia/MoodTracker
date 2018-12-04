@@ -10,7 +10,6 @@ import { Mood } from '../../models/mood';
 import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service';
 
 
-
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'

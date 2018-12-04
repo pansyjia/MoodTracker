@@ -1,8 +1,7 @@
 import { Component, ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Chart } from 'chart.js';
-import { Entry } from '../../models/entry';
-import { Mood } from '../../models/mood';
+import { Entry, Mood } from '../../models/models';
 import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service'
 
 import { EntryDetailPage } from '../entry-detail/entry-detail';

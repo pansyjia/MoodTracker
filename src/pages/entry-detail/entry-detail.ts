@@ -5,6 +5,7 @@ import { ChartPage } from '../chart/chart';
 import { CurrentPage } from '../current/current';
 import { Entry } from '../../models/entry';
 import { Mood } from '../../models/mood';
+
 import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service'
 import { ToastController } from 'ionic-angular';
 
@@ -43,8 +44,6 @@ export class EntryDetailPage {
     }else {
         this.entry = this.entryDataService.getEntryByID(entryID);
     }
-    // console.log("retrieved entry:", this.entry.mood.type);
-    // console.log("happy is", this.happy);
   }
 
   private changeMood(name: string){
