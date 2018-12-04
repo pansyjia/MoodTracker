@@ -8,25 +8,27 @@
 
 <ion-content padding class="card-list">
 
-  <div *ngIf="checkStatus()">
-    <h4>Welcome to Mood Tracker!</h4>
-    <p>Wherer mood matters!</p>
-      <button ion-button clear icon-only (click)="addNew()">
-      <ion-icon name="create"></ion-icon>
-    </button>
+<div *ngIf="checkStatus()">
+    <h2 class="empty-title">Welcome to Mood Tracker!</h2>
+    <h4 class="empty-sub">Wherer mood matters!</h4>
+    <br>
+    <br>
+      <button ion-button round color="secondary" class="get-started" (click)="addNew()">
+    START
+    </button>      
   </div>
 
   <div *ngIf="!checkStatus()">
 
-      <!-- <ion-fab right bottom>
-          <button ion-fab color="primary" icon-only (click)="addNew()"><ion-icon name="add"></ion-icon></button>
-      </ion-fab> -->
+    <!-- make add new more visible -->
+    <button ion-button full color="primary" (click)="addNew()">ADD NED</button>
+    <br><br>
 
     <ion-list no-lines *ngFor="let entry of entries">
 
       <ion-item-sliding #item>
           <ion-item>
-              <img class="card-img" style="width: 125px; height: 125px;" [src]="entry.mood.image" />
+              <img class="card-img" style="width: 120px; height: 120px; " [src]="entry.mood.image" />
               <div class="card-title">{{entry.location}}</div>
               <div class="card-subtitle">{{entry.timestamp}}</div>
           </ion-item>

@@ -4,9 +4,6 @@ import { Chart } from 'chart.js';
 import { Entry, Mood } from '../../models/models';
 import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service'
 
-import { EntryDetailPage } from '../entry-detail/entry-detail';
-import { HomePage } from '../home/home';
-
 
 @IonicPage()
 @Component({

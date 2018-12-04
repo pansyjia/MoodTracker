@@ -36,8 +36,29 @@ page-home {
           margin-left: 50%;
       }
 
-      // .delete-icon{
-      //   display: inline-block;
-      // }
+     ///style empty state
+
+      .empty-title {
+        text-align: center;
+        margin-top: 50%;
+        color:  #222;
+        padding-top: 5em;
+      }
+
+      .empty-sub {
+        text-align: center;
+        margin-top: 1em;
+        color: #222;
+      }
+
+
+      .get-started {
+        color: white;
+       font-weight: 500;
+        margin-top: 3em;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
 
 }

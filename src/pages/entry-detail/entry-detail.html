@@ -9,10 +9,10 @@
   <ion-list no-lines>
       <!-- <ion-icon name="calendar"  color="primary"> {{currentTime | date : 'short'}}</ion-icon>  -->
 
-    <h5 style="text-align:center;">Hi! Where are you now?</h5>
-    <ion-item>
-      <ion-input type="text" placeholder="Your Location" [(ngModel)]="entry.location"></ion-input>
-    </ion-item>
+      <h5 style="text-align:center;">Hi! Where are you now?</h5>
+      <ion-item>
+        <ion-input type="text" placeholder="Your Location" [(ngModel)]="entry.location"></ion-input>
+      </ion-item>
 
     <h5 style="text-align:center;">How is your mood?</h5>
     <ion-row class="select">
@@ -35,24 +35,17 @@
         </button>
       </ion-col>
     </ion-row>
-      <!-- <ion-item>
-        <ion-img style="width: 132px; height: 132px; background: white;" src="./assets/imgs/Happy.png" ng-click="savemood()"></ion-img>
-        <ion-img style="width: 132px; height: 132px;background: white; " src="./assets/imgs/Angry.png" ></ion-img>
-      </ion-item>
-      <ion-item>
-        <ion-img style="width: 132px; height: 132px; background: white;" src="./assets/imgs/Sad.png"></ion-img>
-        <ion-img style="width: 132px; height: 132px;background: white; " src="./assets/imgs/Okay.png"></ion-img>
-      </ion-item> -->
+  
 
     <h5 style="text-align:center;">Add some notes?</h5>
     <ion-item>
-      <ion-input type="text" placeholder="A beautiful day" [(ngModel)]="entry.text"></ion-input>
+      <ion-input type="text" placeholder="Today I..." [(ngModel)]="entry.text"></ion-input>
     </ion-item>
   </ion-list>
 
   <!-- <ion-list no-lines>
     <ion-item> -->
-      <button ion-button outline item-end>Cancel </button>
+      <button ion-button outline item-end (click)="cancel()">Cancel </button>
       <button ion-button item-end (click)="saveEntry()">Save</button>
     <!-- </ion-item>
   </ion-list> -->

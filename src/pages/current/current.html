@@ -8,13 +8,16 @@
 
 
   <ion-content padding>
-        <div *ngIf="checkStatus()">
-                <h4>No Record</h4>
-                <p>Click the button to record your current mood</p>
-                  <button ion-button clear icon-only (click)="addNew()">
-                  <ion-icon name="create"></ion-icon>
-                </button>
-              </div>
+
+    <div *ngIf="checkStatus()">
+      <h2 class="empty-title">No Mood Record</h2>
+      <h5 class="empty-sub">Click the button below to record your current mood</h5>
+      <br>
+      <br>
+      <button ion-button round color="secondary" class="get-started" (click)="addNew()">
+  ADD</button>      
+    </div>
+
 
     <div *ngIf="!checkStatus()">
 

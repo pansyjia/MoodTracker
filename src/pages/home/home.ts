@@ -45,12 +45,10 @@ export class HomePage {
   private deleteEntry(entryID: any) {
     let thisMood = this.entryService.removeEntry(entryID);
     // console.log('thisMood', thisMood);
-    //this.navCtrl.parent.select(2);
-    this.navCtrl.push(HomePage);
     return thisMood;
   }
 
-  private checkStatus(){
+  private checkStatus() {
     if(this.entryService.getEntries().length == 0){
         return true;
       }
@@ -58,7 +56,7 @@ export class HomePage {
   }
 
   // add the first or new record
-  private addNew (){
+  private addNew() {
     this.navCtrl.push(EntryDetailPage);
   }
 
