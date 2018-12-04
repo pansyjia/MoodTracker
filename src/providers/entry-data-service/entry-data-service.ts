@@ -55,7 +55,7 @@ export class EntryDataServiceProvider {
       this.serviceObserver.next(true);
     }
 
-    public getEntries():Entry[] {
+    public getEntries(): Entry[]{
       let entriesClone = JSON.parse(JSON.stringify(this.entries));
       return entriesClone.sort(function(a, b) {
         if (a.timestamp > b.timestamp) {

@@ -22,6 +22,10 @@ export class EntryDetailPage {
   private angry = new Mood("angry", 10, "/assets/imgs/angry.png", "#DB4437", "#ff7762");
   private sad = new Mood("sad", 20, "/assets/imgs/sad.png", "#039BE5", "#63ccff");
   private okay = new Mood("okay",50, "/assets/imgs/okay.png", "#4AAE4E", "#7ee17c");
+  private happyselected = false;
+  private angryselected = false;
+  private sadselected = false;
+  private okayselected = false;
 
   constructor(public navCtrl: NavController,
               public navParams:NavParams,
@@ -45,6 +49,31 @@ export class EntryDetailPage {
 
   private changeMood(name: string){
     this.entry.mood = name;
+    if (name == 'happy') {
+      this.happyselected = true;
+      this.angryselected = false;
+      this.sadselected = false;
+      this.okayselected = false;
+    }
+    if (name == 'angry') {
+      this.happyselected = false;
+      this.angryselected = true;
+      this.sadselected = false;
+      this.okayselected = false;
+    }
+    if (name == 'sad') {
+      this.happyselected = false;
+      this.angryselected = false;
+      this.sadselected = true;
+      this.okayselected = false;
+    }
+    if (name == 'okay') {
+      this.happyselected = false;
+      this.angryselected = false;
+      this.sadselected = false;
+      this.okayselected = true;
+    }
+    // console.log(this.unselected);
   }
 
   private saveEntry() {
@@ -62,7 +91,7 @@ export class EntryDetailPage {
 
     ///save
     let newEntry = new Entry();
-    let newMood = new Mood();
+    let newMood = this.happy;
     if (this.entry.mood == "happy") newMood = this.happy;
     if (this.entry.mood == "angry") newMood = this.angry;
     if (this.entry.mood == "sad") newMood = this.sad;
