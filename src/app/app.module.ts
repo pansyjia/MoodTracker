@@ -9,6 +9,7 @@ import { HomePage } from '../pages/home/home';
 import { EntryDetailPage } from '../pages/entry-detail/entry-detail';
 import { ChartPage } from '../pages/chart/chart';
 import { TabsPage } from '../pages/tabs/tabs';
+import { SettingsPage } from '../pages/settings/settings';
 import { EntryDataServiceProvider } from '../providers/entry-data-service/entry-data-service';
 import { CurrentPage } from '../pages/current/current';
 import { NewLocationPage } from '../pages/new-location/new-location';
@@ -23,7 +24,8 @@ import { NewMoodPage } from '../pages/new-mood/new-mood';
     TabsPage,
     CurrentPage,
     NewMoodPage,
-    NewLocationPage
+    NewLocationPage,
+    SettingsPage
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,8 @@ import { NewMoodPage } from '../pages/new-mood/new-mood';
     TabsPage,
     CurrentPage,
     NewMoodPage,
-    NewLocationPage
+    NewLocationPage,
+    SettingsPage
   ],
   providers: [
     StatusBar,

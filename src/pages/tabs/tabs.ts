@@ -4,6 +4,7 @@ import { ChartPage } from '../chart/chart';
 import { EntryDetailPage } from '../entry-detail/entry-detail';
 import { HomePage } from '../home/home';
 import { CurrentPage } from '../current/current';
+import { SettingsPage } from '../settings/settings';
 
 
 @IonicPage()
@@ -17,6 +18,7 @@ export class TabsPage {
   AddEntry = EntryDetailPage;
   ListView = HomePage;
   CurrentMood = CurrentPage;
+  Settings = SettingsPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
