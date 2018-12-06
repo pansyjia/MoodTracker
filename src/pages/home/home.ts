@@ -62,9 +62,9 @@ export class HomePage {
 
   private checkLength() {
     let k: any;
-    for (k in this.entryService.getEntries()){
-      var entry = this.entryService.getEntries()[k];
-      if(entry.location.length < 20){
+    for (k in this.entries){
+      var entry = this.entries[k];
+      if(entry.location.length > 20){
         return true;
       }
       return false;

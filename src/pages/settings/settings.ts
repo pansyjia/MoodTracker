@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 
+
 import { Location } from "../../models/models";
 import { LocationDataServiceProvider } from "../../providers/location-data-service/location-data-service";
 
@@ -20,7 +21,7 @@ import { LocationDataServiceProvider } from "../../providers/location-data-servi
 })
 export class SettingsPage {
 
-  private locations: Location[];
+  private nearbyLocations: Location[];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public alertCtrl: AlertController,
@@ -28,13 +29,12 @@ export class SettingsPage {
               private locationService: LocationDataServiceProvider) {
     this.locationService.getObservable().subscribe(
       (update) => {
-        this.locations = this.locationService.getLocations();
-        console.log(this.locations);
+        this.nearbyLocations = this.locationService.getNearbyLocations();
       },
       (err) => {
         console.log('this.locationService.getObservable().subscribe :', err);
       });
-    this.locations = this.locationService.getLocations();
+    this.nearbyLocations = this.locationService.getNearbyLocations();
   }
 
   ionViewDidLoad() {
@@ -63,7 +63,7 @@ export class SettingsPage {
         {
           text: 'Overwrite',
           handler: () => {
-            this.locationService.initLocations();
+            this.locationService.dev_initLocations();
             const alert = this.alertCtrl.create({
               title: 'Finished!',
               subTitle: 'Location database already reset.',
@@ -89,5 +89,34 @@ export class SettingsPage {
       //     {id: 'notifyLater', title: 'Maybe Later'}],
       attachments: ["../../assets/imgs/Happy.png"]
     });
+  }
+
+  dev_testGPS() {
+    let currentLocation = this.locationService.getCurrentGeolocation();
+    if (currentLocation === 'unknown') {
+      const alert = this.alertCtrl.create({
+        title: "Can't Find your location!",
+        subTitle: "Please check your privacy settings",
+        buttons: ['OK']
+      });
+      alert.present();
+    } else {
+      const alert = this.alertCtrl.create({
+        title: 'Find your location!',
+        subTitle: "Lat: " + currentLocation.lat + " <br> Long: " + currentLocation.lng,
+        buttons: ['OK']
+      });
+      alert.present();
+    }
+  }
+
+  dev_fakeGeolocation() {
+    this.locationService.dev_fakeGeolocation();
+    const alert = this.alertCtrl.create({
+      title: 'Fake your GPS Data!',
+      subTitle: 'Please relaunch to reset',
+      buttons: ['OK']
+    });
+    alert.present();
   }
 }

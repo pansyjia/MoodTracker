@@ -126,4 +126,8 @@ export class EntryDataServiceProvider {
       }
       return moodcount;
     }
+
+
+
+  
 }

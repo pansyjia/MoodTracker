@@ -147,23 +147,23 @@ constructor(public navCtrl: NavController,
    // }
 
 
-   private meanScore() {
-      var sameLoc = [],
-      sum = 0;
+   // private meanScore() {
+   //    var sameLoc = [],
+   //    sum = 0;
 
-      let k : any;
-      for(k in this.entries)
-      {
-         var entry = this.entries[k];
-         let thisMood = entry.mood;
-         // if (entry.location in sameLoc == true ){
-         //    sameLoc.push(entry);
-         // }
-         for (var i=0; i < sameLoc.length; i++){
-            sum += thisMood.score;
-         }
-         return sum/sameLoc.length
-      }}
+   //    let k : any;
+   //    for(k in this.entries)
+   //    {
+   //       var entry = this.entries[k];
+   //       let thisMood = entry.mood;
+   //       if (entry.location in sameLoc == true ){
+   //          sameLoc.push(entry);
+   //       }
+   //       for (var i=0; i < sameLoc.length; i++){
+   //          sum += thisMood.score;
+   //       }
+   //       return sum/sameLoc.length
+   //    }}
 
 }
 

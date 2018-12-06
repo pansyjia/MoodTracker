@@ -1,4 +1,4 @@
-export const default_locations = [
+export let Default_locations = [
     {
       "geometry": {
         "location": {

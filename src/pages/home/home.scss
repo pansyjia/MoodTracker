@@ -13,7 +13,11 @@ page-home {
         text-align: left;
       }
 
-      .card-title {
+    .entry-card{
+      width: 100%;
+    }
+
+    .card-title {
         position: absolute;
         top: 6%;
         font-size: 1.0em;
@@ -21,8 +25,8 @@ page-home {
         font-weight: bold;
         color:#000;
         margin-left: 0.3em;
-        // max-width: 40%;
-        // word-wrap: break-word;
+        // max-width: 40% !important; 
+        // word-wrap: break-word !important;
       }
 
       .card-subtitle {
