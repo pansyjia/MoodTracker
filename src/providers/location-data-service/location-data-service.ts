@@ -38,6 +38,7 @@ export class LocationDataServiceProvider {
         let location = {
           id: childSnapshot.key,
           name: childSnapshot.val().name,
+          address: childSnapshot.val().address,
           lat: childSnapshot.val().lat,
           lng: childSnapshot.val().lng,
           countAll: childSnapshot.val().countAll,
@@ -55,7 +56,7 @@ export class LocationDataServiceProvider {
     // })
     console.log(default_locations);
     default_locations.forEach((item, index) => {
-      let location = new Location(index, item.name, item.geometry.location.lat, item.geometry.location.lng, 0,  item.id);
+      let location = new Location(index, item.name, item.vicinity, item.geometry.location.lat, item.geometry.location.lng, 0,  item.id);
       // console.log(location);
       this.addLocation(location);
     })
@@ -114,7 +115,8 @@ export class LocationDataServiceProvider {
 
   public addLocation(location: Location): void {
     this.db.ref('/locations/' + location.id).set({
-      name: location.locationName,
+      name: location.name,
+      address: location.address,
       lat: location.lat,
       lng: location.lng,
       countAll: location.countAll,

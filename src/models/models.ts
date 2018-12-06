@@ -19,7 +19,8 @@ export class Mood {
 
 export class Location {
   public constructor(public id: number,
-                     public locationName: string,
+                     public name: string,
+                     public address: string,
                      public lat: number,
                      public lng: number,
                      public countAll: number,

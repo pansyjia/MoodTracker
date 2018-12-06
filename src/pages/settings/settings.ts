@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 
 import { Location } from "../../models/models";
 import { LocationDataServiceProvider } from "../../providers/location-data-service/location-data-service";
@@ -19,7 +20,10 @@ import { LocationDataServiceProvider } from "../../providers/location-data-servi
 export class SettingsPage {
 
   private locations: Location[];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private locationService: LocationDataServiceProvider) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public alertCtrl: AlertController,
+              private locationService: LocationDataServiceProvider) {
     this.locationService.getObservable().subscribe(
       (update) => {
         this.locations = this.locationService.getLocations();
@@ -44,6 +48,30 @@ export class SettingsPage {
   }
 
   dev_initLocations() {
-    this.locationService.initLocations();
+    const confirm = this.alertCtrl.create({
+      title: 'Initialize Database?',
+      message: 'It will overwrite the default locations, but will not affect user-generated locations.',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            console.log('Initialize Database Cancelled');
+          }
+        },
+        {
+          text: 'Overwrite',
+          handler: () => {
+            this.locationService.initLocations();
+            const alert = this.alertCtrl.create({
+              title: 'Finished!',
+              subTitle: 'Location database already reset.',
+              buttons: ['OK']
+            });
+            alert.present();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 }

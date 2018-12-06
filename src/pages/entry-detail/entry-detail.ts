@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
-import { ChartPage } from '../chart/chart';
-import { CurrentPage } from '../current/current';
-import { Entry, Mood } from '../../models/models';
-
-import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service'
 import { ToastController } from 'ionic-angular';
+
+import { Entry, Mood } from '../../models/models';
+import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service'
+
+import { CurrentPage } from '../current/current';
+import { LocationListPage } from '../location-list/location-list'
 
 
 @IonicPage()
@@ -108,5 +108,7 @@ export class EntryDetailPage {
     this.navCtrl.pop();
   }
 
-
+  private chooseCurrentLocation() {
+    this.navCtrl.push(LocationListPage)
+  }
 }

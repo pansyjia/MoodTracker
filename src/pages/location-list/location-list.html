@@ -7,12 +7,21 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>location-list</ion-title>
+    <ion-title>Choose My Location</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content no-padding>
+  <ion-list-header>
+    Nearby Places
+  </ion-list-header>
+  <ion-item *ngFor="let location of locations">
+    <ion-label>
+      <h4>{{location.name}}</h4>
+      <p>{{location.address}}</p>
+    </ion-label>
+    <ion-radio checked="false" value="{{location.id}}"></ion-radio>
+  </ion-item>
 </ion-content>
