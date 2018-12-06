@@ -18,11 +18,11 @@ export class Mood {
 }
 
 export class Location {
-  public constructor(public id: string,
-                     public name: number,
-                     public lat: string,
-                     public lng: string,
-                     public countAll: string,
-                     public googleMapId: number) {
+  public constructor(public id: number,
+                     public locationName: string,
+                     public lat: number,
+                     public lng: number,
+                     public countAll: number,
+                     public googleMapId: string) {
   }
 }

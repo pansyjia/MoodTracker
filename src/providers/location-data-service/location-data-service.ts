@@ -4,7 +4,8 @@ import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs';
 import firebase from 'firebase';
-import '../../assets/js/place.js';
+// import '../../assets/js/place.js';
+import '../../assets/cache/default_locations.js';
 import { HttpClient } from "@angular/common/http";
 
 const config = {
@@ -24,7 +25,7 @@ export class LocationDataServiceProvider {
   private db: any;
 
   constructor(private http: HttpClient) {
-    firebase.initializeApp(config);
+    // firebase.initializeApp(config);
     this.db = firebase.database();
 
     this.clientObservable = new Subject();
@@ -48,9 +49,17 @@ export class LocationDataServiceProvider {
     });
   }
 
-  // private initLocations() {
-  //   this.http.get('')
-  // }
+  public initLocations() {
+    // this.http.get('../../assets/cache/default_locations.js').subscribe(data => {
+    //   console.log(data);
+    // })
+    console.log(default_locations);
+    default_locations.forEach((item, index) => {
+      let location = new Location(index, item.name, item.geometry.location.lat, item.geometry.location.lng, 0,  item.id);
+      // console.log(location);
+      this.addLocation(location);
+    })
+  }
 
   // private initLocations() {
   //
@@ -81,7 +90,7 @@ export class LocationDataServiceProvider {
     this.serviceObserver.next(undefined);
   }
 
-  public getPopularLocations(): Location[]{
+  public getLocations(sortBy: string = 'count'): Location[]{
     let locationsClone = JSON.parse(JSON.stringify(this.locations));
     return locationsClone.sort(function(a, b) {
       if (a.countAll > b.countAll) {
@@ -102,17 +111,15 @@ export class LocationDataServiceProvider {
     return undefined;
   }
 
-  public addEntry(entry: Entry): void {
-    let listEntry = this.db.ref('/locations');
-    let entryRef = listEntry.push();
-    let dataRecord = {
-      location: entry.location,
-      mood: entry.mood,
-      text: entry.text,
-      timestamp: new Date().toLocaleString()
-    }
-    entryRef.set(dataRecord);
-    this.notifySubscribers();
+
+  public addLocation(location: Location): void {
+    this.db.ref('/locations/' + location.id).set({
+      name: location.locationName,
+      lat: location.lat,
+      lng: location.lng,
+      countAll: location.countAll,
+      googleMapId: location.googleMapId
+    });
   }
 
   // public updateEntry(key, newEntry: Entry): void {
@@ -129,10 +136,9 @@ export class LocationDataServiceProvider {
   //   this.notifySubscribers();
   // }
 
-  public updateLocationCount(key, currentCount: number): void {
-    let childRef = this.db.ref('/locations').child(key).child('countAll');
-    childRef.set(currentCount + 1);
-    this.notifySubscribers();
+  public updateLocationCount(id: number, currentCount: number): void {
+    this.db.ref('/locations/' + id + '/countAll').set(currentCount + 1);
+    // this.notifySubscribers();
   }
 
   public initLocationsFromGoogle(): void {

@@ -17,6 +17,8 @@ import { NewMoodPage } from '../pages/new-mood/new-mood';
 import { EntryDataServiceProvider } from '../providers/entry-data-service/entry-data-service';
 import { LocationDataServiceProvider } from '../providers/location-data-service/location-data-service';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -31,6 +33,7 @@ import { LocationDataServiceProvider } from '../providers/location-data-service/
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

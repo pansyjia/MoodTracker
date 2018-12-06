@@ -1,7 +1,4 @@
-{
-  "html_attributions": [],
-  "next_page_token": "CqQCFwEAAELFNJHLad22ZA7dT1ny0eYyztQKxMd9XAdpxlaTgwiJ6rDzWxPUutx7UMgPWQyagGFAJAVaw2knUk9lT2IrV4Zrbl-FceTnde-fuX2ZI_CSsiEWydPVkzB99RSLR7YXg0o89qCLtnPAaSXK63J6IXhGbb9YV3pJjoCzjUTNGXvojJOcoyE4ZCLWlOBxQZ7h4lbsmtp8zaEBzAx-Knuu0U59l-FtAMPdN24lvyWGKBP3bAvSmf_H1vnHsvkjwBExEqnDdYmbhzICD_guVBJSc2WVpvqGtyXLVVVO2GvSIxtHBu6LvOMV2a-JfIyecZKc2_pHpDBRCgBXmiPy3KX6sS06iL0lemNM1TcUUChdNmVB1GbvtcSylNA3FxsYwRK0sRIQSof9Y6vUwQHc03Ur-NHvSBoUVmQ4qu0Ax1BPLq3WYO5vw-3QPb8",
-  "results": [
+default_locations = [
     {
       "geometry": {
         "location": {
@@ -1640,9 +1637,7 @@
       ],
       "vicinity": "Ann Arbor Charter Township"
     }
-  ],
-  "status": "OK"
-}
+  ]
 
 
 
