@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 
-import { Entry, Mood } from '../../models/models';
+import { Entry, Mood, Location } from '../../models/models';
 import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service'
+import { LocationDataServiceProvider } from "../../providers/location-data-service/location-data-service";
 
 import { CurrentPage } from '../current/current';
 import { LocationListPage } from '../location-list/location-list'
@@ -18,6 +19,7 @@ import { LocationListPage } from '../location-list/location-list'
 export class EntryDetailPage {
 
   private entry: Entry;
+  public currentLocation: Location;
   private happy = new Mood("happy", 100, "/assets/imgs/happy.png", "#F0CF75", "#FFE7A3");
   private angry = new Mood("angry", 10, "/assets/imgs/angry.png", "#E6646E", "#E6888D");
   private sad = new Mood("sad", 20, "/assets/imgs/sad.png", "#6DBEFF", "#B7DDFF");
@@ -30,7 +32,19 @@ export class EntryDetailPage {
   constructor(public navCtrl: NavController,
               public navParams:NavParams,
               private entryDataService: EntryDataServiceProvider,
+              private locationService: LocationDataServiceProvider,
               private toastCtrl: ToastController) {
+    // console.log(this.currentLocation.name);
+    this.locationService.getObservable().subscribe(
+      (update) => {
+        this.currentLocation = this.locationService.getCurrentLocation();
+        // console.log(this.currentLocation);
+      },
+      (err) => {
+        console.log('this.locationService.getObservable().subscribe :', err);
+      });
+    this.currentLocation = this.locationService.getCurrentLocation();
+
     let entryID = this.navParams.get("entryID");
 
     if (entryID === undefined) {
@@ -41,7 +55,7 @@ export class EntryDetailPage {
       this.entry.location = "";
       this.entry.timestamp = new Date();
     }else {
-        this.entry = this.entryDataService.getEntryByID(entryID);
+      this.entry = this.entryDataService.getEntryByID(entryID);
     }
   }
 
@@ -95,7 +109,8 @@ export class EntryDetailPage {
     if (this.entry.mood == "sad") newMood = this.sad;
     if (this.entry.mood == "okay") newMood = this.okay;
     newEntry.mood = newMood;
-    newEntry.location = this.entry.location;
+    newEntry.location = this.currentLocation.name;
+    newEntry.locationId = this.currentLocation.id;
     newEntry.text = this.entry.text;
     console.log("Now I would save the entry: ", newEntry);
     this.entryDataService.addEntry(newEntry);
@@ -111,4 +126,9 @@ export class EntryDetailPage {
   private chooseCurrentLocation() {
     this.navCtrl.push(LocationListPage)
   }
+
+  // public updateChosenLocation(name: string, id: number) {
+  //   this.entry.location = name;
+  //   this.entry.locationId = id;
+  // }
 }

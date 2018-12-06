@@ -10,13 +10,12 @@
       <!-- <ion-icon name="calendar"  color="primary"> {{currentTime | date : 'short'}}</ion-icon>  -->
 
       <h5 style="text-align:center;">Where are you now?</h5>
-      <ion-item>
-        <ion-input type="text" placeholder="Your Location" [(ngModel)]="entry.location"></ion-input>
-      </ion-item>
+      <!--<ion-item>-->
+        <!--<ion-input type="text" placeholder="Your Location" [(ngModel)]="entry.location"></ion-input>-->
+      <!--</ion-item>-->
 
-      <button ion-item (click)="chooseCurrentLocation()">
-        Choose a location ->
-      </button>
+      <button ion-item (click)="chooseCurrentLocation()" *ngIf="currentLocation">{{currentLocation.name}}</button>
+      <button ion-item (click)="chooseCurrentLocation()" *ngIf="!currentLocation">Finding your location...</button>
 
 
     <h5 style="text-align:center;">How is your mood?</h5>

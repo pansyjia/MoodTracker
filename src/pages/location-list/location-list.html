@@ -17,11 +17,11 @@
   <ion-list-header>
     Nearby Places
   </ion-list-header>
-  <ion-item *ngFor="let location of locations">
+  <ion-item *ngFor="let location of locations" (click)="chooseLocation(location)">
     <ion-label>
       <h4>{{location.name}}</h4>
       <p>{{location.address}}</p>
     </ion-label>
-    <ion-radio checked="false" value="{{location.id}}"></ion-radio>
+    <ion-radio *ngIf="" checked="true"></ion-radio>
   </ion-item>
 </ion-content>

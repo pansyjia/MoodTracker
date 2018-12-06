@@ -20,6 +20,7 @@ const config = {
 @Injectable()
 export class LocationDataServiceProvider {
   private locations: Location[] = [];
+  private currentLocation: Location;
   private serviceObserver: Subject<any>;
   private clientObservable: Subject<any>;
   private db: any;
@@ -27,7 +28,6 @@ export class LocationDataServiceProvider {
   constructor(private http: HttpClient) {
     // firebase.initializeApp(config);
     this.db = firebase.database();
-
     this.clientObservable = new Subject();
     this.serviceObserver = this.clientObservable;
 
@@ -46,8 +46,13 @@ export class LocationDataServiceProvider {
         };
         this.locations.push(location);
       });
+    this.currentLocation = this.locations[0];
     this.notifySubscribers();
     });
+  }
+
+  public getCurrentLocation() {
+    return this.currentLocation;
   }
 
   public initLocations() {
@@ -112,6 +117,14 @@ export class LocationDataServiceProvider {
     return undefined;
   }
 
+  public updateCurrentLocationByUser(id: number): void {
+    this.currentLocation = this.locations[id];
+    this.serviceObserver.next(undefined);
+  }
+
+  public updateCurrentLocationByGPS(lat: number, lng: number): void {
+    this.serviceObserver.next(undefined);
+  }
 
   public addLocation(location: Location): void {
     this.db.ref('/locations/' + location.id).set({
