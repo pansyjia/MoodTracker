@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs';
 import firebase from 'firebase';
 // import '../../assets/js/place.js';
-import '../../assets/cache/default_locations.js';
+import default_locations from '../../assets/cache/default_locations.js';
 import { HttpClient } from "@angular/common/http";
 
 const config = {

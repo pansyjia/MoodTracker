@@ -1,4 +1,4 @@
-default_locations = [
+export const default_locations = [
     {
       "geometry": {
         "location": {

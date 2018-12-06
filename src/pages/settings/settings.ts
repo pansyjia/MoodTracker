@@ -78,14 +78,15 @@ export class SettingsPage {
   }
 
   dev_testNotification() {
+    console.log(new Date());
+    console.log(new Date(new Date().getTime() + 360000));
     this.localNotifications.schedule({
-      id: 1,
       title: "Mood Tracker",
       text: 'How are you today? Record this moment now!',
-      trigger: {at: new Date(new Date().getTime() + 3600)},
-      actions: [
-          {id: 'createNew', title: 'Create New Mood'},
-          {id: 'notifyLater', title: 'Maybe Later'}],
+      trigger: {at: new Date(new Date().getTime() + 360000)},
+      // actions: [
+      //     {id: 'createNew', title: 'Create New Mood'},
+      //     {id: 'notifyLater', title: 'Maybe Later'}],
       attachments: ["../../assets/imgs/Happy.png"]
     });
   }
