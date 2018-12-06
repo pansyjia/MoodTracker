@@ -7,21 +7,38 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Choose My Location</ion-title>
+    <ion-title>Nearby Places</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content no-padding>
+  <ion-list>
+
+
   <ion-list-header>
-    Nearby Places
+    Popular
   </ion-list-header>
-  <ion-item *ngFor="let location of locations" (click)="chooseLocation(location)">
+  <ion-item *ngFor="let location of popularLocations" (click)="chooseLocation(location)">
     <ion-label>
       <h4>{{location.name}}</h4>
-      <p>{{location.address}}</p>
+      <p>{{location.countAll}} visits | {{location.address}}</p>
     </ion-label>
-    <ion-radio *ngIf="" checked="true"></ion-radio>
+    <ion-radio *ngIf="currentLocation.id == location.id" checked="true"></ion-radio>
   </ion-item>
+  </ion-list>
+
+  <ion-list>
+  <ion-list-header>
+    All
+  </ion-list-header>
+  <ion-item *ngFor="let location of nearbyLocations" (click)="chooseLocation(location)">
+    <ion-label>
+      <h4>{{location.name}}</h4>
+      <p>{{location.distanceToMe | number : '1.2-2' }} km | {{location.address}}</p>
+    </ion-label>
+    <ion-radio *ngIf="currentLocation.id == location.id" checked="true"></ion-radio>
+  </ion-item>
+  </ion-list>
 </ion-content>

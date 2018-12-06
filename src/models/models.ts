@@ -24,6 +24,7 @@ export class Location {
                      public lat: number = 0,
                      public lng: number = 0,
                      public countAll: number = 0,
-                     public googleMapId: string = "") {
+                     public googleMapId: string = "",
+                     public distanceToMe: number = 0) {
   }
 }

@@ -38,7 +38,7 @@ export class EntryDetailPage {
     this.locationService.getObservable().subscribe(
       (update) => {
         this.currentLocation = this.locationService.getCurrentLocation();
-        // console.log(this.currentLocation);
+        console.log('this.currentLocation', this.currentLocation);
       },
       (err) => {
         console.log('this.locationService.getObservable().subscribe :', err);
@@ -114,9 +114,8 @@ export class EntryDetailPage {
     newEntry.text = this.entry.text;
     console.log("Now I would save the entry: ", newEntry);
     this.entryDataService.addEntry(newEntry);
-    // this.navCtrl.pop();
+    this.locationService.updateLocationCount(this.currentLocation);
     this.navCtrl.push(CurrentPage);
-    //this.navCtrl.parent.select(1);
   }
 
   private cancel() {
@@ -127,8 +126,4 @@ export class EntryDetailPage {
     this.navCtrl.push(LocationListPage)
   }
 
-  // public updateChosenLocation(name: string, id: number) {
-  //   this.entry.location = name;
-  //   this.entry.locationId = id;
-  // }
 }

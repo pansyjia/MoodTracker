@@ -5,8 +5,9 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs';
 import firebase from 'firebase';
 // import '../../assets/js/place.js';
-import default_locations from '../../assets/cache/default_locations.js';
+import { Default_locations }  from '../../assets/cache/default_locations.js';
 import { HttpClient } from "@angular/common/http";
+import { Geolocation } from '@ionic-native/geolocation';
 
 const config = {
   apiKey: "AIzaSyC9ICYAY0GONi1mgiGgRjAAuaev2qqosvM",
@@ -20,12 +21,14 @@ const config = {
 @Injectable()
 export class LocationDataServiceProvider {
   private locations: Location[] = [];
-  private currentLocation: Location;
+  private currentLocation: Location = new Location();
+  private currentGeolocation: any = 'unknown';
   private serviceObserver: Subject<any>;
   private clientObservable: Subject<any>;
   private db: any;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private geolocation: Geolocation) {
     // firebase.initializeApp(config);
     this.db = firebase.database();
     this.clientObservable = new Subject();
@@ -43,29 +46,89 @@ export class LocationDataServiceProvider {
           lat: childSnapshot.val().lat,
           lng: childSnapshot.val().lng,
           countAll: childSnapshot.val().countAll,
-          googleMapId: childSnapshot.val().googleMapId
+          googleMapId: childSnapshot.val().googleMapId,
+          distanceToMe: 0
         };
         this.locations.push(location);
       });
-    this.currentLocation = this.locations[0];
-    this.notifySubscribers();
+    this.getCurrentGeolocation();
+    // this.notifySubscribers();
     });
   }
 
-  public getCurrentLocation() {
-    return this.currentLocation;
+  public getCurrentGeolocation(): any {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.currentGeolocation = {'lat': resp.coords.latitude, 'lng': resp.coords.longitude};
+      for (let e of this.locations) {
+        let lat1 = this.currentGeolocation.lat;
+        let lat2 = e.lat;
+        let lon1 = this.currentGeolocation.lng;
+        let lon2 = e.lng;
+        let p = 0.017453292519943295;    // Math.PI / 180
+        let c = Math.cos;
+        let a = 0.5 - c((lat2 - lat1) * p)/2 +
+          c(lat1 * p) * c(lat2 * p) *
+          (1 - c((lon2 - lon1) * p))/2;
+        e.distanceToMe = 12742 * Math.asin(Math.sqrt(a));
+      };
+      let locationsClone = JSON.parse(JSON.stringify(this.locations));
+      this.locations = locationsClone.sort(function(a, b) {
+        if (a.distanceToMe < b.distanceToMe) {
+          return -1;
+        } else {
+          return 1;
+        }
+      });
+      this.currentLocation = this.locations[0];
+    }).catch((error) => {
+      this.currentGeolocation = 'unknown';
+      this.currentLocation = this.locations[0];
+    });
+    console.log('this.notifySubscribers();', this.currentGeolocation)
+    this.notifySubscribers();
+    return this.currentGeolocation;
   }
 
-  public initLocations() {
+  public getCurrentLocation(): Location {
+    return JSON.parse(JSON.stringify(this.currentLocation));
+  }
+
+
+  public dev_initLocations() {
     // this.http.get('../../assets/cache/default_locations.js').subscribe(data => {
     //   console.log(data);
     // })
-    console.log(default_locations);
-    default_locations.forEach((item, index) => {
+    console.log(Default_locations);
+    Default_locations.forEach((item, index) => {
       let location = new Location(index, item.name, item.vicinity, item.geometry.location.lat, item.geometry.location.lng, 0,  item.id);
       // console.log(location);
       this.addLocation(location);
     })
+  }
+
+  public dev_fakeGeolocation() {
+    this.currentGeolocation = {'lat': 42.280775, 'lng': -83.739845};
+    for (let e of this.locations) {
+      let lat1 = this.currentGeolocation.lat;
+      let lat2 = e.lat;
+      let lon1 = this.currentGeolocation.lng;
+      let lon2 = e.lng;
+      let p = 0.017453292519943295;    // Math.PI / 180
+      let c = Math.cos;
+      let a = 0.5 - c((lat2 - lat1) * p)/2 +
+        c(lat1 * p) * c(lat2 * p) *
+        (1 - c((lon2 - lon1) * p))/2;
+      e.distanceToMe = 12742 * Math.asin(Math.sqrt(a));
+    };
+    let locationsClone = JSON.parse(JSON.stringify(this.locations));
+    this.locations = locationsClone.sort(function(a, b) {
+      if (a.distanceToMe < b.distanceToMe) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+    this.currentLocation = this.locations[0];
   }
 
   // private initLocations() {
@@ -97,7 +160,11 @@ export class LocationDataServiceProvider {
     this.serviceObserver.next(undefined);
   }
 
-  public getLocations(sortBy: string = 'count'): Location[]{
+  public getNearbyLocations(): Location[]{
+    return JSON.parse(JSON.stringify(this.locations));
+  }
+
+  public getPopularLocations(): Location[]{
     let locationsClone = JSON.parse(JSON.stringify(this.locations));
     return locationsClone.sort(function(a, b) {
       if (a.countAll > b.countAll) {
@@ -105,7 +172,7 @@ export class LocationDataServiceProvider {
       } else {
         return 1;
       }
-    });
+    }).slice(0, 3) ;
   }
 
   public getLocationByID(id: any): Location {
@@ -118,8 +185,8 @@ export class LocationDataServiceProvider {
     return undefined;
   }
 
-  public updateCurrentLocationByUser(id: number): void {
-    this.currentLocation = this.locations[id];
+  public updateCurrentLocationByUser(location: Location): void {
+    this.currentLocation = location;
     this.serviceObserver.next(undefined);
   }
 
@@ -136,7 +203,7 @@ export class LocationDataServiceProvider {
       countAll: location.countAll,
       googleMapId: location.googleMapId
     });
-  }
+  } // !!! Don't save Location.distanceToMe online !!!
 
   // public updateEntry(key, newEntry: Entry): void {
   //   let parentRef = this.db.ref('/locations');
@@ -152,9 +219,9 @@ export class LocationDataServiceProvider {
   //   this.notifySubscribers();
   // }
 
-  public updateLocationCount(id: number, currentCount: number): void {
-    this.db.ref('/locations/' + id + '/countAll').set(currentCount + 1);
-    // this.notifySubscribers();
+  public updateLocationCount(location: Location): void {
+    this.db.ref('/locations/' + location.id + '/countAll').set(parseInt(location.countAll + 1));
+    this.notifySubscribers();
   }
 
   public initLocationsFromGoogle(): void {

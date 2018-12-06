@@ -20,6 +20,7 @@ import { LocationDataServiceProvider } from '../providers/location-data-service/
 
 import { HttpClientModule } from '@angular/common/http';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
   providers: [
     StatusBar,
     SplashScreen,
+    Geolocation,
     LocalNotifications,
     EntryDataServiceProvider,
     LocationDataServiceProvider,

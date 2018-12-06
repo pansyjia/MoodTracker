@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service';
+
 import { NewMoodPage } from '../new-mood/new-mood';
 import { EntryDetailPage } from '../entry-detail/entry-detail';
-import { Entry, Mood } from '../../models/models';
+import { Entry } from '../../models/models';
+
+import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service';
+import { LocationDataServiceProvider } from "../../providers/location-data-service/location-data-service";
 
 @IonicPage()
 @Component({
@@ -16,7 +19,8 @@ export class CurrentPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              private entryService: EntryDataServiceProvider) {
+              private entryService: EntryDataServiceProvider,
+              private locationService: LocationDataServiceProvider,) {
 
         this.entryService.getObservable().subscribe(
           (update) => {
@@ -36,6 +40,7 @@ export class CurrentPage {
 
 
   private addNew (){
+    this.locationService.getCurrentGeolocation();
     this.navCtrl.push(EntryDetailPage);
   }
 
