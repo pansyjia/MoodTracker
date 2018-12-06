@@ -220,7 +220,7 @@ export class LocationDataServiceProvider {
   // }
 
   public updateLocationCount(location: Location): void {
-    this.db.ref('/locations/' + location.id + '/countAll').set(parseInt(location.countAll + 1));
+    this.db.ref('/locations/' + location.id + '/countAll').set(location.countAll + 1);
     this.notifySubscribers();
   }
 
