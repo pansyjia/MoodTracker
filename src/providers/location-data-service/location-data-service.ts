@@ -31,6 +31,7 @@ export class LocationDataServiceProvider {
     this.clientObservable = new Subject();
     this.serviceObserver = this.clientObservable;
 
+
     let dataRef = this.db.ref('/locations');
     dataRef.on('value', snapshot => {
       this.locations = [];

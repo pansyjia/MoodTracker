@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 import { Location } from "../../models/models";
 import { LocationDataServiceProvider } from "../../providers/location-data-service/location-data-service";
@@ -23,6 +24,7 @@ export class SettingsPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public alertCtrl: AlertController,
+              private localNotifications: LocalNotifications,
               private locationService: LocationDataServiceProvider) {
     this.locationService.getObservable().subscribe(
       (update) => {
@@ -73,5 +75,18 @@ export class SettingsPage {
       ]
     });
     confirm.present();
+  }
+
+  dev_testNotification() {
+    this.localNotifications.schedule({
+      id: 1,
+      title: "Mood Tracker",
+      text: 'How are you today? Record this moment now!',
+      trigger: {at: new Date(new Date().getTime() + 3600)},
+      actions: [
+          {id: 'createNew', title: 'Create New Mood'},
+          {id: 'notifyLater', title: 'Maybe Later'}],
+      attachments: ["../../assets/imgs/Happy.png"]
+    });
   }
 }
