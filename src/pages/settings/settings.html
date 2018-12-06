@@ -14,16 +14,27 @@
 
 
 <ion-content no-padding>
+  <ion-list-header>
+    Hi, Siyu
+  </ion-list-header>
   <ion-list>
     <button ion-item (click)="dev_switchAccount()">
       Switch account
     </button>
-    <button ion-item (click)="dev_delAccount()">
+    <button class="danger" ion-item (click)="dev_delAccount()">
       Delete my account
     </button>
-    <button ion-item (click)="dev_initLocations()">
+  </ion-list>
+
+  <ion-list-header>
+    Dev Tools
+  </ion-list-header>
+  <ion-list>
+    <button ion-item (click)="dev_testNotification()">
+      Test Notification
+    </button>
+    <button class="danger" ion-item (click)="dev_initLocations()">
       Init location database
     </button>
-
   </ion-list>
 </ion-content>

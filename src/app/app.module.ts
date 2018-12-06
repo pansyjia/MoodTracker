@@ -13,12 +13,13 @@ import { SettingsPage } from '../pages/settings/settings';
 import { CurrentPage } from '../pages/current/current';
 import { NewLocationPage } from '../pages/new-location/new-location';
 import { NewMoodPage } from '../pages/new-mood/new-mood';
-import { LocationListPage} from "../pages/location-list/location-list";
+import { LocationListPage } from "../pages/location-list/location-list";
 
 import { EntryDataServiceProvider } from '../providers/entry-data-service/entry-data-service';
 import { LocationDataServiceProvider } from '../providers/location-data-service/location-data-service';
 
 import { HttpClientModule } from '@angular/common/http';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     StatusBar,
     SplashScreen,
+    LocalNotifications,
     EntryDataServiceProvider,
     LocationDataServiceProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
