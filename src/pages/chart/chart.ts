@@ -78,7 +78,7 @@ constructor(public navCtrl: NavController,
          let thisMood = entry.mood;
          console.log("retrieved mood:", thisMood);
          this.chartTips.push(thisMood.type);
-         this.chartLabels.push(entry.location);
+         this.chartLabels.push(entry.location.slice(0,14));
          this.chartValues.push(thisMood.score);
          this.chartColours.push(thisMood.color);
          this.chartHoverColours.push(thisMood.hover);

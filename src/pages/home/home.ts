@@ -60,5 +60,17 @@ export class HomePage {
     this.navCtrl.push(EntryDetailPage);
   }
 
+  private checkLength() {
+    let k: any;
+    for (k in this.entryService.getEntries()){
+      var entry = this.entryService.getEntries()[k];
+      if(entry.location.length < 20){
+        return true;
+      }
+      return false;
+    } 
+
+  }
+
 
 }

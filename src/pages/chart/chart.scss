@@ -1,6 +1,9 @@
 page-chart {
     ion-content{
-        background-image: url("../assets/imgs/back-d.png");
+    background-image: url("../assets/imgs/back-d.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 100%;
     }
     
 
@@ -27,6 +30,11 @@ page-chart {
         border-color: rgba(0, 0, 0, 0);        
         background-color: rgba(0, 0, 0, 0);
         color: white; 
+     }
+
+     .mood-item{
+        margin-left: 15%;
+        margin-right: 15%;
      }
 
     // .scroll-content {

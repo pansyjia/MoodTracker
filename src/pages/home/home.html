@@ -27,7 +27,8 @@
       <ion-item-sliding #item>
           <ion-item>
               <img class="card-img" style="width: 120px; height: 120px; " [src]="entry.mood.image" />
-              <div class="card-title">{{entry.location}}</div>
+              <div class="card-title" *ngIf="checkLength()">{{entry.location}}</div>
+              <div class="card-title" *ngIf="!checkLength()">{{entry.location.slice(0,19)}}...</div>
               <div class="card-subtitle">{{entry.timestamp}}</div>
           </ion-item>
 

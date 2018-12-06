@@ -1,6 +1,9 @@
 page-current {
     ion-content{
         background-image: url("../assets/imgs/back-d.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        height: 100%;
     }
 
     .mood-img{

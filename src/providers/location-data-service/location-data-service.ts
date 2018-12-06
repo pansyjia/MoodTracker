@@ -59,7 +59,7 @@ export class LocationDataServiceProvider {
     // this.http.get('../../assets/cache/default_locations.js').subscribe(data => {
     //   console.log(data);
     // })
-    console.log(default_locations);
+    // console.log(default_locations);
     default_locations.forEach((item, index) => {
       let location = new Location(index, item.name, item.vicinity, item.geometry.location.lat, item.geometry.location.lng, 0,  item.id);
       // console.log(location);
