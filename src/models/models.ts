@@ -2,6 +2,7 @@ export class Entry {
   id: number;
   timestamp: Date;
   location: string;
+  locationId: number;
   text: string;
   mood: any;
 }

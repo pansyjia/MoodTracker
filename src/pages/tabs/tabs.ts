@@ -7,6 +7,8 @@ import { CurrentPage } from '../current/current';
 import { SettingsPage } from '../settings/settings';
 
 
+
+
 @IonicPage()
 @Component({
   selector: 'page-tabs',

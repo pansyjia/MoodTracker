@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { LocationDataServiceProvider } from "../../providers/location-data-service/location-data-service";
+
 /**
  * Generated class for the SettingsPage page.
  *
@@ -15,11 +17,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SettingsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private locationService: LocationDataServiceProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPage');
   }
 
+  dev_switchAccount() {
+
+  }
+
+  dev_delAccount() {
+
+  }
+
+  dev_initLocations() {
+
+  }
 }

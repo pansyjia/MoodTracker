@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Entry, Mood, Location } from '../../models/models';
+import { Entry } from '../../models/models';
 import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs';
@@ -17,7 +17,7 @@ const config = {
 @Injectable()
 export class EntryDataServiceProvider {
   private entries: Entry[] = [];
-  ////replace Observer with Subject 
+  ////replace Observer with Subject
   private serviceObserver: Subject<any>;
   private clientObservable: Subject<any>;
   private db: any;
@@ -43,7 +43,8 @@ export class EntryDataServiceProvider {
             timestamp: childSnapshot.val().timestamp,
             text: childSnapshot.val().text,
             mood: childSnapshot.val().mood,
-    };
+            locationId: childSnapshot.val().locationId,
+          };
       this.entries.push(entry);
 
     });
