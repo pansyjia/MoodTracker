@@ -14,7 +14,7 @@ page-chart {
      }
   
   
-     canvas  {
+     canvas {
         height: 500px;
 
      }
@@ -33,7 +33,7 @@ page-chart {
      }
 
      .mood-item{
-        margin-left: 15%;
+        margin-left: 10%;
         margin-right: 15%;
      }
 
@@ -41,8 +41,10 @@ page-chart {
     //     background-color: map-get($colors, light);
     // }
 
-    // ion-card-header {
-    //     font-weight: bold;
-    // }
+    #doughnut-chart {
+       width: 500;
+       height: 500 !important;
+    } 
+
 
 }

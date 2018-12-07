@@ -9,14 +9,16 @@ import { Default_locations }  from '../../assets/cache/default_locations.js';
 import { HttpClient } from "@angular/common/http";
 import { Geolocation } from '@ionic-native/geolocation';
 
-const config = {
-  apiKey: "AIzaSyC9ICYAY0GONi1mgiGgRjAAuaev2qqosvM",
-  authDomain: "mood-tracker-8f5b8.firebaseapp.com",
-  databaseURL: "https://mood-tracker-8f5b8.firebaseio.com",
-  projectId: "mood-tracker-8f5b8",
-  storageBucket: "mood-tracker-8f5b8.appspot.com",
-  messagingSenderId: "1047636349755"
-};
+// const config = {
+//   apiKey: "AIzaSyC9ICYAY0GONi1mgiGgRjAAuaev2qqosvM",
+//   authDomain: "mood-tracker-8f5b8.firebaseapp.com",
+//   databaseURL: "https://mood-tracker-8f5b8.firebaseio.com",
+//   projectId: "mood-tracker-8f5b8",
+//   storageBucket: "mood-tracker-8f5b8.appspot.com",
+//   messagingSenderId: "1047636349755"
+// };
+
+
 
 @Injectable()
 export class LocationDataServiceProvider {
@@ -220,7 +222,7 @@ export class LocationDataServiceProvider {
   // }
 
   public updateLocationCount(location: Location): void {
-    this.db.ref('/locations/' + location.id + '/countAll').set(parseInt(location.countAll + 1));
+    this.db.ref('/locations/' + location.id + '/countAll').set(location.countAll + 1);;
     this.notifySubscribers();
   }
 

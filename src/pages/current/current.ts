@@ -20,7 +20,7 @@ export class CurrentPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private entryService: EntryDataServiceProvider,
-              private locationService: LocationDataServiceProvider,) {
+              private locationService: LocationDataServiceProvider) {
 
         this.entryService.getObservable().subscribe(
           (update) => {

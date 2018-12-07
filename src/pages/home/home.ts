@@ -7,7 +7,7 @@ import { NewMoodPage } from '../new-mood/new-mood';
 
 import { Entry } from '../../models/models';
 import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service';
-
+import { LocationDataServiceProvider } from "../../providers/location-data-service/location-data-service";
 
 @Component({
   selector: 'page-home',
@@ -19,7 +19,8 @@ export class HomePage {
   private entries: Entry[];
 
   constructor(public navCtrl: NavController,
-              private entryService: EntryDataServiceProvider) {
+              private entryService: EntryDataServiceProvider,
+              private locationService: LocationDataServiceProvider) {
     this.entryService.getObservable().subscribe(
       (update) => {
           this.entries = this.entryService.getEntries();
@@ -57,6 +58,7 @@ export class HomePage {
 
   // add the first or new record
   private addNew() {
+    this.locationService.getCurrentGeolocation();
     this.navCtrl.push(EntryDetailPage);
   }
 
