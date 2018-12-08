@@ -10,7 +10,7 @@
 
 <div *ngIf="checkStatus()">
     <h2 class="empty-title">Welcome to Mood Tracker!</h2>
-    <h4 class="empty-sub">Wherer mood matters!</h4>
+    <h4 class="empty-sub" >Where mood matters</h4>
     <br>
     <br>
       <button ion-button round color="secondary" class="get-started" (click)="addNew()">
@@ -27,9 +27,8 @@
       <ion-item-sliding #item>
           <ion-item class="entry-card">
               <img class="card-img" style="width: 120px; height: 120px; " [src]="entry.mood.image" />
-              <div class="card-title">{{entry.location.slice(0,23)}}</div>
-              <!-- <div class="card-title" *ngIf="!checkLength()">{{entry.location}}</div> -->
-              <div class="card-subtitle">{{entry.timestamp}}</div>
+              <div class="card-title">{{entry.timestamp}}</div>
+              <div class="card-subtitle" text-wrap>{{entry.location}}</div>
           </ion-item>
 
           <ion-item-options side="left">

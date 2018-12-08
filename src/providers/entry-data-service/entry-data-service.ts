@@ -14,6 +14,17 @@ const config = {
   messagingSenderId: "1047636349755"
 };
 
+///firebase for testing empty state
+// const config = {
+//   apiKey: "AIzaSyBU4FhZ_0XJF9-GpUxvRCfXFP14PnANb6o",
+//   authDomain: "moodtracker-b75bd.firebaseapp.com",
+//   databaseURL: "https://moodtracker-b75bd.firebaseio.com",
+//   projectId: "moodtracker-b75bd",
+//   storageBucket: "moodtracker-b75bd.appspot.com",
+//   messagingSenderId: "587504295484"
+// };
+
+
 @Injectable()
 export class EntryDataServiceProvider {
   private entries: Entry[] = [];
@@ -52,7 +63,7 @@ export class EntryDataServiceProvider {
   });
   }
 
-    public getObservable(): Observable<Entry[]> {
+    public getObservable(): Subject<Entry[]> {
       return this.clientObservable;
     }
 
@@ -93,6 +104,7 @@ export class EntryDataServiceProvider {
         timestamp: new Date().toLocaleString()
       }
       entryRef.set(dataRecord);
+     
       this.notifySubscribers();
     }
 
