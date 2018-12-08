@@ -24,7 +24,7 @@ export class EntryDetailPage {
   private angry = new Mood("angry", 10, "/assets/imgs/angry.png", "#E6646E", "#E6888D");
   private sad = new Mood("sad", 20, "/assets/imgs/sad.png", "#6DBEFF", "#B7DDFF");
   private okay = new Mood("okay",50, "/assets/imgs/okay.png", "#F09C4F", "#F0B077");
-  private happyselected = false;
+  private happyselected = true;
   private angryselected = false;
   private sadselected = false;
   private okayselected = false;
@@ -113,9 +113,15 @@ export class EntryDetailPage {
     newEntry.locationId = this.currentLocation.id;
     newEntry.text = this.entry.text;
     console.log("Now I would save the entry: ", newEntry);
-    this.entryDataService.addEntry(newEntry);
+    let entryID = this.navParams.get("entryID");
+    if (entryID === null) {
+      this.entryDataService.updateEntry(entryID, newEntry);
+    } else {
+      this.entryDataService.addEntry(newEntry);
+    }
     this.locationService.updateLocationCount(this.currentLocation);
-    this.navCtrl.push(CurrentPage);
+    this.navCtrl.pop();
+    // this.navCtrl.push(CurrentPage);
   }
 
   private cancel() {

@@ -97,16 +97,14 @@ export class EntryDataServiceProvider {
     }
 
     public updateEntry(key, newEntry: Entry): void {
-      let parentRef = this.db.ref('/entries');
-      let childRef = parentRef.child(key);
+      let parentRef = this.db.ref('/entries' + newEntry.id);
       let updateRecord = {
-        // id: newEntry.id,
         location: newEntry.location,
         mood: newEntry.mood,
         text: newEntry.text,
         timestamp: new Date(newEntry.timestamp).toLocaleString()
       }
-      childRef.set(updateRecord);
+      parentRef.set(updateRecord);
       this.notifySubscribers();
     }
 
@@ -129,5 +127,5 @@ export class EntryDataServiceProvider {
 
 
 
-  
+
 }
