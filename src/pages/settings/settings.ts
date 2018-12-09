@@ -6,6 +6,8 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 
 import { Location } from "../../models/models";
 import { LocationDataServiceProvider } from "../../providers/location-data-service/location-data-service";
+import { UsersserviceProvider } from "../../providers/usersservice/usersservice";
+import { LoginPage } from "../login/login";
 
 /**
  * Generated class for the SettingsPage page.
@@ -21,20 +23,23 @@ import { LocationDataServiceProvider } from "../../providers/location-data-servi
 })
 export class SettingsPage {
 
-  private nearbyLocations: Location[];
+  // private nearbyLocations: Location[];
+  public userName: string;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public alertCtrl: AlertController,
               private localNotifications: LocalNotifications,
-              private locationService: LocationDataServiceProvider) {
+              private locationService: LocationDataServiceProvider,
+              private usersService: UsersserviceProvider) {
     this.locationService.getObservable().subscribe(
       (update) => {
-        this.nearbyLocations = this.locationService.getNearbyLocations();
+        // this.nearbyLocations = this.locationService.getNearbyLocations();
       },
       (err) => {
         console.log('this.locationService.getObservable().subscribe :', err);
       });
-    this.nearbyLocations = this.locationService.getNearbyLocations();
+    // this.nearbyLocations = this.locationService.getNearbyLocations();
+    this.userName = this.usersService.getProfileName();
   }
 
   ionViewDidLoad() {
@@ -42,7 +47,8 @@ export class SettingsPage {
   }
 
   dev_switchAccount() {
-
+    this.usersService.signout();
+    this.navCtrl.setRoot(LoginPage);
   }
 
   dev_delAccount() {
@@ -119,4 +125,5 @@ export class SettingsPage {
     });
     alert.present();
   }
+
 }

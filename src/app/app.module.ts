@@ -3,8 +3,13 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { HttpClientModule } from '@angular/common/http';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+import { Geolocation } from '@ionic-native/geolocation';
 
 import { MyApp } from './app.component';
+import { LoginPage } from '../pages/login/login';
+import { SignupPage } from '../pages/signup/signup';
 import { HomePage } from '../pages/home/home';
 import { EntryDetailPage } from '../pages/entry-detail/entry-detail';
 import { ChartPage } from '../pages/chart/chart';
@@ -16,16 +21,27 @@ import { NewMoodPage } from '../pages/new-mood/new-mood';
 import { LocationListPage } from "../pages/location-list/location-list";
 import { LocationListNewPage } from "../pages/location-list-new/location-list-new";
 
+import firebase from 'firebase';
+import { UsersserviceProvider } from '../providers/usersservice/usersservice';
 import { EntryDataServiceProvider } from '../providers/entry-data-service/entry-data-service';
 import { LocationDataServiceProvider } from '../providers/location-data-service/location-data-service';
 
-import { HttpClientModule } from '@angular/common/http';
-import { LocalNotifications } from '@ionic-native/local-notifications';
-import { Geolocation } from '@ionic-native/geolocation';
+export const firebaseConfig = {
+  apiKey: "AIzaSyC9ICYAY0GONi1mgiGgRjAAuaev2qqosvM",
+  authDomain: "mood-tracker-8f5b8.firebaseapp.com",
+  databaseURL: "https://mood-tracker-8f5b8.firebaseio.com",
+  projectId: "mood-tracker-8f5b8",
+  storageBucket: "mood-tracker-8f5b8.appspot.com",
+  messagingSenderId: "1047636349755"
+};
+firebase.initializeApp(firebaseConfig);
+
 
 @NgModule({
   declarations: [
     MyApp,
+    LoginPage,
+    SignupPage,
     HomePage,
     EntryDetailPage,
     ChartPage,
@@ -45,6 +61,8 @@ import { Geolocation } from '@ionic-native/geolocation';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    LoginPage,
+    SignupPage,
     HomePage,
     EntryDetailPage,
     ChartPage,
@@ -61,6 +79,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     SplashScreen,
     Geolocation,
     LocalNotifications,
+    UsersserviceProvider,
     EntryDataServiceProvider,
     LocationDataServiceProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

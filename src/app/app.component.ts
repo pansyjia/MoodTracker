@@ -5,12 +5,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { LoginPage } from "../pages/login/login";
+import firebase from 'firebase';
+
 @Component({
   templateUrl: 'app.html'
 })
+
 export class MyApp {
   rootPage:any = TabsPage;
-  // rootPage:any = HomePage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
@@ -19,6 +22,29 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+
+    var that = this;
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        that.rootPage = TabsPage;
+        // ...
+      } else {
+        // User is signed out.
+        // ...
+        that.rootPage = LoginPage;
+
+      }
+    });
+
   }
+
+
+  // openPage(page) {
+  //   // Reset the content nav to have just this page
+  //   // we wouldn't want the back button to show in this scenario
+  //   this.navCtrl.setRoot(page.component);
+  // }
 }
 

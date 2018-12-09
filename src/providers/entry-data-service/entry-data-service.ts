@@ -5,46 +5,19 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs';
 import firebase from 'firebase';
 
-const config = {
-  apiKey: "AIzaSyC9ICYAY0GONi1mgiGgRjAAuaev2qqosvM",
-  authDomain: "mood-tracker-8f5b8.firebaseapp.com",
-  databaseURL: "https://mood-tracker-8f5b8.firebaseio.com",
-  projectId: "mood-tracker-8f5b8",
-  storageBucket: "mood-tracker-8f5b8.appspot.com",
-  messagingSenderId: "1047636349755"
-};
-
-///firebase for testing empty state
-// const config = {
-//   apiKey: "AIzaSyBU4FhZ_0XJF9-GpUxvRCfXFP14PnANb6o",
-//   authDomain: "moodtracker-b75bd.firebaseapp.com",
-//   databaseURL: "https://moodtracker-b75bd.firebaseio.com",
-//   projectId: "moodtracker-b75bd",
-//   storageBucket: "moodtracker-b75bd.appspot.com",
-//   messagingSenderId: "587504295484"
-// };
-
-// firebase for testing locations
-// const config = {
-//   apiKey: "AIzaSyAsu7-LDmismIGqw1BHeb0kUeKsuE7_y_0",
-//   authDomain: "my-awesome-669.firebaseapp.com",
-//   databaseURL: "https://my-awesome-669.firebaseio.com",
-//   projectId: "my-awesome-669",
-//   storageBucket: "my-awesome-669.appspot.com",
-//   messagingSenderId: "15864534392"
-// };
+import { UsersserviceProvider } from "../usersservice/usersservice";
 
 
 @Injectable()
 export class EntryDataServiceProvider {
   private entries: Entry[] = [];
-  ////replace Observer with Subject
   private serviceObserver: Subject<any>;
   private clientObservable: Subject<any>;
   private db: any;
+  private username: string;
 
-  constructor() {
-    firebase.initializeApp(config);
+  constructor(private usersService: UsersserviceProvider) {
+    this.username = this.usersService.getProfileName();
     this.db = firebase.database();
 
   //   this.clientObservable = Observable.create(observer => {
@@ -54,7 +27,7 @@ export class EntryDataServiceProvider {
     this.clientObservable = new Subject();
     this.serviceObserver = this.clientObservable;
 
-    let dataRef = this.db.ref('/entries');
+    let dataRef = this.db.ref('/' + this.username + '/entries');
     dataRef.on('value', snapshot => {
         this.entries = [];
         snapshot.forEach(childSnapshot => {
@@ -105,7 +78,7 @@ export class EntryDataServiceProvider {
     }
 
     public addEntry(entry: Entry): void {
-      let listEntry = this.db.ref('/entries');
+      let listEntry = this.db.ref('/' + this.username + '/entries');
       let entryRef = listEntry.push();
       let dataRecord = {
         location: entry.location,
@@ -119,7 +92,7 @@ export class EntryDataServiceProvider {
     }
 
     public updateEntry(key, newEntry: Entry): void {
-      let parentRef = this.db.ref('/entries' + newEntry.id);
+      let parentRef = this.db.ref('/' + this.username + '/entries' + newEntry.id);
       let updateRecord = {
         location: newEntry.location,
         mood: newEntry.mood,
@@ -131,7 +104,7 @@ export class EntryDataServiceProvider {
     }
 
     public removeEntry(key): void {
-      let parentRef = this.db.ref('/entries');
+      let parentRef = this.db.ref('/' + this.username + '/entries');
       let childRef = parentRef.child(key);
       childRef.remove();
       this.notifySubscribers();
@@ -146,8 +119,5 @@ export class EntryDataServiceProvider {
       }
       return moodcount;
     }
-
-
-
 
 }
