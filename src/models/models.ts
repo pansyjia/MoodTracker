@@ -19,12 +19,12 @@ export class Mood {
 }
 
 export class Location {
-  public constructor(public name: string = "Finding your location...",
-                     public address: string = "A moment please...",
-                     public lat: number = 999,
-                     public lng: number = 999,
+  public constructor(public name: string = "Finding...",
+                     public address: string = "",
+                     public lat: number = 0,
+                     public lng: number = 0,
                      public countAll: number = 0,
-                     public googleMapId: string = "fake",
+                     public googleMapId: string = "",
                      public distanceToMe: number = 0) {
   }
 }

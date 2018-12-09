@@ -55,12 +55,12 @@ export class HomePage {
       }
       return false;
   }
-
-  // add the first or new record
-  private addNew() {
-    this.locationService.getCurrentGeolocation();
-    this.navCtrl.push(EntryDetailPage);
-  }
+  //
+  // // add the first or new record
+  // private addNew() {
+  //   this.locationService.getCurrentGeolocation();
+  //   this.navCtrl.push(EntryDetailPage);
+  // }
 
   private checkLength() {
     let k: any;
@@ -70,7 +70,7 @@ export class HomePage {
         return true;
       }
       return false;
-    } 
+    }
 
   }
 

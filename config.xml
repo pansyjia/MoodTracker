@@ -86,9 +86,15 @@
         <string>need location access to find things nearby</string>
     </edit-config>
     <plugin name="cordova-plugin-local-notification" spec="0.9.0-beta.2" />
+    <engine name="browser" spec="5.0.4" />
+    <engine name="android" spec="7.1.4" />
     <plugin name="cordova-plugin-geolocation" spec="4.0.1">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
-    <engine name="browser" spec="5.0.4" />
-    <engine name="android" spec="7.1.4" />
+    <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+      <string>We use your location for full functionality of certain app features.</string>
+    </edit-config>
+    <plugin name="cordova-plugin-geolocation" spec="4.0.1">
+      <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
+    </plugin>
 </widget>

@@ -4,7 +4,8 @@ import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs';
 import firebase from 'firebase';
-import { UsersserviceProvider } from "../usersservice/usersservice";
+// import { UsersserviceProvider } from "../usersservice/usersservice";
+import { Storage } from "@ionic/storage";
 
 
 @Injectable()
@@ -14,38 +15,86 @@ export class EntryDataServiceProvider {
   private clientObservable: Subject<any>;
   private db: any;
   private username: string;
+  private uid: string;
+  private dataRef: any;
 
-  constructor(private usersService: UsersserviceProvider) {
-    this.username = this.usersService.getProfileName();
-   
+  constructor( private storage: Storage) {
+    // this.usersService.getObservable().subscribe(
+    //   (update) => {
+    //     this.username = this.usersService.getProfileName();
+    //     this.uid = this.usersService.getProfileUID();
+    //   },
+    //   (err) => {
+    //     console.log('this.usersService.getObservable:', err);
+    //   });
+    // this.username = this.usersService.getProfileName();
+    // this.uid = this.usersService.getProfileUID();
+    this.storage.get('user-email').then((val) => {
+      this.username = val;
+    });
+    this.storage.get('user-uid').then((val) => {
+      this.uid = val;
+    });
+
     this.db = firebase.database();
 
-  //   this.clientObservable = Observable.create(observer => {
-  //   this.serviceObserver = observer;
-  // });
+    this.dataRef = this.db.ref('/' + this.uid + '/entries');
 
     this.clientObservable = new Subject();
     this.serviceObserver = this.clientObservable;
-   
 
-    let dataRef = this.db.ref('/' + this.username + '/entries');
-    dataRef.on('value', snapshot => {
-        this.entries = [];
-        snapshot.forEach(childSnapshot => {
-          let entry = {
-            id: childSnapshot.key,
-            location: childSnapshot.val().location,
-            timestamp: childSnapshot.val().timestamp,
-            text: childSnapshot.val().text,
-            mood: childSnapshot.val().mood,
-            // image: childSnapshot.val().image,
-            locationId: childSnapshot.val().locationId,
-          };
-      this.entries.push(entry);
-
+    this.storage.get('user-email').then((val) => {
+      this.updateCache();
     });
-    this.notifySubscribers();
-  });
+  //
+  //   dataRef.on('value', snapshot => {
+  //       this.entries = [];
+  //       snapshot.forEach(childSnapshot => {
+  //         let entry = {
+  //           id: childSnapshot.key,
+  //           location: childSnapshot.val().location,
+  //           timestamp: childSnapshot.val().timestamp,
+  //           text: childSnapshot.val().text,
+  //           mood: childSnapshot.val().mood,
+  //           // image: childSnapshot.val().image,
+  //           locationId: childSnapshot.val().locationId,
+  //         };
+  //     this.entries.push(entry);
+  //
+  //   });
+  //   this.notifySubscribers();
+  // });
+  }
+
+  public updateCache() {
+
+    this.dataRef.off("value");
+    this.entries = [];
+    this.storage.get('user-email').then((val) => {
+      this.username = val;
+    });
+    this.storage.get('user-uid').then((val) => {
+      this.uid = val;
+    });
+    console.log(this.username, this.uid);
+    this.dataRef = this.db.ref('/' + this.uid + '/entries');
+    this.dataRef.on('value', snapshot => {
+      this.entries = [];
+      snapshot.forEach(childSnapshot => {
+        let entry = {
+          id: childSnapshot.key,
+          location: childSnapshot.val().location,
+          timestamp: childSnapshot.val().timestamp,
+          text: childSnapshot.val().text,
+          mood: childSnapshot.val().mood,
+          // image: childSnapshot.val().image,
+          locationId: childSnapshot.val().locationId,
+        };
+        this.entries.push(entry);
+      });
+      this.notifySubscribers();
+    });
+    // this.notifySubscribers();
   }
 
     public getObservable(): Subject<Entry[]> {
@@ -80,7 +129,8 @@ export class EntryDataServiceProvider {
     }
 
     public addEntry(entry: Entry): void {
-      let listEntry = this.db.ref('/' + this.username + '/entries');
+      console.log('addEntry', '/' + this.uid + '/entries');
+      let listEntry = this.db.ref('/' + this.uid + '/entries');
       let entryRef = listEntry.push();
       let dataRecord = {
         id: -1,
@@ -92,12 +142,12 @@ export class EntryDataServiceProvider {
         timestamp: new Date().toLocaleString()
       }
       entryRef.set(dataRecord);
-
+      // this.entries.push(entry);
       this.notifySubscribers();
     }
 
     public updateEntry(key, newEntry: Entry): void {
-      let parentRef = this.db.ref('/' + this.username + '/entries');
+      let parentRef = this.db.ref('/' + this.uid + '/entries');
       let childRef = parentRef.child(key);
       let updateRecord = {
         // id: newEntry.id,
@@ -113,7 +163,7 @@ export class EntryDataServiceProvider {
     }
 
     public removeEntry(key): void {
-      let parentRef = this.db.ref('/' + this.username + '/entries');
+      let parentRef = this.db.ref('/' + this.uid + '/entries');
       let childRef = parentRef.child(key);
       childRef.remove();
       this.notifySubscribers();

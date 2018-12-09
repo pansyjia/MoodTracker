@@ -43,7 +43,7 @@ export class SettingsPage {
 
     this.timeText = moment(new Date()).format();
     this.timeNotify = new Date().getTime() + 1000;
-    
+
   }
 
   timeChange(time) {
@@ -71,7 +71,7 @@ export class SettingsPage {
       return this.localNotifications.cancelAll();
     })
   }
-  
+
 
 
   ionViewDidLoad() {
@@ -135,7 +135,7 @@ export class SettingsPage {
 
 
   dev_testGPS() {
-    let currentLocation = this.locationService.getCurrentGPS();
+    let currentLocation = this.locationService.getCurrentGeolocation();
     if (currentLocation === 'unknown') {
       const alert = this.alertCtrl.create({
         title: "Can't Find your location!",

@@ -32,7 +32,7 @@ export class LocationListNewPage {
       alert.present();
       return undefined
     }
-    let currentGeolocation = this.locationService.getCurrentGPS();
+    let currentGeolocation = this.locationService.getCurrentGeolocation();
     let currentLocation = this.locationService.getCurrentLocation();
     if (currentLocation.lat == 999) {
       const alert = this.alertCtrl.create({
@@ -47,7 +47,9 @@ export class LocationListNewPage {
       this.placeAddress = 'In ' + currentLocation.name;
     }
     let location = new Location(this.placeName, this.placeAddress, currentGeolocation.lat, currentGeolocation.lng, 0, 'userdefined-'+ this.placeName + '-' + this.placeAddress);
-    this.locationService.addLocation(location,   true);
+    this.locationService.addLocation(location);
+    this.locationService.updateCurrentLocationByUser(location);
+    this.navCtrl.pop();
     this.navCtrl.pop();
   }
 

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-
 import { Location } from '../../models/models';
 import { LocationDataServiceProvider } from '../../providers/location-data-service/location-data-service';
 
@@ -14,9 +13,9 @@ import { LocationListNewPage } from "../location-list-new/location-list-new";
 })
 export class LocationListPage {
 
-  private popularLocations: Location[] = [];
-  private nearbyLocations: Location[] = [];
-  private currentLocation: Location = new Location();
+  private popularLocations: Location[];
+  private nearbyLocations: Location[];
+  private currentLocation: Location;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
