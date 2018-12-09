@@ -2,7 +2,7 @@ export class Entry {
   id: number;
   timestamp: Date;
   location: string;
-  locationId: number;
+  locationId: string;
   text: string;
   mood: any;
 }
@@ -18,13 +18,12 @@ export class Mood {
 }
 
 export class Location {
-  public constructor(public id: number = -1,
-                     public name: string = "Finding...",
-                     public address: string = "",
-                     public lat: number = 0,
-                     public lng: number = 0,
+  public constructor(public name: string = "Finding your location...",
+                     public address: string = "A moment please...",
+                     public lat: number = 999,
+                     public lng: number = 999,
                      public countAll: number = 0,
-                     public googleMapId: string = "",
+                     public googleMapId: string = "fake",
                      public distanceToMe: number = 0) {
   }
 }

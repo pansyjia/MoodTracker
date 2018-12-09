@@ -14,6 +14,7 @@ import { CurrentPage } from '../pages/current/current';
 import { NewLocationPage } from '../pages/new-location/new-location';
 import { NewMoodPage } from '../pages/new-mood/new-mood';
 import { LocationListPage } from "../pages/location-list/location-list";
+import { LocationListNewPage } from "../pages/location-list-new/location-list-new";
 
 import { EntryDataServiceProvider } from '../providers/entry-data-service/entry-data-service';
 import { LocationDataServiceProvider } from '../providers/location-data-service/location-data-service';
@@ -33,7 +34,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     NewMoodPage,
     NewLocationPage,
     SettingsPage,
-    LocationListPage
+    LocationListPage,
+    LocationListNewPage
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     NewMoodPage,
     NewLocationPage,
     SettingsPage,
-    LocationListPage
+    LocationListPage,
+    LocationListNewPage
   ],
   providers: [
     StatusBar,

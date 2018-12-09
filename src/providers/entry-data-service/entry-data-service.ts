@@ -24,6 +24,16 @@ const config = {
 //   messagingSenderId: "587504295484"
 // };
 
+// firebase for testing locations
+// const config = {
+//   apiKey: "AIzaSyAsu7-LDmismIGqw1BHeb0kUeKsuE7_y_0",
+//   authDomain: "my-awesome-669.firebaseapp.com",
+//   databaseURL: "https://my-awesome-669.firebaseio.com",
+//   projectId: "my-awesome-669",
+//   storageBucket: "my-awesome-669.appspot.com",
+//   messagingSenderId: "15864534392"
+// };
+
 
 @Injectable()
 export class EntryDataServiceProvider {
@@ -104,7 +114,7 @@ export class EntryDataServiceProvider {
         timestamp: new Date().toLocaleString()
       }
       entryRef.set(dataRecord);
-     
+
       this.notifySubscribers();
     }
 

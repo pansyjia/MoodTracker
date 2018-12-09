@@ -92,7 +92,7 @@ export class SettingsPage {
   }
 
   dev_testGPS() {
-    let currentLocation = this.locationService.getCurrentGeolocation();
+    let currentLocation = this.locationService.getCurrentGPS();
     if (currentLocation === 'unknown') {
       const alert = this.alertCtrl.create({
         title: "Can't Find your location!",

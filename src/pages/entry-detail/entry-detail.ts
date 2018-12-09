@@ -110,7 +110,7 @@ export class EntryDetailPage {
     if (this.entry.mood == "okay") newMood = this.okay;
     newEntry.mood = newMood;
     newEntry.location = this.currentLocation.name;
-    newEntry.locationId = this.currentLocation.id;
+    newEntry.locationId = this.currentLocation.googleMapId;
     newEntry.text = this.entry.text;
     console.log("Now I would save the entry: ", newEntry);
     let entryID = this.navParams.get("entryID");

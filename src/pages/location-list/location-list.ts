@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+
 import { Location } from '../../models/models';
 import { LocationDataServiceProvider } from '../../providers/location-data-service/location-data-service';
+
+import { LocationListNewPage } from "../location-list-new/location-list-new";
 
 @IonicPage()
 @Component({
@@ -11,9 +14,9 @@ import { LocationDataServiceProvider } from '../../providers/location-data-servi
 })
 export class LocationListPage {
 
-  private popularLocations: Location[];
-  private nearbyLocations: Location[];
-  private currentLocation: Location;
+  private popularLocations: Location[] = [];
+  private nearbyLocations: Location[] = [];
+  private currentLocation: Location = new Location();
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -22,6 +25,7 @@ export class LocationListPage {
       (update) => {
         this.nearbyLocations = this.locationService.getNearbyLocations();
         this.popularLocations = this.locationService.getPopularLocations();
+        this.currentLocation = this.locationService.getCurrentLocation();
       },
       (err) => {
         console.log('this.locationService.getObservable().subscribe :', err);
@@ -34,6 +38,10 @@ export class LocationListPage {
   private chooseLocation(location: Location){
     this.locationService.updateCurrentLocationByUser(location);
     this.navCtrl.pop();
+  }
+
+  private createNewLocation() {
+    this.navCtrl.push(LocationListNewPage);
   }
 
 }
