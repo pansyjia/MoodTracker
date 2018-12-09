@@ -4,7 +4,6 @@ import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs';
 import firebase from 'firebase';
-
 import { UsersserviceProvider } from "../usersservice/usersservice";
 
 
