@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Entry } from '../../models/models';
+import { Entry, Mood } from '../../models/models';
 import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs';
@@ -17,6 +17,7 @@ export class EntryDataServiceProvider {
 
   constructor(private usersService: UsersserviceProvider) {
     this.username = this.usersService.getProfileName();
+   
     this.db = firebase.database();
 
   //   this.clientObservable = Observable.create(observer => {
@@ -25,6 +26,7 @@ export class EntryDataServiceProvider {
 
     this.clientObservable = new Subject();
     this.serviceObserver = this.clientObservable;
+   
 
     let dataRef = this.db.ref('/' + this.username + '/entries');
     dataRef.on('value', snapshot => {
@@ -36,6 +38,7 @@ export class EntryDataServiceProvider {
             timestamp: childSnapshot.val().timestamp,
             text: childSnapshot.val().text,
             mood: childSnapshot.val().mood,
+            // image: childSnapshot.val().image,
             locationId: childSnapshot.val().locationId,
           };
       this.entries.push(entry);
@@ -80,8 +83,11 @@ export class EntryDataServiceProvider {
       let listEntry = this.db.ref('/' + this.username + '/entries');
       let entryRef = listEntry.push();
       let dataRecord = {
+        id: -1,
         location: entry.location,
+        locationId: entry.locationId,
         mood: entry.mood,
+        // image: entry.mood.image,
         text: entry.text,
         timestamp: new Date().toLocaleString()
       }
@@ -91,14 +97,18 @@ export class EntryDataServiceProvider {
     }
 
     public updateEntry(key, newEntry: Entry): void {
-      let parentRef = this.db.ref('/' + this.username + '/entries' + newEntry.id);
+      let parentRef = this.db.ref('/' + this.username + '/entries');
+      let childRef = parentRef.child(key);
       let updateRecord = {
+        // id: newEntry.id,
         location: newEntry.location,
+        locationId: newEntry.locationId,
         mood: newEntry.mood,
+        // image: newEntry.mood.image,
         text: newEntry.text,
         timestamp: new Date(newEntry.timestamp).toLocaleString()
       }
-      parentRef.set(updateRecord);
+      childRef .set(updateRecord);
       this.notifySubscribers();
     }
 
@@ -117,6 +127,15 @@ export class EntryDataServiceProvider {
         }
       }
       return moodcount;
+    }
+
+
+    public getMood(name: string):Mood {
+      if (name == "happy") { return new Mood("happy", 100, "/assets/imgs/happy.png", "#F0CF75", "#FFE7A3"); }
+      if (name == "angry") { return new Mood("angry", 30, "/assets/imgs/angry.png", "#E6646E", "#E6888D"); }
+      if (name == "sad") { return new Mood("sad", 50, "/assets/imgs/sad.png", "#6DBEFF", "#B7DDFF"); }
+      if (name == "okay") { return new Mood("okay", 80, "/assets/imgs/okay.png", "#F09C4F", "#F0B077"); }
+      return new Mood("happy", 100, "/assets/imgs/happy.png", "#F0CF75", "#FFE7A3"); // if not applied
     }
 
 }

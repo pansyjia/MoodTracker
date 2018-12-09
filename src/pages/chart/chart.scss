@@ -42,8 +42,11 @@ page-chart {
     // }
 
     #doughnut-chart {
-       width: 500;
-       height: 500 !important;
+       width: 300px;
+       height: 150px !important;
+       display: block;
+        margin-left: auto;
+        margin-right: auto;
     } 
 
 

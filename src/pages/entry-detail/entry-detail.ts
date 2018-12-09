@@ -24,7 +24,7 @@ export class EntryDetailPage {
   private angry = new Mood("angry", 10, "/assets/imgs/angry.png", "#E6646E", "#E6888D");
   private sad = new Mood("sad", 20, "/assets/imgs/sad.png", "#6DBEFF", "#B7DDFF");
   private okay = new Mood("okay",50, "/assets/imgs/okay.png", "#F09C4F", "#F0B077");
-  private happyselected = true;
+  private happyselected = false;
   private angryselected = false;
   private sadselected = false;
   private okayselected = false;
@@ -52,6 +52,7 @@ export class EntryDetailPage {
       this.entry.id = -1;
       this.entry.text = "";
       this.entry.mood = "happy";
+      // this.entry.image = "/assets/imgs/happy_selected.png";
       this.entry.location = "";
       this.entry.timestamp = new Date();
     }else {
@@ -89,18 +90,6 @@ export class EntryDetailPage {
   }
 
   private saveEntry() {
-    ///present toast
-    let toast = this.toastCtrl.create({
-      message: 'A mood record was added successfully',
-      duration: 3000,
-      position: 'top'
-    });
-
-    toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
-    });
-    toast.present();
-
     ///save
     let newEntry = new Entry();
     let newMood = this.happy;
@@ -114,10 +103,36 @@ export class EntryDetailPage {
     newEntry.text = this.entry.text;
     console.log("Now I would save the entry: ", newEntry);
     let entryID = this.navParams.get("entryID");
-    if (entryID === null) {
-      this.entryDataService.updateEntry(entryID, newEntry);
-    } else {
+   
+    if (entryID === undefined) {
+
       this.entryDataService.addEntry(newEntry);
+
+      let toast = this.toastCtrl.create({
+        message: 'A mood record was added successfully',
+        duration: 3000,
+        position: 'top'
+      });
+  
+      toast.onDidDismiss(() => {
+        console.log('Dismissed toast');
+      });
+      toast.present();
+  
+    } else { 
+      this.entryDataService.updateEntry(entryID, newEntry);
+
+      let toast = this.toastCtrl.create({
+        message: 'A mood record was updated successfully',
+        duration: 3000,
+        position: 'bottom'
+      });
+  
+      toast.onDidDismiss(() => {
+        console.log('Dismissed toast');
+      });
+      toast.present();
+  
     }
     this.locationService.updateLocationCount(this.currentLocation);
     this.navCtrl.pop();

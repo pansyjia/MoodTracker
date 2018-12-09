@@ -30,9 +30,9 @@
     Dev Tools
   </ion-list-header>
   <ion-list>
-    <button ion-item (click)="dev_testNotification()">
+    <!-- <button ion-item (click)="dev_testNotification()">
       Test Notification
-    </button>
+    </button> -->
     <button ion-item (click)="dev_testGPS()">
       Test GPS
     </button>
@@ -43,4 +43,33 @@
       Init location database
     </button>
   </ion-list>
+
+  <ion-list-header>
+    Reminder
+  </ion-list-header>
+  <ion-list>
+    <button ion-item (click)="dev_testNotification()">
+      Test Notification
+    </button>
+    <ion-item>
+      <ion-label>Remind me at: 
+      </ion-label>
+      <ion-datetime displayFormat="hh:mm A" pickerFormat="hh mm A" [(ngModel)]="timeText" (ionChange)="timeChange($event)"></ion-datetime>
+    </ion-item>
+
+    <div class="button-bar" padding>
+      <ion-row>
+          <ion-col>
+              <button ion-button color="primary" block outline  (click)="onCancel()">CANCEL</button>
+          </ion-col>
+          <ion-col>
+          <button ion-button color="primary" block (click)="onEnable() ">ENABLE</button>
+        </ion-col>
+      </ion-row>
+    </div>
+
+  </ion-list>
+
+
+
 </ion-content>

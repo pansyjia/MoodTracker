@@ -1,20 +1,15 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform  } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { LocalNotifications } from '@ionic-native/local-notifications';
-
+import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service';
 
 import { Location } from "../../models/models";
 import { LocationDataServiceProvider } from "../../providers/location-data-service/location-data-service";
 import { UsersserviceProvider } from "../../providers/usersservice/usersservice";
 import { LoginPage } from "../login/login";
+import  * as moment from 'moment';
 
-/**
- * Generated class for the SettingsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -23,14 +18,19 @@ import { LoginPage } from "../login/login";
 })
 export class SettingsPage {
 
+  timeText: string;
+  timeNotify: any;
+
   // private nearbyLocations: Location[];
   public userName: string;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              public platform: Platform,
               public alertCtrl: AlertController,
               private localNotifications: LocalNotifications,
               private locationService: LocationDataServiceProvider,
-              private usersService: UsersserviceProvider) {
+              private usersService: UsersserviceProvider,
+              private entryDataService: EntryDataServiceProvider) {
     this.locationService.getObservable().subscribe(
       (update) => {
         // this.nearbyLocations = this.locationService.getNearbyLocations();
@@ -40,7 +40,39 @@ export class SettingsPage {
       });
     // this.nearbyLocations = this.locationService.getNearbyLocations();
     this.userName = this.usersService.getProfileName();
+
+    this.timeText = moment(new Date()).format();
+    this.timeNotify = new Date().getTime() + 1000;
+    
   }
+
+  timeChange(time) {
+    this.timeNotify = new Date();
+    this.timeNotify.setHours(time.hour, time.minute, 0);
+    console.log("see time" + "this.timeNotify")
+  }
+
+  onEnable() {
+    this.onCancel().then(() => {
+      this.localNotifications.schedule({
+        id: 101,
+        title: "Mood Tracker",
+        text: 'How are you? It only takes a second - record your current feelings!',
+        trigger: {at: this.timeNotify},
+        // trigger: {at: new Date(new Date().getTime() + 1000)},
+        every: 'day'
+      });
+      console.log('Notification has been set successfully...');
+    });
+  }
+
+  onCancel() {
+    return this.platform.ready().then(() => {
+      return this.localNotifications.cancelAll();
+    })
+  }
+  
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPage');
@@ -83,6 +115,8 @@ export class SettingsPage {
     confirm.present();
   }
 
+
+
   dev_testNotification() {
     console.log(new Date());
     console.log(new Date(new Date().getTime() + 360000));
@@ -90,12 +124,15 @@ export class SettingsPage {
       title: "Mood Tracker",
       text: 'How are you? It only takes a second - record your current feelings!',
       trigger: {at: new Date(new Date().getTime() + 360000)},
+      // trigger: {at: this.timeNotify},
+      // every: 'day',
       // actions: [
       //     {id: 'createNew', title: 'Create New Mood'},
       //     {id: 'notifyLater', title: 'Maybe Later'}],
       attachments: ["../../assets/imgs/Happy.png"]
     });
   }
+
 
   dev_testGPS() {
     let currentLocation = this.locationService.getCurrentGPS();

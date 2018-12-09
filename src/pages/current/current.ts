@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { NewMoodPage } from '../new-mood/new-mood';
 import { EntryDetailPage } from '../entry-detail/entry-detail';
-import { Entry } from '../../models/models';
+import { Entry, Mood } from '../../models/models';
 
 import { EntryDataServiceProvider } from '../../providers/entry-data-service/entry-data-service';
 import { LocationDataServiceProvider } from "../../providers/location-data-service/location-data-service";
@@ -44,10 +44,10 @@ export class CurrentPage {
     this.navCtrl.push(EntryDetailPage);
   }
 
-  // private getMood(name: string) {
-  //   let thisMood = this.entryService.getMood(name);
-  //   return thisMood;
-  // }
+  private getMood(name: string) {
+    let thisMood = this.entryService.getMood(name);
+    return thisMood;
+  }
 
   private checkStatus(){
     if(this.entryService.getEntries().length == 0){

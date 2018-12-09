@@ -14,12 +14,6 @@ import { EntryDataServiceProvider } from '../../providers/entry-data-service/ent
 export class ChartPage {
 
 
-  // private happy = new Mood("happy", 100, "/assets/imgs/Happy-b.png", "#FFCC00", "#fff176");
-  // private angry = new Mood("angry", -10, "/assets/imgs/Angry-b.png", "#DB4437", "#ff7762");
-  // private sad = new Mood("sad", -20, "/assets/imgs/Sad-b.png", "#039BE5", "#63ccff");
-  // private okay = new Mood("okay", 50, "/assets/imgs/Okay-b.png", "#4AAE4E", "#7ee17c");
-
-
  @ViewChild('barChart') barChart;
  @ViewChild('doughnutChart') doughnutChart;
 
@@ -40,8 +34,8 @@ export class ChartPage {
 
 
 constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              private entryService: EntryDataServiceProvider) {
+            public navParams: NavParams,
+            private entryService: EntryDataServiceProvider) {
 
     this.entryService.getObservable().subscribe(
       (update) => {
@@ -221,17 +215,17 @@ constructor(public navCtrl: NavController,
 
 
 
-   private moodCount(moodtype:string) {
-      let k : any;
-      for(k in this.entries)
-      {
-         var entry = this.entries[k];
-         var mood = moodtype;
-         var count = this.entries.filter((obj) => obj.mood === mood).length;
-      }
-      return count;
+   // private moodCount(moodtype:string) {
+   //    let k : any;
+   //    for(k in this.entries)
+   //    {
+   //       var entry = this.entries[k];
+   //       var mood = moodtype;
+   //       var count = this.entries.filter((obj) => obj.mood === mood).length;
+   //    }
+   //    return count;
 
-   }
+   // }
 
 
    // private meanScore() {

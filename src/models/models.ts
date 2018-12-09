@@ -1,10 +1,11 @@
 export class Entry {
-  id: number;
+  id: any;
   timestamp: Date;
   location: string;
   locationId: string;
   text: string;
   mood: any;
+  // image: string;
 }
 
 export class Mood {
