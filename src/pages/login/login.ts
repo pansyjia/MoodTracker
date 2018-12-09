@@ -47,7 +47,8 @@ export class LoginPage {
     this.usersService.loginUserService(this.email, this.password).then(authData => {
       //successful
       loader.dismiss();
-      that.navCtrl.setRoot(TabsPage);
+      // that.navCtrl.setRoot(TabsPage);
+      this.navCtrl.setRoot(this.navCtrl.getActive().component);
 
     }, error => {
       loader.dismiss();
@@ -56,6 +57,7 @@ export class LoginPage {
         message: error,
         duration: 3000,
         position: 'top'
+
       });
       toast.present();
 

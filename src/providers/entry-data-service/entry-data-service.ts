@@ -18,7 +18,7 @@ export class EntryDataServiceProvider {
   private uid: string;
   private dataRef: any;
 
-  constructor( private storage: Storage) {
+  constructor(private storage: Storage) {
     // this.usersService.getObservable().subscribe(
     //   (update) => {
     //     this.username = this.usersService.getProfileName();
@@ -29,55 +29,52 @@ export class EntryDataServiceProvider {
     //   });
     // this.username = this.usersService.getProfileName();
     // this.uid = this.usersService.getProfileUID();
-    this.storage.get('user-email').then((val) => {
-      this.username = val;
-    });
-    this.storage.get('user-uid').then((val) => {
-      this.uid = val;
-    });
 
     this.db = firebase.database();
 
-    this.dataRef = this.db.ref('/' + this.uid + '/entries');
+
 
     this.clientObservable = new Subject();
     this.serviceObserver = this.clientObservable;
 
-    this.storage.get('user-email').then((val) => {
-      this.updateCache();
-    });
-  //
-  //   dataRef.on('value', snapshot => {
-  //       this.entries = [];
-  //       snapshot.forEach(childSnapshot => {
-  //         let entry = {
-  //           id: childSnapshot.key,
-  //           location: childSnapshot.val().location,
-  //           timestamp: childSnapshot.val().timestamp,
-  //           text: childSnapshot.val().text,
-  //           mood: childSnapshot.val().mood,
-  //           // image: childSnapshot.val().image,
-  //           locationId: childSnapshot.val().locationId,
-  //         };
-  //     this.entries.push(entry);
-  //
-  //   });
-  //   this.notifySubscribers();
-  // });
-  }
 
-  public updateCache() {
-
-    this.dataRef.off("value");
-    this.entries = [];
     this.storage.get('user-email').then((val) => {
       this.username = val;
     });
     this.storage.get('user-uid').then((val) => {
+      console.log('user-uid in storage', val);
       this.uid = val;
+      this.dataRef = this.db.ref('/' + this.uid + '/entries');
+      this.dataRef.on('value', snapshot => {
+        this.entries = [];
+        snapshot.forEach(childSnapshot => {
+          let entry = {
+            id: childSnapshot.key,
+            location: childSnapshot.val().location,
+            timestamp: childSnapshot.val().timestamp,
+            text: childSnapshot.val().text,
+            mood: childSnapshot.val().mood,
+            // image: childSnapshot.val().image,
+            locationId: childSnapshot.val().locationId,
+          };
+          this.entries.push(entry);
+
+        });
+        this.notifySubscribers();
+      });
+      // this.updateCache(this.uid);
     });
-    console.log(this.username, this.uid);
-    this.dataRef = this.db.ref('/' + this.uid + '/entries');
+
+
+  }
+
+  public updateCache(uid) {
+
+    this.dataRef.off();
+    this.entries = [];
+
+    console.log('updateCache', uid);
+    this.dataRef = this.db.ref('/' + uid + '/entries');
     this.dataRef.on('value', snapshot => {
       this.entries = [];
       snapshot.forEach(childSnapshot => {
@@ -93,99 +90,100 @@ export class EntryDataServiceProvider {
         this.entries.push(entry);
       });
       this.notifySubscribers();
+      // this.serviceObserver.next(true);
     });
     // this.notifySubscribers();
   }
 
-    public getObservable(): Subject<Entry[]> {
-      return this.clientObservable;
-    }
+  public getObservable(): Subject<any> {
+    return this.clientObservable;
+  }
 
-    private notifySubscribers(): void {
-      // this.serviceObserver.next(true);
-      this.serviceObserver.next(undefined);
-      ///Siyu can only run the file using undefined
-    }
+  private notifySubscribers(): void {
+    // this.serviceObserver.next(true);
+    this.serviceObserver.next(true);
+    ///Siyu can only run the file using undefined
+  }
 
-    public getEntries(): Entry[]{
-      let entriesClone = JSON.parse(JSON.stringify(this.entries));
-      return entriesClone.sort(function(a, b) {
-        if (a.timestamp > b.timestamp) {
-          return -1;
-        } else {
-          return 1;
-        }
-      });
-    }
-
-    public getEntryByID(id: any): Entry {
-      for (let e of this.entries) {
-        if (e.id === id) {
-          let clone = JSON.parse(JSON.stringify(e));
-          return clone;
-        }
+  public getEntries(): Entry[]{
+    let entriesClone = JSON.parse(JSON.stringify(this.entries));
+    return entriesClone.sort(function(a, b) {
+      if (a.timestamp > b.timestamp) {
+        return -1;
+      } else {
+        return 1;
       }
-      return undefined;
-    }
+    });
+  }
 
-    public addEntry(entry: Entry): void {
-      console.log('addEntry', '/' + this.uid + '/entries');
-      let listEntry = this.db.ref('/' + this.uid + '/entries');
-      let entryRef = listEntry.push();
-      let dataRecord = {
-        id: -1,
-        location: entry.location,
-        locationId: entry.locationId,
-        mood: entry.mood,
-        // image: entry.mood.image,
-        text: entry.text,
-        timestamp: new Date().toLocaleString()
+  public getEntryByID(id: any): Entry {
+    for (let e of this.entries) {
+      if (e.id === id) {
+        let clone = JSON.parse(JSON.stringify(e));
+        return clone;
       }
-      entryRef.set(dataRecord);
-      // this.entries.push(entry);
-      this.notifySubscribers();
     }
+    return undefined;
+  }
 
-    public updateEntry(key, newEntry: Entry): void {
-      let parentRef = this.db.ref('/' + this.uid + '/entries');
-      let childRef = parentRef.child(key);
-      let updateRecord = {
-        // id: newEntry.id,
-        location: newEntry.location,
-        locationId: newEntry.locationId,
-        mood: newEntry.mood,
-        // image: newEntry.mood.image,
-        text: newEntry.text,
-        timestamp: new Date(newEntry.timestamp).toLocaleString()
+  public addEntry(entry: Entry): void {
+    console.log('addEntry', '/' + this.uid + '/entries');
+    let listEntry = this.db.ref('/' + this.uid + '/entries');
+    let entryRef = listEntry.push();
+    let dataRecord = {
+      id: -1,
+      location: entry.location,
+      locationId: entry.locationId,
+      mood: entry.mood,
+      // image: entry.mood.image,
+      text: entry.text,
+      timestamp: new Date().toLocaleString()
+    }
+    entryRef.set(dataRecord);
+    // this.entries.push(entry);
+    this.notifySubscribers();
+  }
+
+  public updateEntry(key, newEntry: Entry): void {
+    let parentRef = this.db.ref('/' + this.uid + '/entries');
+    let childRef = parentRef.child(key);
+    let updateRecord = {
+      // id: newEntry.id,
+      location: newEntry.location,
+      locationId: newEntry.locationId,
+      mood: newEntry.mood,
+      // image: newEntry.mood.image,
+      text: newEntry.text,
+      timestamp: new Date(newEntry.timestamp).toLocaleString()
+    }
+    childRef .set(updateRecord);
+    this.notifySubscribers();
+  }
+
+  public removeEntry(key): void {
+    let parentRef = this.db.ref('/' + this.uid + '/entries');
+    let childRef = parentRef.child(key);
+    childRef.remove();
+    this.notifySubscribers();
+  }
+
+  public moodCount(type: string): number{
+    let moodcount = 0;
+    for (let e of this.entries) {
+      if (e.mood.type === type) {
+        moodcount +=1;
       }
-      childRef .set(updateRecord);
-      this.notifySubscribers();
     }
-
-    public removeEntry(key): void {
-      let parentRef = this.db.ref('/' + this.uid + '/entries');
-      let childRef = parentRef.child(key);
-      childRef.remove();
-      this.notifySubscribers();
-    }
-
-    public moodCount(type: string): number{
-      let moodcount = 0;
-      for (let e of this.entries) {
-        if (e.mood.type === type) {
-          moodcount +=1;
-        }
-      }
-      return moodcount;
-    }
+    return moodcount;
+  }
 
 
-    public getMood(name: string):Mood {
-      if (name == "happy") { return new Mood("happy", 100, "/assets/imgs/happy.png", "#F0CF75", "#FFE7A3"); }
-      if (name == "angry") { return new Mood("angry", 30, "/assets/imgs/angry.png", "#E6646E", "#E6888D"); }
-      if (name == "sad") { return new Mood("sad", 50, "/assets/imgs/sad.png", "#6DBEFF", "#B7DDFF"); }
-      if (name == "okay") { return new Mood("okay", 80, "/assets/imgs/okay.png", "#F09C4F", "#F0B077"); }
-      return new Mood("happy", 100, "/assets/imgs/happy.png", "#F0CF75", "#FFE7A3"); // if not applied
-    }
+  public getMood(name: string):Mood {
+    if (name == "happy") { return new Mood("happy", 100, "/assets/imgs/happy.png", "#F0CF75", "#FFE7A3"); }
+    if (name == "angry") { return new Mood("angry", 30, "/assets/imgs/angry.png", "#E6646E", "#E6888D"); }
+    if (name == "sad") { return new Mood("sad", 50, "/assets/imgs/sad.png", "#6DBEFF", "#B7DDFF"); }
+    if (name == "okay") { return new Mood("okay", 80, "/assets/imgs/okay.png", "#F09C4F", "#F0B077"); }
+    return new Mood("happy", 100, "/assets/imgs/happy.png", "#F0CF75", "#FFE7A3"); // if not applied
+  }
 
 }

@@ -46,7 +46,8 @@ export class UsersserviceProvider {
     return this.fireAuth.signInWithEmailAndPassword(email, password).then((newUser) => {
       this.storage.set('user-email', firebase.auth().currentUser.email);
       this.storage.set('user-uid', firebase.auth().currentUser.uid);
-      this.entryService.updateCache();
+      this.entryService.updateCache(firebase.auth().currentUser.uid);
+
       // this.notifySubscribers();
     });
   }
