@@ -20,11 +20,12 @@ export class EntryDetailPage {
 
   private entry: Entry;
   public currentLocation: Location;
+  public currentLocationAddress: string;
   private happy = new Mood("happy", 100, "/assets/imgs/happy.png", "#F0CF75", "#FFE7A3");
   private angry = new Mood("angry", 10, "/assets/imgs/angry.png", "#E6646E", "#E6888D");
   private sad = new Mood("sad", 20, "/assets/imgs/sad.png", "#6DBEFF", "#B7DDFF");
   private okay = new Mood("okay",50, "/assets/imgs/okay.png", "#F09C4F", "#F0B077");
-  private happyselected = false;
+  private happyselected = true;
   private angryselected = false;
   private sadselected = false;
   private okayselected = false;
@@ -43,11 +44,13 @@ export class EntryDetailPage {
       (err) => {
         console.log('this.locationService.getObservable().subscribe :', err);
       });
-    this.currentLocation = this.locationService.getCurrentLocation();
+
 
     let entryID = this.navParams.get("entryID");
 
     if (entryID === undefined) {
+      this.currentLocation = this.locationService.getCurrentLocation();
+
       this.entry = new Entry();
       this.entry.id = -1;
       this.entry.text = "";
@@ -57,6 +60,32 @@ export class EntryDetailPage {
       this.entry.timestamp = new Date();
     }else {
       this.entry = this.entryDataService.getEntryByID(entryID);
+      this.currentLocationAddress = this.entry.location;
+
+      if (this.entry.mood.type == 'happy') {
+        this.happyselected = true;
+        this.angryselected = false;
+        this.sadselected = false;
+        this.okayselected = false;
+      }
+      if (this.entry.mood.type == 'angry') {
+        this.happyselected = false;
+        this.angryselected = true;
+        this.sadselected = false;
+        this.okayselected = false;
+      }
+      if (this.entry.mood.type == 'sad') {
+        this.happyselected = false;
+        this.angryselected = false;
+        this.sadselected = true;
+        this.okayselected = false;
+      }
+      if (this.entry.mood.type == 'okay') {
+        this.happyselected = false;
+        this.angryselected = false;
+        this.sadselected = false;
+        this.okayselected = true;
+      }
     }
   }
 
@@ -91,21 +120,21 @@ export class EntryDetailPage {
 
   private saveEntry() {
     ///save
-    let newEntry = new Entry();
-    let newMood = this.happy;
-    if (this.entry.mood == "happy") newMood = this.happy;
-    if (this.entry.mood == "angry") newMood = this.angry;
-    if (this.entry.mood == "sad") newMood = this.sad;
-    if (this.entry.mood == "okay") newMood = this.okay;
-    newEntry.mood = newMood;
-    newEntry.location = this.currentLocation.name;
-    newEntry.locationId = this.currentLocation.googleMapId;
-    newEntry.text = this.entry.text;
-    console.log("Now I would save the entry: ", newEntry);
-    let entryID = this.navParams.get("entryID");
-   
-    if (entryID === undefined) {
 
+    let entryID = this.navParams.get("entryID");
+
+    if (entryID === undefined) {
+      let newEntry = new Entry();
+      let newMood = this.happy;
+      if (this.entry.mood == "happy") newMood = this.happy;
+      if (this.entry.mood == "angry") newMood = this.angry;
+      if (this.entry.mood == "sad") newMood = this.sad;
+      if (this.entry.mood == "okay") newMood = this.okay;
+      newEntry.mood = newMood;
+      newEntry.location = this.currentLocation.name;
+      newEntry.locationId = this.currentLocation.googleMapId;
+      newEntry.text = this.entry.text;
+      console.log("Now I would save the entry: ", newEntry);
       this.entryDataService.addEntry(newEntry);
 
       let toast = this.toastCtrl.create({
@@ -113,26 +142,30 @@ export class EntryDetailPage {
         duration: 3000,
         position: 'top'
       });
-  
+
       toast.onDidDismiss(() => {
         console.log('Dismissed toast');
       });
       toast.present();
-  
-    } else { 
-      this.entryDataService.updateEntry(entryID, newEntry);
+
+    } else {
+      if (this.entry.mood == "happy") this.entry.mood = this.happy;
+      if (this.entry.mood == "angry") this.entry.mood = this.angry;
+      if (this.entry.mood == "sad") this.entry.mood = this.sad;
+      if (this.entry.mood == "okay") this.entry.mood = this.okay;
+      this.entryDataService.updateEntry(entryID, this.entry);
 
       let toast = this.toastCtrl.create({
         message: 'A mood record was updated successfully',
         duration: 3000,
         position: 'bottom'
       });
-  
+
       toast.onDidDismiss(() => {
         console.log('Dismissed toast');
       });
       toast.present();
-  
+
     }
     this.locationService.updateLocationCount(this.currentLocation);
     this.navCtrl.pop();

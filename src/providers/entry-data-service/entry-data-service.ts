@@ -154,7 +154,7 @@ export class EntryDataServiceProvider {
       mood: newEntry.mood,
       // image: newEntry.mood.image,
       text: newEntry.text,
-      timestamp: new Date(newEntry.timestamp).toLocaleString()
+      timestamp: newEntry.timestamp
     }
     childRef .set(updateRecord);
     this.notifySubscribers();
