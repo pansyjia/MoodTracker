@@ -16,6 +16,7 @@ export class LocationListPage {
   private popularLocations: Location[];
   private nearbyLocations: Location[];
   private currentLocation: Location;
+  private loadMoreText:string = 'Load More';
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -44,7 +45,8 @@ export class LocationListPage {
   }
 
   private initLocationsFromGoogle() {
-    this.locationService.initLocationsFromGoogle();
+    this.loadMoreText = 'No more'
+    // this.locationService.initLocationsFromGoogle();
   }
 
 }

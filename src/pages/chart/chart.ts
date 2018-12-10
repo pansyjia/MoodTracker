@@ -40,6 +40,11 @@ constructor(public navCtrl: NavController,
     this.entryService.getObservable().subscribe(
       (update) => {
           this.entries = this.entryService.getEntries();
+          // this.defineChartData();
+          // this.createBarChart();
+          // this.createDoughnutChart();
+
+
          //  console.log(this.entries);
       //   console.log('this.entryService.getObservable().subscribe ');
       },
@@ -127,11 +132,11 @@ constructor(public navCtrl: NavController,
          this.chartColours.push(thisMood.color);
          this.chartHoverColours.push(thisMood.hover);
       }
-      
+
    }
 
 
-  
+
    /**
     * Configure the Bar chart, define configuration options
     */
@@ -181,10 +186,10 @@ constructor(public navCtrl: NavController,
 
    }
 
- 
+
 
    createDoughnutChart(): void{
-      this.doughnutEL = new Chart(this.doughnutChart.nativeElement, 
+      this.doughnutEL = new Chart(this.doughnutChart.nativeElement,
          {
          type: 'doughnut',
          data: {

@@ -40,7 +40,7 @@
       <ion-radio *ngIf="currentLocation.googleMapId == location.googleMapId" checked="true"></ion-radio>
     </ion-item>
     <ion-item>
-      <ion-label text-center (click)="initLocationsFromGoogle()">Load More</ion-label>
+      <ion-label text-center (click)="initLocationsFromGoogle()">{{loadMoreText}}</ion-label>
     </ion-item>
   </ion-list>
 

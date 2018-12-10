@@ -72,6 +72,7 @@ export class EntryDataServiceProvider {
 
     this.dataRef.off();
     this.entries = [];
+    this.uid = uid;
 
     console.log('updateCache', uid);
     this.dataRef = this.db.ref('/' + uid + '/entries');

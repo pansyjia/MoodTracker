@@ -1,6 +1,7 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Create a Mood Record</ion-title>
+    <ion-title *ngIf="currentLocation">Create a Mood Record</ion-title>
+    <ion-title *ngIf="currentLocationAddress">Mood Record</ion-title>
   </ion-navbar>
 </ion-header>
 

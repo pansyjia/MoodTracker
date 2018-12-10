@@ -92,9 +92,10 @@
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
     <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
-      <string>We use your location for full functionality of certain app features.</string>
+        <string>We use your location for full functionality of certain app features.</string>
     </edit-config>
     <plugin name="cordova-plugin-geolocation" spec="4.0.1">
-      <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
+        <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
+    <add name="Access-Control-Allow-Origin" value="localhost:8100" />
 </widget>

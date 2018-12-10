@@ -3,22 +3,22 @@
       <ion-title>Add Location&Text</ion-title>
     </ion-navbar>
   </ion-header>
-  
-  
+
+
   <ion-content padding>
     <ion-list>
       <h5 style="text-align:center;">Hi! Where are you now?</h5>
       <ion-item>
         <ion-input type="text" placeholder="Your Location" [(ngModel)]="entry.location"></ion-input>
       </ion-item>
-  
+
       <h5 style="text-align:center;">Add Note</h5>
       <ion-item>
         <ion-input type="text" placeholder="Today I..." [(ngModel)]="entry.text"></ion-input>
       </ion-item>
     </ion-list>
-  
-    <button ion-button item-end (click)="saveEntry()">Done</button>
-  
+
+    <button ion-button text-center (click)="saveEntry()">Done</button>
+
   </ion-content>
-  
+

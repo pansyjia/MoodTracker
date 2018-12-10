@@ -135,14 +135,8 @@ export class SettingsPage {
     console.log(new Date(new Date().getTime() + 360000));
     this.localNotifications.schedule({
       title: "Mood Tracker",
-      text: 'How are you? It only takes a second - record your current feelings!',
-      trigger: {at: new Date(new Date().getTime() + 360000)},
-      // trigger: {at: this.timeNotify},
-      // every: 'day',
-      // actions: [
-      //     {id: 'createNew', title: 'Create New Mood'},
-      //     {id: 'notifyLater', title: 'Maybe Later'}],
-      attachments: ["../../assets/imgs/Happy.png"]
+      text: 'How are you? It only takes a second - record your current feelings!'
+      
     });
   }
 

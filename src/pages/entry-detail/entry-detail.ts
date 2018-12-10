@@ -147,6 +147,7 @@ export class EntryDetailPage {
         console.log('Dismissed toast');
       });
       toast.present();
+      this.locationService.updateLocationCount(this.currentLocation);
 
     } else {
       if (this.entry.mood == "happy") this.entry.mood = this.happy;
@@ -167,7 +168,7 @@ export class EntryDetailPage {
       toast.present();
 
     }
-    this.locationService.updateLocationCount(this.currentLocation);
+
     this.navCtrl.pop();
     // this.navCtrl.push(CurrentPage);
   }

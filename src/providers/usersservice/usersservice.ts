@@ -55,12 +55,12 @@ export class UsersserviceProvider {
 
   public signupUserService(account: {}){
     return this.fireAuth.createUserWithEmailAndPassword(account['email'], account['password']).then((newUser) => {
-      this.storage.set('user-email', firebase.auth().currentUser.email);
-      this.storage.set('user-uid', firebase.auth().currentUser.uid);
-      this.entryService.updateCache(firebase.auth().currentUser.uid);
       //sign in the user
       this.fireAuth.signInWithEmailAndPassword(account['email'], account['password']).then((authenticatedUser) => {
 
+        this.storage.set('user-email', firebase.auth().currentUser.email);
+        this.storage.set('user-uid', firebase.auth().currentUser.uid);
+        this.entryService.updateCache(firebase.auth().currentUser.uid);
         // this.notifySubscribers();
         //successful login, create user profile
         // this.userProfile.child(authenticatedUser.uid).set(
@@ -82,7 +82,7 @@ export class UsersserviceProvider {
     this.fireAuth.signOut();
     this.storage.remove('user-email');
     this.storage.remove('user-uid');
-    this.entryService.updateCache(firebase.auth().currentUser.uid);
+    this.entryService.updateCache('blank');
     // this.notifySubscribers();
   }
 

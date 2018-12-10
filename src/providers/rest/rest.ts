@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 /*
@@ -9,15 +9,28 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class RestProvider {
-  apiUrl = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyD6MTT0ofqku0B2PFugvKks5gykEid_Tkw&radius=500&location=';
+
 
   constructor(public http: HttpClient) {
     // console.log('Hello RestProvider Provider');
 
   }
   getListLocations(lat, lng): any {
-    console.log(this.apiUrl+lat.toString()+','+lng.toString())
-    this.http.get(this.apiUrl+lat.toString()+','+lng.toString()).subscribe(data => {
+    let apiUrl = '/api';
+    let urlSearchParams = {
+      'key':'AIzaSyD6MTT0ofqku0B2PFugvKks5gykEid_Tkw',
+      'radius':500,
+      'location':lat.toString()+','+lng.toString()
+    }
+    let private_options = { headers: new HttpHeaders({
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'GET',
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    }) };
+
+    this.http.post(apiUrl, urlSearchParams, private_options).subscribe(data => {
+        console.log('restdata', data);
         return data;
       }, err => {
         console.log(err);
