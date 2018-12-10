@@ -21,9 +21,9 @@
     <button ion-item (click)="dev_switchAccount()">
       Switch account
     </button>
-    <button class="danger" ion-item (click)="dev_delAccount()">
-      Delete my account
-    </button>
+    <!--<button class="danger" ion-item (click)="dev_delAccount()">-->
+      <!--Delete my account-->
+    <!--</button>-->
   </ion-list>
 
   <ion-list-header>
@@ -52,7 +52,7 @@
       Test Notification
     </button>
     <ion-item>
-      <ion-label>Remind me at: 
+      <ion-label>Remind me at:
       </ion-label>
       <ion-datetime displayFormat="hh:mm A" pickerFormat="hh mm A" [(ngModel)]="timeText" (ionChange)="timeChange($event)"></ion-datetime>
     </ion-item>

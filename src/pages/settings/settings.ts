@@ -62,12 +62,25 @@ export class SettingsPage {
         // trigger: {at: new Date(new Date().getTime() + 1000)},
         every: 'day'
       });
+      const alert = this.alertCtrl.create({
+        title: 'Finished!',
+        subTitle: 'Notification has been set successfully.',
+        buttons: ['OK']
+      });
+      alert.present();
       console.log('Notification has been set successfully...');
     });
   }
 
   onCancel() {
+
     return this.platform.ready().then(() => {
+      // const alert = this.alertCtrl.create({
+      //   title: 'Finished!',
+      //   subTitle: 'Notification has been cancelled.',
+      //   buttons: ['OK']
+      // });
+      // alert.present();
       return this.localNotifications.cancelAll();
     })
   }
