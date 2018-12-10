@@ -43,4 +43,8 @@ export class LocationListPage {
     this.navCtrl.push(LocationListNewPage);
   }
 
+  private initLocationsFromGoogle() {
+    this.locationService.initLocationsFromGoogle();
+  }
+
 }

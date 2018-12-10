@@ -6,8 +6,10 @@ import { Subject } from 'rxjs';
 import firebase from 'firebase';
 // import '../../assets/js/place.js';
 import { Default_locations }  from '../../assets/cache/default_locations.js';
-import { HttpClient } from "@angular/common/http";
+// import { HttpClient } from "@angular/common/http";
 import { Geolocation } from '@ionic-native/geolocation';
+import { RestProvider } from "../rest/rest";
+// import 'https://maps.googleapis.com/maps/api/js?key=AIzaSyC9ICYAY0GONi1mgiGgRjAAuaev2qqosvM&libraries=places&callback=initMap'
 
 // const config = {
 //   apiKey: "AIzaSyC9ICYAY0GONi1mgiGgRjAAuaev2qqosvM",
@@ -29,8 +31,8 @@ export class LocationDataServiceProvider {
   private clientObservable: Subject<any>;
   private db: any;
 
-  constructor(private http: HttpClient,
-              private geolocation: Geolocation) {
+  constructor(private geolocation: Geolocation,
+              private rest: RestProvider) {
     // firebase.initializeApp(config);
     this.db = firebase.database();
     this.clientObservable = new Subject();
@@ -230,7 +232,9 @@ export class LocationDataServiceProvider {
   }
 
   public initLocationsFromGoogle(): void {
-
+    let newLocations = this.rest.getListLocations(this.currentGeolocation.lat, this.currentGeolocation.lng);
+    console.log('newLocations', newLocations);
   }
+
 
 }

@@ -26,6 +26,7 @@ import firebase from 'firebase';
 import { UsersserviceProvider } from '../providers/usersservice/usersservice';
 import { EntryDataServiceProvider } from '../providers/entry-data-service/entry-data-service';
 import { LocationDataServiceProvider } from '../providers/location-data-service/location-data-service';
+import { RestProvider } from '../providers/rest/rest';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyC9ICYAY0GONi1mgiGgRjAAuaev2qqosvM",
@@ -93,7 +94,8 @@ firebase.initializeApp(firebaseConfig);
     UsersserviceProvider,
     EntryDataServiceProvider,
     LocationDataServiceProvider,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    RestProvider
   ]
 })
 export class AppModule {}
